@@ -1,6 +1,14 @@
 
 export { Component } from './component'
-import { ComponentInternalInstance, ComponentPublicInstance, Slots, nextTick, WatchOptions, WatchStopHandle } from 'vue'
+import {
+    ComponentInternalInstance,
+    ComponentPublicInstance,
+    Slots,
+    nextTick,
+    WatchOptions,
+    WatchStopHandle,
+
+} from 'vue'
 
 // export declare class Base {
 
@@ -38,4 +46,22 @@ export class Base {
     $nextTick!: typeof nextTick;
     $watch!: { (source: string | Function, cb: Function, options?: WatchOptions): WatchStopHandle };
 
+
+    beforeCreate?(): void;
+    created?(): void;
+    beforeMount?(): void;
+    mounted?():void;
+    beforeUpdate?(): void;
+    updated?(): void;
+    activated?(): void;
+    deactivated?(): void;
+    /** @deprecated use `beforeUnmount` instead */
+    beforeDestroy?(): void;
+    beforeUnmount?(): void;
+    /** @deprecated use `unmounted` instead */
+    destroyed?(): void;
+    unmounted?(): void;
+    renderTracked?(e: any): void;
+    renderTriggered?(e: any): void;
+    errorCaptured?(err: any, instance: ComponentPublicInstance | null, info: string): boolean | void;
 }
