@@ -2,7 +2,7 @@
 
 This repo is not released yet. Welcome to suggest and contribute. Message me on github.
 
-# Example
+# What now
 
 ```typescript
 import { Component ,Base} from "ThisRepo";
