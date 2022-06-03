@@ -2,7 +2,7 @@
 
 This repo is not released yet. Welcome to suggest and contribute. Message me on github.
 
-# What now
+# Finished
 
 ```typescript
 import { Component, Ref, Base } from "ThisRepo";
@@ -38,7 +38,7 @@ export default class Comp extends Sup {
   }
   mounted() {
     //vue lifecycle
-    console.log(this.ref, this.getter, this.prop, this.supProp, this.supGetter);
+    console.log(this.ref,  this.prop, this.supProp,this.getter, this.supGetter);
   }
 }
 ```
@@ -72,7 +72,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    console.log(this.ref, this.getter, this.prop, this.supProp, this.supGetter);
+    console.log(this.ref, this.prop, this.supProp, this.getter, this.supGetter);
   },
 });
 ```
