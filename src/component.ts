@@ -1,60 +1,30 @@
 import { defineComponent } from 'vue';
-import { obtainSlot } from './utils';
-
-const LifecycleNames = [
-    "beforeCreate",
-    "created",
-    "beforeMount",
-    "mounted",
-    "beforeUpdate",
-    "updated",
-    "activated",
-    "deactivated",
-    "beforeDestroy",
-    "beforeUnmount",
-    "destroyed",
-    "unmounted",
-    "renderTracked",
-    "renderTriggered",
-    "errorCaptured"
-]
-
-
-function makeObject(names: string[], obj: any) {
-    return names.reduce<Record<string, any>>((pv, cv) => {
-        pv[cv] = obj[cv]
-        return pv
-    }, {})
+import { build as optionComputed } from './option/computed'
+import { build as optionData } from './option/data'
+import { build as optionMethodsAndLifecycle } from './option/methodsAndLifecycle'
+import { build as optionRef } from './option/ref'
+export interface OptionBuilder {
+    data?: Record<string, any>
+    methods?: Record<string, Function>
+    lifecycle?: Record<string, Function>
+    computed?: Record<string, any>
 }
-export function Component(cons: { new(): any, prototype: any }) {
-    const slot = obtainSlot(cons.prototype)
-    const sample = new cons
-    const proto = cons.prototype
-    const LifecycleFunctions:Record<string,Function>={}
-    const methodNames = Object.getOwnPropertyNames(proto).filter(name => {
-        if (name === 'constructor') {
-            return false
-        }
-        if (typeof proto[name] === 'function') {
-            if(LifecycleNames.includes(name)){
-                LifecycleFunctions[name]=proto[name]
-                return false
-            }
-
-            return true
-        }
-    })
-
-    const dataNames = Object.getOwnPropertyNames(sample)
-
-    const def = defineComponent({
+export interface Cons { new(): any, prototype: any }
+export function Component(cons: Cons) {
+    const optionBuilder: OptionBuilder = {}
+    optionComputed(cons,optionBuilder)
+    optionMethodsAndLifecycle(cons, optionBuilder)
+    optionRef(cons, optionBuilder)
+    const raw = {
         data() {
-            return makeObject(dataNames, sample)
+            const optionBuilder: OptionBuilder = {}
+            optionData(cons, optionBuilder)
+            return optionBuilder.data ?? {}
         },
-        methods: makeObject(methodNames, proto),
-        ...LifecycleFunctions
-    })
+        methods: optionBuilder.methods,
+        computed: optionBuilder.computed,
+        ...optionBuilder.lifecycle
+    }
+    const def = defineComponent(raw)
     return def as any
-
-
 }

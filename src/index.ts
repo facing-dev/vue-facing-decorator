@@ -1,5 +1,6 @@
 
 export { Component } from './component'
+export { decorator as Ref } from './option/ref'
 import {
     ComponentInternalInstance,
     ComponentPublicInstance,
@@ -50,7 +51,7 @@ export class Base {
     beforeCreate?(): void;
     created?(): void;
     beforeMount?(): void;
-    mounted?():void;
+    mounted?(): void;
     beforeUpdate?(): void;
     updated?(): void;
     activated?(): void;
