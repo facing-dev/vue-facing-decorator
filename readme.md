@@ -1,6 +1,10 @@
 # Read me
 
+Designed for vue 3.
+
 Welcome to suggest and contribute. Message me on github.
+
+Do the same work like [vue-class-component](https://github.com/vuejs/vue-class-component) and [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator) in vue 3.
 
 # Install
 
