@@ -1,7 +1,18 @@
 import { Base } from './index'
 const SlotSymbol = Symbol('vue-facing-decorator-slot')
 class Slot {
-    names: Map<string, Set<string>> = new Map
+    names: Map<string, Map<string, any>> = new Map
+    obtainMap<T extends Map<string, any>>(name: string): T {
+        let map = this.names.get(name)
+        if (!map) {
+            
+            map = new Map
+            this.names.set(name,map)
+        }else{
+
+        }
+        return map as any
+    }
 }
 
 export function makeSlot(obj: any): Slot {
@@ -48,8 +59,12 @@ export function toBaseReverse(obj: any) {
 
 export function excludeNames(names: string[], slot: Slot) {
     return names.filter(name => {
-        for (const set of slot.names.values()) {
-            if (set.has(name)) {
+        for (const mapName of slot.names.keys()) {
+            if (mapName === 'watch') {
+                continue
+            }
+            const map = slot.names.get(mapName)!
+            if (map.has(name)) {
                 return false
             }
         }
@@ -57,7 +72,7 @@ export function excludeNames(names: string[], slot: Slot) {
     })
 }
 
-export function getValidNames(obj: any, filter: (des: PropertyDescriptor,name:string) => boolean) {
+export function getValidNames(obj: any, filter: (des: PropertyDescriptor, name: string) => boolean) {
     const descriptors = Object.getOwnPropertyDescriptors(obj)
-    return Object.keys(descriptors).filter(name => filter(descriptors[name],name))
+    return Object.keys(descriptors).filter(name => filter(descriptors[name], name))
 }

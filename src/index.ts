@@ -1,7 +1,10 @@
 
 export { Component } from './component'
 export { decorator as Ref } from './option/ref'
-import {
+export { decorator as Watch } from './option/watch'
+export { decorator as Prop } from './option/props'
+export { decorator as Inject } from './option/inject'
+import type {
     ComponentInternalInstance,
     ComponentPublicInstance,
     Slots,

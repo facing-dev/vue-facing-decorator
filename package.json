@@ -1,8 +1,19 @@
 {
   "name": "vue-facing-decorator",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Vue typescript class and decorator based component.",
   "main": "dist/index.js",
+  "keywords": [
+    "vue",
+    "class",
+    "typescript",
+    "decorator",
+    "vue decorator",
+    "vue component",
+    "sfc",
+    "vue class component",
+    "vue component decorator"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,5 +22,14 @@
   "types": "dist/index.d.ts",
   "peerDependencies": {
     "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/vue": "^2.0.0",
+    "typescript": "latest"
+  },
+  "homepage": "https://github.com/facing-dev/vue-facing-decorator",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:facing-dev/vue-facing-decorator.git"
   }
 }
