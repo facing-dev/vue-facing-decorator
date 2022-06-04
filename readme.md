@@ -17,7 +17,7 @@ import {
   Inject,
   Base,
 } from "vue-facing-decorator";
-
+import AnotherComponent from "./AnotherComponent.vue";
 //super class, DO NOT SUPPORT ANY DECORATOR now
 class Sup extends Base {
   //reactivity super property
@@ -39,6 +39,10 @@ class Sup extends Base {
   //OPTION, provide object or function(this:Comp){return {foo:'bar'}}
   provide: {
     provideKey: "provideValue",
+  },
+  //OPTION, components
+  components: {
+    AnotherComponent,
   },
   //OPTION, use modifier to modify component option built by vue-facing-decorator
   modifier: (option: any) => {
@@ -127,8 +131,12 @@ is equal to
 
 ```typescript
 import { defineComponent} from "vue";
+import AnotherComponent from "./AnotherComponent.vue";
 export default defineComponent({
   name: "MyComponent",
+  components:{
+    AnotherComponent
+  },
   emits: ["update:modelValue"],
   provide: {
     provideKey: "provideValue",

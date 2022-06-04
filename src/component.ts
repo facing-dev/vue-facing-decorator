@@ -47,6 +47,7 @@ export function Component(arg: Cons | {
     name?: string
     emits?: string[]
     provide?: Record<string, any> | Function
+    components?:Record<string,any>
     modifier?: (raw: any) => any
 }): any {
     if (typeof arg === 'function') {
@@ -59,6 +60,9 @@ export function Component(arg: Cons | {
         }
         if (Array.isArray(arg.emits)) {
             option.emits = arg.emits
+        }
+        if(arg.components){
+            option.components=arg.components
         }
         if (arg.provide) {
             option.provide = arg.provide
