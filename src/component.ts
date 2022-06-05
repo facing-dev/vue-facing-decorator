@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import { obtainSlot, toBaseReverse } from './utils'
+import { obtainSlot, extendSlotPath } from './utils'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
 import { build as optionMethodsAndLifecycle } from './option/methodsAndLifecycle'
@@ -20,7 +20,7 @@ export interface OptionBuilder {
 
 }
 export interface Cons { new(): any, prototype: any }
-function ComponentOption(cons: Cons) {
+function ComponentOption(cons: Cons, extend?: any) {
     const optionBuilder: OptionBuilder = {}
     optionComputed(cons, optionBuilder)
     optionWatch(cons, optionBuilder)
@@ -41,12 +41,13 @@ function ComponentOption(cons: Cons) {
         watch: optionBuilder.watch,
         props: optionBuilder.props,
         inject: optionBuilder.inject,
-        ...optionBuilder.lifecycle
+        ...optionBuilder.lifecycle,
+        extends: extend
     }
     return raw as any
 }
 
-export function Component(arg: Cons | {
+type ComponentOption = {
     name?: string
     emits?: string[]
     provide?: Record<string, any> | Function
@@ -55,43 +56,92 @@ export function Component(arg: Cons | {
     inheritAttrs?: boolean;
     expose?: string[];
     modifier?: (raw: any) => any
-}): any {
+}
+type ComponentConsOption = Cons | ComponentOption
+function ComponentStep(cons: Cons, extend?: any) {
+    return defineComponent(ComponentOption(cons, extend))
+}
+
+function ComponentStepWithOption(cons: Cons, arg: ComponentOption, extend?: any): any {
+    let option = ComponentOption(cons, extend)
+    const slot = obtainSlot(cons.prototype)
+    if (typeof arg.name !== 'undefined') {
+        option.name = arg.name
+    }
+
+    let emits = Array.from(slot.obtainMap('emits').keys())
+    if (Array.isArray(arg.emits)) {
+        emits = Array.from(new Set([...emits, ...arg.emits]))
+    }
+    option.emits = emits
+
+
+    if (arg.components) {
+        option.components = arg.components
+    }
+    if (arg.provide) {
+        option.provide = arg.provide
+    }
+    if (arg.directives) {
+        option.directives = arg.directives
+    }
+    if (arg.inheritAttrs) {
+        option.inheritAttrs = arg.inheritAttrs
+    }
+    if (arg.expose) {
+        option.expose = arg.expose
+    }
+
+    if (arg.modifier) {
+        option = arg.modifier(option)
+        if (!option) {
+            throw 'Component modifier should return vue component option'
+        }
+    }
+    return defineComponent(option)
+}
+
+export function ComponentBase(cons: Cons) {
+    const slot = obtainSlot(cons.prototype)
+    slot.inComponent = true
+    return cons
+}
+
+export function Component(arg: Cons|ComponentOption) {
+
+    function extend(cons: Cons) {
+        ComponentBase(cons)
+        const slotPath = extendSlotPath(cons.prototype)
+
+        slotPath.forEach(proto => {
+            const slot = obtainSlot(proto)
+            if (!slot.inComponent) {
+                throw 'Class should be decorated by Component or ComponentBase: ' + proto.constructor
+            }
+        })
+
+        return slotPath.reduceRight<any>((pv, cv, ci) => {
+            if (ci > 0) {
+                return ComponentStep(cv.constructor, pv === null ? undefined : pv)
+            } else {
+
+                if (typeof arg === 'function') {
+                    return ComponentStepWithOption(cv.constructor, {}, pv === null ? undefined : pv)
+                } else {
+                    return ComponentStepWithOption(cv.constructor, arg, pv === null ? undefined : pv)
+                }
+            }
+        }, null)
+    }
     if (typeof arg === 'function') {
-        return defineComponent(ComponentOption(arg))
+
+        const finalComp = extend(arg)
+        return finalComp
     }
     return function (cons: Cons) {
-        let option = ComponentOption(cons)
-        const slot = obtainSlot(cons.prototype)
-        if (typeof arg.name !== 'undefined') {
-            option.name = arg.name
-        }
 
-        let emits = Array.from(slot.obtainMap('emits').keys())
-        if (Array.isArray(arg.emits)) {
-            emits = Array.from(new Set([...emits,...arg.emits]))
-        }
-        option.emits = emits
+        const finalComp = extend(cons)
 
-
-        if (arg.components) {
-            option.components = arg.components
-        }
-        if (arg.provide) {
-            option.provide = arg.provide
-        }
-        if (arg.directives) {
-            option.directives = arg.directives
-        }
-        if (arg.inheritAttrs) {
-            option.inheritAttrs = arg.inheritAttrs
-        }
-        if (arg.expose) {
-            option.expose = arg.expose
-        }
-        if (arg.modifier) {
-            option = arg.modifier(option)
-        }
-
-        return defineComponent(option)
+        return finalComp
     }
 }

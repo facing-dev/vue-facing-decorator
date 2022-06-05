@@ -5,18 +5,19 @@ class Slot {
     obtainMap<T extends Map<string, any>>(name: string): T {
         let map = this.names.get(name)
         if (!map) {
-            
+
             map = new Map
-            this.names.set(name,map)
-        }else{
+            this.names.set(name, map)
+        } else {
 
         }
         return map as any
     }
+    inComponent = false
 }
 
 export function makeSlot(obj: any): Slot {
-    if (obj[SlotSymbol]) {
+    if (getSlot(obj)) {
         throw ''
     }
     const slot = new Slot
@@ -27,7 +28,8 @@ export function makeSlot(obj: any): Slot {
     return slot
 }
 export function getSlot(obj: any): Slot | undefined {
-    return obj[SlotSymbol]
+
+    return Object.getOwnPropertyDescriptor(obj, SlotSymbol)?.value
 }
 
 export function obtainSlot(obj: any): Slot {
@@ -47,11 +49,38 @@ export function makeObject(names: string[], obj: any) {
     }, {})
 }
 
-export function toBaseReverse(obj: any) {
+// export function toBaseReverse(obj: any) {
+//     const arr: any[] = []
+//     let curr = obj
+//     while (curr.constructor !== Base) {
+//         arr.unshift(curr)
+//         curr = Object.getPrototypeOf(curr)
+//     }
+//     return arr
+// }
+
+export function toComponentReverse(obj: any) {
     const arr: any[] = []
     let curr = obj
+
+    do {
+
+        arr.unshift(curr)
+        curr = Object.getPrototypeOf(curr)
+    } while (curr.constructor !== Base && !getSlot(curr))
+    return arr
+}
+
+export function extendSlotPath(obj: any): {
+    constructor: any
+}[] {
+    const arr: any[] = []
+    let curr = obj
+
     while (curr.constructor !== Base) {
-        arr.push(curr)
+        if (getSlot(curr)) {
+            arr.push(curr)
+        }
         curr = Object.getPrototypeOf(curr)
     }
     return arr

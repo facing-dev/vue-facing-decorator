@@ -1,6 +1,6 @@
 import { makeObject, obtainSlot } from '../utils'
 import { Cons, OptionBuilder } from '../component'
-import { toBaseReverse, excludeNames, getValidNames } from '../utils'
+import { toComponentReverse, excludeNames, getValidNames } from '../utils'
 const LifecycleNames = [
     "beforeCreate",
     "created",
@@ -21,7 +21,8 @@ const LifecycleNames = [
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
-    const protoArr = toBaseReverse(cons.prototype).reverse()
+    const protoArr = toComponentReverse(cons.prototype)
+
     optionBuilder.lifecycle ??= {}
     optionBuilder.methods ??= {}
     const LifecycleFunctions: Record<string, Function> = {}
