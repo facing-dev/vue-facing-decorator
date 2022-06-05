@@ -19,6 +19,7 @@ import {
   Watch,
   Prop,
   Inject,
+  Emit,
   Base,
 } from "vue-facing-decorator";
 import AnotherComponent from "./AnotherComponent.vue";
@@ -59,6 +60,19 @@ class Sup extends Base {
   },
 })
 export default class Comp extends Sup {
+  //emit an event with name of method
+  @Emit()
+  eventName(arg: any) {
+    return arg;
+  }
+  //emit an event with custom name and promise value
+  //event will be emitted when promise resolved
+  @Emit("eventCustomNamePromise")
+  event2(arg: any) {
+    return new Promise((resolver) => {
+      resolver(arg);
+    });
+  }
   //create a ref
   @Ref
   readonly ref!: HTMLDivElement;
@@ -127,6 +141,8 @@ export default class Comp extends Sup {
       this.prop,
       this.provideAcientKeyAlias
     );
+    this.eventName("eventName value");
+    this.event2("eventCustomNamePromise value");
   }
 }
 ```
@@ -138,10 +154,10 @@ import { defineComponent} from "vue";
 import AnotherComponent from "./AnotherComponent.vue";
 export default defineComponent({
   name: "MyComponent",
-  components:{
-    AnotherComponent
+  components: {
+    AnotherComponent,
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "eventName", "eventCustomNamePromise"],
   provide: {
     provideKey: "provideValue",
   },
@@ -165,6 +181,15 @@ export default defineComponent({
     },
     method2() {
       console.log("method2");
+    },
+    eventName() {
+      this.$emit("eventName", "eventName value");
+    },
+    async event2() {
+      const value = await new Promise<any>((resolver) => {
+        resolver("eventCustomNamePromise value");
+      });
+      this.$emit("eventCustomNamePromise", value);
     },
   },
   watch: {
