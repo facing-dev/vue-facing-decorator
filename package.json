@@ -15,7 +15,8 @@
     "vue component decorator"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-build": "./node_modules/.bin/tsc && npm run test",
+    "test": "./node_modules/.bin/mocha -r ts-node/register test/test.ts"
   },
   "author": "",
   "license": "MIT",
@@ -24,7 +25,12 @@
     "vue": "^3.0.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
     "@types/vue": "^2.0.0",
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "ts-node": "^10.8.1",
     "typescript": "latest"
   },
   "homepage": "https://github.com/facing-dev/vue-facing-decorator",
