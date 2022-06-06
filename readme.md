@@ -10,7 +10,14 @@ Do the same work like [vue-class-component](https://github.com/vuejs/vue-class-c
 
 `npm install -S vue-facing-decorator`
 
-# Finished
+
+
+# How to use
+
+### Index
+
+* [Basic](#basic)
+* [Extends](#extends)
 
 ### Basic
 
