@@ -53,7 +53,7 @@ type ComponentOption = {
     provide?: Record<string, any> | Function
     components?: Record<string, any>
     directives?: Record<string, any>;
-    inheritAttrs?: true;
+    inheritAttrs?: boolean;
     expose?: string[];
     modifier?: (raw: any) => any
 }

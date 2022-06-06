@@ -5,8 +5,8 @@ export interface WatchConfig {
     key: string
     handler: WatchCallback,
     flush?: 'post',
-    deep?: true,
-    immediate?: true,
+    deep?: boolean,
+    immediate?: boolean,
 }
 export function decorator(key: string, option?: Omit<WatchConfig, 'handler' | 'key'>) {
 
