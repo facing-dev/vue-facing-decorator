@@ -22,6 +22,7 @@ Welcome to suggest and contribute. Message me on github.
 
 * [Basic](#basic)
 * [Extends](#extends)
+* [Tsx render](#tsx-render)
 
 ### Basic
 
@@ -344,4 +345,69 @@ export default defineComponent({
     }
 })
 
+```
+
+### Tsx render
+
+```tsx
+//in Comp.render.tsx
+import type Comp from './Comp'
+
+export default function render(this: Comp) {
+    return <div onClick={this.onClick}>Tsx render {this.number}</div>
+}
+
+//in Comp.ts
+import {
+    Component,
+    Base,
+} from 'vue-facing-decorator'
+import render from './Comp.render'
+
+@Component({
+    render
+})
+export default class Comp extends Base {
+    number = 1
+    onClick() {
+        this.number++
+    }
+}
+
+//in parent component
+import {
+  Component,
+  Base,
+} from 'vue-facing-decorator';
+import Comp from "./Comp"
+
+@Component({
+  components:{
+    Comp
+  }
+})
+export default class ParentComponent extends Base {
+
+}
+```
+
+is euqal to
+
+```typescript
+//in Comp.ts
+import { defineComponent } from "vue";
+import render from './Comp.render'
+export default defineComponent({
+    render,
+    data(){
+        return {
+            number:1
+        }
+    },
+    methods:{
+        onClick(){
+            this.number++
+        }
+    }
+})
 ```

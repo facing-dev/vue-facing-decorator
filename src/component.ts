@@ -55,6 +55,7 @@ type ComponentOption = {
     directives?: Record<string, any>;
     inheritAttrs?: boolean;
     expose?: string[];
+    render?: Function;
     modifier?: (raw: any) => any
 }
 type ComponentConsOption = Cons | ComponentOption
@@ -91,7 +92,9 @@ function ComponentStepWithOption(cons: Cons, arg: ComponentOption, extend?: any)
     if (arg.expose) {
         option.expose = arg.expose
     }
-
+    if (arg.render) {
+        option.render = arg.render
+    }
     if (arg.modifier) {
         option = arg.modifier(option)
         if (!option) {
@@ -107,12 +110,11 @@ export function ComponentBase(cons: Cons) {
     return cons
 }
 
-export function Component(arg: Cons|ComponentOption) {
+export function Component(arg: Cons | ComponentOption) {
 
     function extend(cons: Cons) {
         ComponentBase(cons)
         const slotPath = extendSlotPath(cons.prototype)
-
         slotPath.forEach(proto => {
             const slot = obtainSlot(proto)
             if (!slot.inComponent) {
