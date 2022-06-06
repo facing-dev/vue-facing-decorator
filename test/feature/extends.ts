@@ -72,4 +72,25 @@ describe('feature extends',
         })
     }
 )
-export default {}
+
+
+// import { defineComponent } from 'vue';
+// export default defineComponent({
+//     extends: {
+//         extends: {
+//             methods: {
+//                 method1Comp() {
+//                     return 'method1Comp value'
+//                 }
+//             }
+//         },
+//         method2Comp() {
+//             return 'method2Comp value'
+//         }
+//     },
+//     methods: {
+//         method3Comp() {
+//             return 'method3Comp value'
+//         }
+//     }
+// })

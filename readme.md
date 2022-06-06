@@ -12,6 +12,8 @@ Do the same work like [vue-class-component](https://github.com/vuejs/vue-class-c
 
 # Finished
 
+### Basic
+
 ```typescript
 import {
   Component,
@@ -23,7 +25,7 @@ import {
   Base,
 } from "vue-facing-decorator";
 import AnotherComponent from "./AnotherComponent.vue";
-//super class, DO NOT SUPPORT ANY DECORATOR now
+//super class, See [extends section](#Extends)
 class Sup extends Base {
   //reactivity super property
   supProperty = "supProperty";
@@ -48,6 +50,14 @@ class Sup extends Base {
   //OPTION, components
   components: {
     AnotherComponent,
+  },
+  //OPTION, inheritAttrs
+  inheritAttrs:true,
+  //OPTION, expose
+  expose:[],
+  //OPTION, directives
+  directives:{
+
   },
   //OPTION, use modifier to modify component option built by vue-facing-decorator
   modifier: (option: any) => {
@@ -232,4 +242,95 @@ export default defineComponent({
     );
   },
 });
+```
+
+### Extends
+
+```typescript
+import { Component, ComponentBase, Base } from 'vue-facing-decorator'
+//Comp1 super class
+class Comp1Sup extends Base {
+    method1Sup() {
+        return 'method1Sup value'
+    }
+}
+/*
+Comp1 base component. To define a base component use `@ComponentBase` instead of `@Component`.
+Runtime will bundle Class `Comp1` and `Comp1Sup` to a vue option component.
+Methods of Comp1 will override `Comp1Sup`'s.
+Decorators can be only used on `@Component` and `@ComponentBase` classes. Comp1Sup don't accept any decorators.
+*/
+@ComponentBase
+class Comp1 extends Comp1Sup {
+    method1Comp() {
+        return 'method1Comp value'
+    }
+}
+
+class Comp2Sup extends Comp1 {
+    method2Sup() {
+        return 'method2Sup value'
+    }
+}
+
+
+/*
+Similer to Comp1, runtime will bundle class `Comp2` and `Comp2Sup` into a vue option component.
+Bundled `Comp2` will extends bundled `Comp1` by vue `extends` option `{extends:Comp1}`
+*/
+@ComponentBase
+class Comp2 extends Comp2Sup {
+    method2Comp() {
+        return 'method2Comp value'
+    }
+}
+
+class Comp3Sup extends Comp2 {
+    method3Sup() {
+        return 'method3Sup value'
+    }
+}
+
+/*
+
+(Comp3 -> Comp3Sup) vue extends (Comp2 -> Comp2Sup) vue extends (Comp1 -> Comp1Sup)
+
+Class extends class by ES class extending stratge i.e. `Comp3 -> Comp3Sup` .
+
+Vue component extends vue component by vue component exteding strategy i.e. `(Comp3 -> Comp3Sup) vue extends (Comp2 -> Comp2Sup)`
+
+`Comp3` is a "Final Component" decorated by '@Component'.
+*/
+@Component
+export default class Comp3 extends Comp3Sup {
+    method3Comp() {
+        return 'method3Comp value'
+    }
+}
+```
+
+is euqal to
+
+```typescript
+import { defineComponent } from 'vue';
+export default defineComponent({
+    extends: {
+        extends: {
+            methods: {
+                method1Comp() {
+                    return 'method1Comp value'
+                }
+            }
+        },
+        method2Comp() {
+            return 'method2Comp value'
+        }
+    },
+    methods: {
+        method3Comp() {
+            return 'method3Comp value'
+        }
+    }
+})
+
 ```
