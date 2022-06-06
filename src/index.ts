@@ -70,3 +70,5 @@ export class Base {
     renderTriggered?(e: any): void;
     errorCaptured?(err: any, instance: ComponentPublicInstance | null, info: string): boolean | void;
 }
+
+export const Vue = Base

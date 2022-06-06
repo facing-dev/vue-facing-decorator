@@ -1,10 +1,14 @@
 # Read me
 
-Designed for vue 3.
+Designed for vue 3, do the same work like [vue-class-component](https://github.com/vuejs/vue-class-component) and [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator).
+
+* Community desired vue class component with typescript decorators.
+* Safety. Transform es class to vue option api according to specifications.
+* Performance. Once transform on project loading, ready for everywhere.
+* Support both es class inherit and vue component extending.
+
 
 Welcome to suggest and contribute. Message me on github.
-
-Do the same work like [vue-class-component](https://github.com/vuejs/vue-class-component) and [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator) in vue 3.
 
 # Install
 
