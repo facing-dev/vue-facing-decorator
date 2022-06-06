@@ -25,7 +25,7 @@ import {
   Base,
 } from "vue-facing-decorator";
 import AnotherComponent from "./AnotherComponent.vue";
-//super class, See [extends section](#Extends)
+//super class. See extends section.
 class Sup extends Base {
   //reactivity super property
   supProperty = "supProperty";
