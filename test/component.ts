@@ -28,6 +28,9 @@ const FullOptionOpt = {
   modifier(option: any) {
     option.emits.push('emits3')
     return option
+  },
+  render() {
+    return 'render value'
   }
 }
 
@@ -55,6 +58,9 @@ describe('Component',
         switch (key) {
           case 'emits':
             expect([...opt, 'emits3'].join(',')).to.equal(FullOptionContext[key].join(','))
+            break;
+          case 'render':
+            expect('render value').to.equal(FullOptionContext[key]())
             break;
           case 'modifier':
             return;

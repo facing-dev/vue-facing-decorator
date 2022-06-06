@@ -15,8 +15,9 @@
     "vue component decorator"
   ],
   "scripts": {
-    "test-build": "./node_modules/.bin/tsc && npm run test",
-    "test": "./node_modules/.bin/mocha -r ts-node/register test/test.ts"
+    "test-build": "npm run build && npm run test",
+    "test": "./node_modules/.bin/mocha -r ts-node/register test/test.ts",
+    "build":"./node_modules/.bin/tsc"
   },
   "author": "",
   "license": "MIT",
