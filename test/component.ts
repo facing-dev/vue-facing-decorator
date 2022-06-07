@@ -26,7 +26,7 @@ const FullOptionOpt = {
   inheritAttrs: true,
   expose: ['expose1', 'expose2'],
   modifier(option: any) {
-    option.emits.push('emits3')
+    option.modifierCalled=true
     return option
   },
   render() {
@@ -60,7 +60,7 @@ describe('Component',
         const opt = (FullOptionOpt as any)[key]
         switch (key) {
           case 'emits':
-            expect([...opt, 'emits3'].join(',')).to.equal(FullOptionContext[key].join(','))
+            expect(opt.join(',')).to.equal(FullOptionContext[key].join(','))
             break;
           case 'render':
             expect('render value').to.equal(FullOptionContext[key]())
@@ -69,6 +69,7 @@ describe('Component',
             expect(opt.test).to.equal(FullOptionContext['test'])
             break;
           case 'modifier':
+            expect(true).to.equal(FullOptionContext['modifierCalled'])
             return;
           default:
             expect(opt).to.equal(FullOptionContext[key])
