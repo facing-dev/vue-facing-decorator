@@ -1,7 +1,7 @@
 import { makeObject, obtainSlot } from '../utils'
 import { Cons, OptionBuilder } from '../component'
 import { toComponentReverse, excludeNames, getValidNames } from '../utils'
-const LifecycleNames = [
+export const LifecycleNames = [
     "beforeCreate",
     "created",
     "beforeMount",
@@ -16,8 +16,9 @@ const LifecycleNames = [
     "unmounted",
     "renderTracked",
     "renderTriggered",
-    "errorCaptured"
-]
+    "errorCaptured",
+    "serverPrefetch"
+] as const
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
@@ -37,7 +38,7 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
             }
             return false
         }), slot).forEach(name => {
-            if (LifecycleNames.includes(name)) {
+            if (LifecycleNames.includes(name as any)) {
                 LifecycleFunctions[name] = proto[name]
             }
             else {
