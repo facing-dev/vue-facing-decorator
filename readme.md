@@ -23,6 +23,7 @@ Welcome to suggest and contribute. Message me on github.
 * [Basic](#basic)
 * [Extends](#extends)
 * [Tsx render](#tsx-render)
+* [In class lifecycle names](#)
 
 ### Basic
 
@@ -70,6 +71,11 @@ class Sup extends Base {
   //OPTION, directives
   directives:{
 
+  },
+  //OPTION, this will be assigned to vue option
+  options: {
+    beforeRouteEnter() {
+    },
   },
   //OPTION, use modifier to modify component option built by vue-facing-decorator
   modifier: (option: any) => {
@@ -253,6 +259,7 @@ export default defineComponent({
       (this as any).provideAcientKeyAlias //type error
     );
   },
+  beforeRouteEnter() {},
 });
 ```
 
@@ -411,5 +418,53 @@ export default defineComponent({
             this.number++
         }
     }
+})
+```
+
+### In class lifecycle names
+
+These class names could be defined in class directly.
+
+```js
+[
+    "beforeCreate",
+    "created",
+    "beforeMount",
+    "mounted",
+    "beforeUpdate",
+    "updated",
+    "activated",
+    "deactivated",
+    "beforeDestroy",
+    "beforeUnmount",
+    "destroyed",
+    "unmounted",
+    "renderTracked",
+    "renderTriggered",
+    "errorCaptured",
+    "serverPrefetch"
+]
+```
+
+For names not in this list, use
+
+```typescript
+@Component({
+  options:{
+    foo(){
+
+    }
+  }
+})
+```
+
+or
+
+```typescript
+@Component({
+  modifier(opt:any){
+    opt.foo=function(){}
+    return opt
+  }
 })
 ```
