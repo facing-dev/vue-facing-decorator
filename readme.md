@@ -23,7 +23,7 @@ Welcome to suggest and contribute. Message me on github.
 * [Basic](#basic)
 * [Extends](#extends)
 * [Tsx render](#tsx-render)
-* [In class lifecycle names](#)
+* [In class lifecycle names](#in-class-lifecycle-names)
 
 ### Basic
 
