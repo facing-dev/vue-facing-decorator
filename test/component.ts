@@ -31,6 +31,9 @@ const FullOptionOpt = {
   },
   render() {
     return 'render value'
+  },
+  options: {
+    test: 'test value'
   }
 }
 
@@ -61,6 +64,9 @@ describe('Component',
             break;
           case 'render':
             expect('render value').to.equal(FullOptionContext[key]())
+            break;
+          case 'options':
+            expect(opt.test).to.equal(FullOptionContext['test'])
             break;
           case 'modifier':
             return;

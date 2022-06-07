@@ -307,7 +307,7 @@ class Comp3Sup extends Comp2 {
 
 (Comp3 -> Comp3Sup) vue extends (Comp2 -> Comp2Sup) vue extends (Comp1 -> Comp1Sup)
 
-Class extends class by ES class extending stratge i.e. `Comp3 -> Comp3Sup` .
+Class extends class by ES class extending strategy i.e. `Comp3 -> Comp3Sup` .
 
 Vue component extends vue component by vue component exteding strategy i.e. `(Comp3 -> Comp3Sup) vue extends (Comp2 -> Comp2Sup)`
 
@@ -334,8 +334,10 @@ export default defineComponent({
                 }
             }
         },
-        method2Comp() {
-            return 'method2Comp value'
+        methods: {
+          method2Comp() {
+              return 'method2Comp value'
+          }
         }
     },
     methods: {

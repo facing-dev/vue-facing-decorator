@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue';
+import { defineComponent,ComponentCustomOptions } from 'vue';
 import { obtainSlot, extendSlotPath } from './utils'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
@@ -57,6 +57,7 @@ type ComponentOption = {
     expose?: string[];
     render?: Function;
     modifier?: (raw: any) => any
+    options?:ComponentCustomOptions&Record<string,any>
 }
 type ComponentConsOption = Cons | ComponentOption
 function ComponentStep(cons: Cons, extend?: any) {
@@ -95,6 +96,9 @@ function ComponentStepWithOption(cons: Cons, arg: ComponentOption, extend?: any)
     if (arg.render) {
         option.render = arg.render
     }
+    if(arg.options){
+        Object.assign(option,arg.options)
+    }
     if (arg.modifier) {
         option = arg.modifier(option)
         if (!option) {
@@ -110,7 +114,7 @@ export function ComponentBase(cons: Cons) {
     return cons
 }
 
-export function Component(arg: Cons | ComponentOption) {
+export function Component(arg: ComponentConsOption) {
 
     function extend(cons: Cons) {
         ComponentBase(cons)
