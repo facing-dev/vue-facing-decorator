@@ -7,7 +7,7 @@ Designed for vue 3, do the same work like [vue-class-component](https://github.c
 * Community desired vue class component with typescript decorators.
 * Safety. Transform es class to vue option api according to specifications.
 * Performance. Once transform on project loading, ready for everywhere.
-* Support both es class inherit and vue component extending.
+* Support es class inherit, vue component `extends` and vue `mixins`.
 
 
 Welcome to suggest and contribute. Message me on github.
@@ -23,7 +23,7 @@ Welcome to suggest and contribute. Message me on github.
 ### Index
 
 * [Basic](#basic)
-* [Extends](#extends)
+* [Extends and mixins](#extends-and-mixins)
 * [Tsx render](#tsx-render)
 * [In class lifecycle names](#in-class-lifecycle-names)
 
@@ -278,7 +278,7 @@ export default defineComponent({
 });
 ```
 
-### Extends
+### Extends and mixins
 
 ```typescript
 import { Component, ComponentBase, Base } from 'vue-facing-decorator'
@@ -317,11 +317,19 @@ class Comp2 extends Comp2Sup {
     method2Comp() {
         return 'method2Comp value'
     }
+
+    sameMethodName(){
+      console.log('in Comp2')
+    }
 }
 
 class Comp3Sup extends Comp2 {
     method3Sup() {
         return 'method3Sup value'
+    }
+
+    sameMethodName(){
+      console.log('in Comp3Sup')
     }
 }
 
@@ -335,40 +343,169 @@ Vue component extends vue component by vue component exteding strategy i.e. `(Co
 
 `Comp3` is a "Final Component" decorated by '@Component'.
 */
+
+/*
+The sameMethodName method is the one in Comp3.
+The priority is Comp3 > Comp3Sup > Comp2
+*/
 @Component
-export default class Comp3 extends Comp3Sup {
+export class Comp3 extends Comp3Sup {
     method3Comp() {
         return 'method3Comp value'
     }
+
+    sameMethodName(){
+      console.log('in Comp3')
+    }
+}
+
+/*
+If `mixins` is provided to Component decorator, it will be setted to vue option api `mixins`. Both `extends` and `mixins` will be effective.
+Mixins component will lost them type information. So wo should cast `this` context to `any`.
+In this case, the sameMethodName method is the one in Comp3.
+The priority is Comp3 > Comp3Sup > mixin2 > mixin1 > Comp2
+Comp3 and Comp3Sup considered one component. It `mixins: [mixin1,mixin2]` and `extends: Comp2`
+*/
+@Component({
+  mixins:[{
+    methods:{
+      mixin1Method(){
+      },
+      sameMethodName(){
+        console.log('in mixin1')
+      }
+    }
+  },{
+    methods:{
+      mixin2Method(){
+      },
+      sameMethodName(){
+        console.log('in mixin2')
+      }
+    }
+  }]
+})
+export class Comp3Mixins extends Comp3Sup{
+  sameMethodName(){
+    console.log('in Comp3Mixins')
+  }
+
+ get mixinContext():any { // Mixins will lost type information, for now return any this
+   return this
+ }
+ mounted(){
+   this.mixinContext.mixin1Method()
+   this.mixinContext.mixin2Method()
+ }
 }
 ```
 
 is euqal to
 
 ```typescript
+//For Comp3
 import { defineComponent } from 'vue';
-export default defineComponent({
-    extends: {
-        extends: {
-            methods: {
-                method1Comp() {
-                    return 'method1Comp value'
-                }
+defineComponent({
+    extends: {//This is Comp2 includes Comp2Sup
+        extends: {//This is Comp2 includes Comp3Sup
+          methods: {
+            method1Sup() {
+                return 'method1Sup value'
+            },
+            method1Comp() {
+                return 'method1Comp value'
             }
+          }
         },
         methods: {
+          method2Sup() {
+              return 'method2Sup value'
+          },
           method2Comp() {
               return 'method2Comp value'
+          },
+          sameMethodName(){
+            console.log('in Comp2')
           }
         }
     },
     methods: {
-        method3Comp() {
-            return 'method3Comp value'
-        }
+      method3Sup() {
+        return 'method3Sup value'
+      },
+      method3Comp() {
+          return 'method3Comp value'
+      },
+      sameMethodName(){//This method in Comp3 overwrites the one in Comp3Sup
+        console.log('in Comp3')
+      }
     }
 })
 
+//For Comp3Mixins
+
+defineComponent({
+  mixins:[{
+    methods:{
+      mixin1Method(){
+      },
+      sameMethodName(){
+        console.log('in mixin1')
+      }
+    }
+  },{
+    methods:{
+      mixin2Method(){
+      },
+      sameMethodName(){
+        console.log('in mixin2')
+      }
+    }
+  }],
+  extends: {
+    extends: {
+      methods: {
+        method1Sup() {
+            return 'method1Sup value'
+        },
+        method1Comp() {
+            return 'method1Comp value'
+        }
+      }
+    },
+    methods: {
+      method2Sup() {
+          return 'method2Sup value'
+      },
+      method2Comp() {
+          return 'method2Comp value'
+      },
+      sameMethodName(){
+        console.log('in Comp2')
+      }
+    }
+  },
+  methods: {
+    method3Sup() {
+      return 'method3Sup value'
+    },
+    method3Comp() {
+        return 'method3Comp value'
+    },
+    sameMethodName(){
+      console.log('in Comp3')
+    }
+  },
+  computed:{
+    mixinContext(){
+      return this
+    }
+  },
+  mounted(){
+    this.mixinContext.mixin1Method()
+    this.mixinContext.mixin2Method()
+  }
+})
 ```
 
 ### Tsx render
