@@ -7,7 +7,7 @@ Designed for vue 3, do the same work like [vue-class-component](https://github.c
 * Community desired vue class component with typescript decorators.
 * Safety. Transform es class to vue option api according to specifications.
 * Performance. Once transform on project loading, ready for everywhere.
-* Support es class inherit, vue component `extends` and vue `mixins`.
+* Support es class inherit, vue `extends` and vue `mixins`.
 
 
 Welcome to suggest and contribute. Message me on github.
