@@ -1,19 +1,18 @@
 
 import { Cons, OptionBuilder } from '../component'
-import { obtainSlot } from '../utils'
+import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 export interface InjectConfig {
     from?: string | Symbol
     default?: any
 }
 
-export function decorator(option?: InjectConfig) {
-    return function (proto: any, name: string) {
-        const slot = obtainSlot(proto)
-        let map = slot.obtainMap<Map<string, InjectConfig>>('inject')
-        const opt = Object.assign({}, option ?? {})
-        map.set(name, opt)
-    }
-}
+export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, option?: InjectConfig) {
+    const slot = obtainSlot(proto)
+    let map = slot.obtainMap<Map<string, InjectConfig>>('inject')
+    const opt = Object.assign({}, option ?? {})
+    map.set(name, opt)
+})
+
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.inject ??= {}

@@ -1,5 +1,5 @@
 import { Cons, OptionBuilder } from '../component'
-import { obtainSlot } from '../utils'
+import { obtainSlot, } from '../utils'
 import type { WatchCallback } from 'vue'
 export interface WatchConfig {
     key: string
@@ -8,7 +8,8 @@ export interface WatchConfig {
     deep?: boolean,
     immediate?: boolean,
 }
-export function decorator(key: string, option?: Omit<WatchConfig, 'handler' | 'key'>) {
+type Option = Omit<WatchConfig, 'handler' | 'key'>
+export function decorator(key: string, option?: Option) {
 
     return function (proto: any, name: string) {
         const slot = obtainSlot(proto)

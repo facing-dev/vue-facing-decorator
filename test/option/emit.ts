@@ -5,7 +5,7 @@ import { Component, Emit, Base } from '../../dist'
 
 @Component
 export class Comp extends Base {
-    @Emit()
+    @Emit
     defaultEmit() {
         return 'defaultEmit value'
     }

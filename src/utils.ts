@@ -1,4 +1,5 @@
 import { Base } from './index'
+import type { BaseTypeIdentify } from './index'
 const SlotSymbol = Symbol('vue-facing-decorator-slot')
 class Slot {
     names: Map<string, Map<string, any>> = new Map
@@ -104,4 +105,21 @@ export function excludeNames(names: string[], slot: Slot) {
 export function getValidNames(obj: any, filter: (des: PropertyDescriptor, name: string) => boolean) {
     const descriptors = Object.getOwnPropertyDescriptors(obj)
     return Object.keys(descriptors).filter(name => filter(descriptors[name], name))
+}
+
+export function optoinNullableMemberDecorator<T>(handler: { (proto: any, name: string, option?: T): any }) {
+    function decorator(option?: T): any
+    function decorator(proto: BaseTypeIdentify, name: any): any
+    function decorator(optionOrProto?: T | BaseTypeIdentify, name?: any): any {
+        if (name) {
+            handler(optionOrProto, name)
+        }
+        else {
+            return function (proto: any, name: any) {
+                handler(proto, name, optionOrProto as T | undefined)
+            }
+        }
+    }
+
+    return decorator
 }

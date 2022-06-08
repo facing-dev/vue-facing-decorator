@@ -8,7 +8,7 @@ function Full_validator() {
 }
 @Component
 export class Comp extends Base {
-    @Prop()
+    @Prop
     readonly propName!: any
 
     @Prop({

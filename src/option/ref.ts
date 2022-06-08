@@ -1,10 +1,12 @@
 import { Cons, OptionBuilder } from '../component'
-import { obtainSlot } from '../utils'
-export function decorator(proto: any, name: string) {
+import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
+
+export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, option?: {}) {
     const slot = obtainSlot(proto)
-    let map=slot.obtainMap<Map<string, any>>('ref')
+    let map = slot.obtainMap<Map<string, any>>('ref')
     map.set(name, true)
-}
+})
+
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.computed ??= {}

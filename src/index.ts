@@ -10,10 +10,13 @@ import type {
     ComponentPublicInstance,
     ComponentOptions
 } from 'vue'
-
+const IdentifySymbol = Symbol('vue-facing-decorator-identify')
+export interface BaseTypeIdentify {
+    [IdentifySymbol]: undefined
+}
 
 export const Base = class { } as {
-    new(): ComponentPublicInstance
+    new(): ComponentPublicInstance & BaseTypeIdentify
 }
 
 
