@@ -1,4 +1,4 @@
-import { defineComponent,ComponentCustomOptions } from 'vue';
+import { defineComponent, ComponentCustomOptions } from 'vue';
 import { obtainSlot, extendSlotPath } from './utils'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
@@ -57,7 +57,8 @@ type ComponentOption = {
     expose?: string[];
     render?: Function;
     modifier?: (raw: any) => any
-    options?:ComponentCustomOptions&Record<string,any>
+    options?: ComponentCustomOptions & Record<string, any>
+    template?: string
 }
 type ComponentConsOption = Cons | ComponentOption
 function ComponentStep(cons: Cons, extend?: any) {
@@ -67,9 +68,14 @@ function ComponentStep(cons: Cons, extend?: any) {
 function ComponentStepWithOption(cons: Cons, arg: ComponentOption, extend?: any): any {
     let option = ComponentOption(cons, extend)
     const slot = obtainSlot(cons.prototype)
-    if (typeof arg.name !== 'undefined') {
-        option.name = arg.name
-    }
+
+    Object.keys(arg).reduce<Record<string, any>>((option, name: string) => {
+        if (['options', 'modifier','emits'].includes(name)) {
+            return option
+        }
+        option[name] = arg[name as keyof ComponentOption]
+        return option
+    }, option)
 
     let emits = Array.from(slot.obtainMap('emits').keys())
     if (Array.isArray(arg.emits)) {
@@ -77,27 +83,8 @@ function ComponentStepWithOption(cons: Cons, arg: ComponentOption, extend?: any)
     }
     option.emits = emits
 
-
-    if (arg.components) {
-        option.components = arg.components
-    }
-    if (arg.provide) {
-        option.provide = arg.provide
-    }
-    if (arg.directives) {
-        option.directives = arg.directives
-    }
-    if (arg.inheritAttrs) {
-        option.inheritAttrs = arg.inheritAttrs
-    }
-    if (arg.expose) {
-        option.expose = arg.expose
-    }
-    if (arg.render) {
-        option.render = arg.render
-    }
-    if(arg.options){
-        Object.assign(option,arg.options)
+    if (arg.options) {
+        Object.assign(option, arg.options)
     }
     if (arg.modifier) {
         option = arg.modifier(option)
@@ -115,7 +102,6 @@ export function ComponentBase(cons: Cons) {
 }
 
 export function Component(arg: ComponentConsOption) {
-
     function extend(cons: Cons) {
         ComponentBase(cons)
         const slotPath = extendSlotPath(cons.prototype)

@@ -74,6 +74,12 @@ class Sup extends Base {
   directives:{
 
   },
+  //OPTION, template string, [NEED VUE FULL BUILD](https://vuejs.org/api/options-rendering.html#template).
+  template:'<div></div>',
+  //OPTION, render function
+  render(){
+
+  },
   //OPTION, this will be assigned to vue option
   options: {
     beforeRouteEnter() {
@@ -262,6 +268,10 @@ export default defineComponent({
     );
   },
   beforeRouteEnter() {},
+  template:'<div></div>',
+  render(){
+
+  }
 });
 ```
 

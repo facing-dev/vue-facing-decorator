@@ -34,7 +34,8 @@ const FullOptionOpt = {
   },
   options: {
     test: 'test value'
-  }
+  },
+  template:'template string'
 }
 
 @Component(FullOptionOpt)
