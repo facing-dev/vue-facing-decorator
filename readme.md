@@ -74,6 +74,8 @@ class Sup extends Base {
   directives:{
 
   },
+  //OPTION, mixins
+  mixins:[{}],
   //OPTION, template string, [NEED VUE FULL BUILD](https://vuejs.org/api/options-rendering.html#template).
   template:'<div></div>',
   //OPTION, render function
@@ -268,6 +270,7 @@ export default defineComponent({
     );
   },
   beforeRouteEnter() {},
+  mixins:[{}],
   template:'<div></div>',
   render(){
 

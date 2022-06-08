@@ -59,6 +59,7 @@ type ComponentOption = {
     modifier?: (raw: any) => any
     options?: ComponentCustomOptions & Record<string, any>
     template?: string
+    mixins?: any[]
 }
 type ComponentConsOption = Cons | ComponentOption
 function ComponentStep(cons: Cons, extend?: any) {
@@ -70,7 +71,7 @@ function ComponentStepWithOption(cons: Cons, arg: ComponentOption, extend?: any)
     const slot = obtainSlot(cons.prototype)
 
     Object.keys(arg).reduce<Record<string, any>>((option, name: string) => {
-        if (['options', 'modifier','emits'].includes(name)) {
+        if (['options', 'modifier', 'emits'].includes(name)) {
             return option
         }
         option[name] = arg[name as keyof ComponentOption]

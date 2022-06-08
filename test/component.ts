@@ -26,7 +26,7 @@ const FullOptionOpt = {
   inheritAttrs: true,
   expose: ['expose1', 'expose2'],
   modifier(option: any) {
-    option.modifierCalled=true
+    option.modifierCalled = true
     return option
   },
   render() {
@@ -35,7 +35,14 @@ const FullOptionOpt = {
   options: {
     test: 'test value'
   },
-  template:'template string'
+  template: 'template string',
+  mixins: [{
+    methods: {
+      mixinMethod() {
+
+      }
+    }
+  }]
 }
 
 @Component(FullOptionOpt)
