@@ -407,7 +407,7 @@ is euqal to
 import { defineComponent } from 'vue';
 defineComponent({
     extends: {//This is Comp2 includes Comp2Sup
-        extends: {//This is Comp2 includes Comp3Sup
+        extends: {//This is Comp3 includes Comp3Sup
           methods: {
             method1Sup() {
                 return 'method1Sup value'
