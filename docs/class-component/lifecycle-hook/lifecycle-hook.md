@@ -2,7 +2,7 @@
 
 Class component supports almost all lifecycle hooks in vanilla vue. Write then as class methods directly. Hooks won't be tranformed into `methods`.
 
-[](./code-option-name.ts ':include :type=code typescript')
+[](./code-usage.ts ':include :type=code typescript')
 
 ## Lsit of lifecycle hook names
 
