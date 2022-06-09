@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import 'mocha';
 import { Component, Base } from '../dist'
 import { isEmptyObject } from './utils';
+
 @Component
 export class Empty extends Base {
 

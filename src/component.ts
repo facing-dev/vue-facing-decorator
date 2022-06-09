@@ -88,10 +88,7 @@ function ComponentStepWithOption(cons: Cons, arg: ComponentOption, extend?: any)
         Object.assign(option, arg.options)
     }
     if (arg.modifier) {
-        option = arg.modifier(option)
-        if (!option) {
-            throw 'Component modifier should return vue component option'
-        }
+        arg.modifier(option)
     }
     return defineComponent(option)
 }
