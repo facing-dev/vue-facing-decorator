@@ -80,7 +80,7 @@ It will be assigned to vue option component before `modifier`.
 
 ### modifier
 
-Finally, you can use this function to modify the generated vue option component directly.
+Finally, we can use this function to modify the generated vue option component directly.
 
 > This option belongs to `vue-facing-decorator`.
 

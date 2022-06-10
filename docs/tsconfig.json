@@ -10,6 +10,7 @@
         "sourceMap": true,
         "lib": [
             "esnext",
+            "DOM"
         ],
         "allowJs": true,
         "skipLibCheck": true,
@@ -23,7 +24,8 @@
         "noUnusedLocals": false,
         "paths": {
             "vue-facing-decorator": ["../dist"]
-        }
+        },
+        "jsx": "preserve"
     },
     "include": [
         "./**/*.ts",

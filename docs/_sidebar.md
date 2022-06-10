@@ -1,4 +1,5 @@
-- [Quick start](home/quick-start/quick-start.md)
+- [Information](README.md)
+- [Quick start](quick-start/quick-start.md)
 - Class component
     - [Component](class-component/component/component.md)
     - [Property](class-component/property/property.md)
@@ -6,3 +7,10 @@
     - [Lifecycle hooks](class-component/lifecycle-hook/lifecycle-hook.md)
     - [Getter](class-component/getter/getter.md)
     - [Event](class-component/event/event.md)
+    - [Reference](class-component/ref/ref.md)
+    - [Watcher](class-component/watcher/watcher.md)
+    - [Injection](class-component/injection/injection.md)
+- Inheritance
+    - [ECMAScript class](inheritance/es-class/es-class.md)
+    - [Component](inheritance/component/component.md)
+    - [Complex example](inheritance/complex-example/complex-example.md)

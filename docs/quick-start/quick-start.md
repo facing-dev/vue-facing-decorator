@@ -30,3 +30,17 @@ In common used vue Single-File components(`.vue` files), the default exported vu
 [](./code-how-to-use-sfc.vue ':include :type=code text')
 
 > DO NOT USE composition api script `<script setup lang="ts">`.
+
+### In separated files with TSX
+
+If you don't want to use Single-File components, this is another choice. It use `.ts` file to define component and import template from `.tsx` file.
+
+> It also requires to export component as `default`.
+
+> Make style effective by webpack loaders as usual.
+
+[](./code-separated-files-tsx/Comp.render.tsx ':include :type=code tsx')
+
+[](./code-separated-files-tsx/Comp.ts ':include :type=code typescript')
+
+[](./code-separated-files-tsx/style.css ':include :type=code css')
