@@ -1,6 +1,6 @@
 # Read me
 
-![GitHub](https://img.shields.io/github/license/facing-dev/vue-facing-decorator) ![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/facing-dev/vue-facing-decorator/release) ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/vue-facing-decorator/peer/vue)
+![GitHub](https://img.shields.io/github/license/facing-dev/vue-facing-decorator) ![npm](https://img.shields.io/npm/v/vue-facing-decorator) ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/vue-facing-decorator/peer/vue)
 
 Designed for vue 3, do the same work like [vue-class-component](https://github.com/vuejs/vue-class-component) and [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator).
 
