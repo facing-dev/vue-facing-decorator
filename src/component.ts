@@ -1,5 +1,5 @@
 import { defineComponent, ComponentCustomOptions } from 'vue';
-import { obtainSlot, getSuperSlot } from './utils'
+import { obtainSlot, getSuperSlot, getSlot } from './utils'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
 import { build as optionMethodsAndLifecycle } from './option/methodsAndLifecycle'
@@ -103,22 +103,35 @@ function build(cons: Cons, option: ComponentOption) {
 }
 function _Component(arg: ComponentConsOption, cb: (cons: Cons, option: ComponentOption) => any) {
     if (typeof arg === 'function') {
+        console.log('zxzxzx A')
         return cb(arg, {})
     }
+    console.log('zxzxzx B')
     return function (cons: Cons) {
+        console.log('zxzxzx C')
         return cb(cons, arg)
     }
 }
 export function ComponentBase(arg: ComponentConsOption): any {
     return _Component(arg, function (cons: Cons, option: ComponentOption) {
+        console.log('zxzxzx D')
         build(cons, option)
         return cons
     })
 }
 
 export function Component(arg: ComponentConsOption): any {
+    console.log('zxzxzx', arg)
     return _Component(arg, function (cons: Cons, option: ComponentOption) {
+        console.log('zxzxzx 2')
         build(cons, option)
+        // const slot = getSlot(cons.prototype)!
+        // Object.defineProperty(cons, '__vccOpts', {
+        //     value: slot.cachedVueComponent
+        // })
+        // console.log('kkkk', '__vccOpts' in cons, cons)
+        // return cons
         return obtainSlot(cons.prototype).cachedVueComponent
     })
+
 }
