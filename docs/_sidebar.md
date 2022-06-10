@@ -7,7 +7,7 @@
     - [Lifecycle hooks](class-component/lifecycle-hook/lifecycle-hook.md)
     - [Getter](class-component/getter/getter.md)
     - [Event](class-component/event/event.md)
-    - [Reference](class-component/ref/ref.md)
+    - [Reference](class-component/reference/reference.md)
     - [Watcher](class-component/watcher/watcher.md)
     - [Injection](class-component/injection/injection.md)
 - Inheritance
