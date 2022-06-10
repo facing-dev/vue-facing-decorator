@@ -20,6 +20,6 @@ class SuperComponent extends Vue {
 @Component({
     name: "MyComponent"
 })
-class MyComponent extends SuperComponent {
+export default class MyComponent extends SuperComponent {
 
 }

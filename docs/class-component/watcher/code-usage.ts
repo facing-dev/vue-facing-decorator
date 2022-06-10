@@ -22,7 +22,7 @@ Vue option component
 */
 
 @Component
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
     property = "value"
 
     @Watch("property")

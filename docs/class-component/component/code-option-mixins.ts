@@ -16,6 +16,6 @@ Vue option component
 @Component({
     mixins: [VueComponent]
 })
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
 
 }

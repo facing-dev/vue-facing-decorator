@@ -11,6 +11,6 @@ Vue option component
 @Component({
     expose: ['Name']
 })
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
 
 }

@@ -20,7 +20,7 @@ Vue option component
         MyAnotherComponent
     }
 })
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
 
 }
 

@@ -1,5 +1,5 @@
 import { defineComponent, ComponentCustomOptions } from 'vue';
-import { obtainSlot, extendSlotPath } from './utils'
+import { obtainSlot, getSuperSlot } from './utils'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
 import { build as optionMethodsAndLifecycle } from './option/methodsAndLifecycle'
@@ -62,14 +62,9 @@ type ComponentOption = {
     mixins?: any[]
 }
 type ComponentConsOption = Cons | ComponentOption
-function ComponentStep(cons: Cons, extend?: any) {
-    return defineComponent(ComponentOption(cons, extend))
-}
-
-function ComponentStepWithOption(cons: Cons, arg: ComponentOption, extend?: any): any {
+function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     let option = ComponentOption(cons, extend)
     const slot = obtainSlot(cons.prototype)
-
     Object.keys(arg).reduce<Record<string, any>>((option, name: string) => {
         if (['options', 'modifier', 'emits'].includes(name)) {
             return option
@@ -77,7 +72,6 @@ function ComponentStepWithOption(cons: Cons, arg: ComponentOption, extend?: any)
         option[name] = arg[name as keyof ComponentOption]
         return option
     }, option)
-
     let emits = Array.from(slot.obtainMap('emits').keys())
     if (Array.isArray(arg.emits)) {
         emits = Array.from(new Set([...emits, ...arg.emits]))
@@ -92,46 +86,39 @@ function ComponentStepWithOption(cons: Cons, arg: ComponentOption, extend?: any)
     }
     return defineComponent(option)
 }
-
-export function ComponentBase(cons: Cons) {
+function build(cons: Cons, option: ComponentOption) {
     const slot = obtainSlot(cons.prototype)
     slot.inComponent = true
-    return cons
-}
-
-export function Component(arg: ComponentConsOption) {
-    function extend(cons: Cons) {
-        ComponentBase(cons)
-        const slotPath = extendSlotPath(cons.prototype)
-        slotPath.forEach(proto => {
-            const slot = obtainSlot(proto)
-            if (!slot.inComponent) {
-                throw 'Class should be decorated by Component or ComponentBase: ' + proto.constructor
-            }
-        })
-
-        return slotPath.reduceRight<any>((pv, cv, ci) => {
-            if (ci > 0) {
-                return ComponentStep(cv.constructor, pv === null ? undefined : pv)
-            } else {
-
-                if (typeof arg === 'function') {
-                    return ComponentStepWithOption(cv.constructor, {}, pv === null ? undefined : pv)
-                } else {
-                    return ComponentStepWithOption(cv.constructor, arg, pv === null ? undefined : pv)
-                }
-            }
-        }, null)
+    const superSlot = getSuperSlot(cons.prototype)
+    if (superSlot) {
+        if (!superSlot.inComponent) {
+            throw 'Class should be decorated by Component or ComponentBase: ' + slot.master
+        }
+        if (superSlot.cachedVueComponent === null) {
+            throw 'Component decorator 1'
+        }
     }
+    const component = buildComponent(cons, option, superSlot === null ? undefined : superSlot.cachedVueComponent)
+    slot.cachedVueComponent = component
+}
+function _Component(arg: ComponentConsOption, cb: (cons: Cons, option: ComponentOption) => any) {
     if (typeof arg === 'function') {
-
-        const finalComp = extend(arg)
-        return finalComp
+        return cb(arg, {})
     }
     return function (cons: Cons) {
-
-        const finalComp = extend(cons)
-
-        return finalComp
+        return cb(cons, arg)
     }
+}
+export function ComponentBase(arg: ComponentConsOption): any {
+    return _Component(arg, function (cons: Cons, option: ComponentOption) {
+        build(cons, option)
+        return cons
+    })
+}
+
+export function Component(arg: ComponentConsOption): any {
+    return _Component(arg, function (cons: Cons, option: ComponentOption) {
+        build(cons, option)
+        return obtainSlot(cons.prototype).cachedVueComponent
+    })
 }

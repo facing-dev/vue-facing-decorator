@@ -2,7 +2,9 @@
 import { expect } from 'chai';
 import 'mocha';
 import { Component, ComponentBase, Base } from '../../dist'
-@ComponentBase
+@ComponentBase({
+    name:'ComponentBase'
+})
 class Sup extends Base {
     dataSup = 'dataSup value'
     methodSup(){
@@ -33,12 +35,14 @@ describe('feature component extends',
 
         })
         it('sup',()=>{
+        
             expect('object').to.equal(typeof SupContext)
             expect('function').to.equal(typeof SupContext?.data)
             const supData = SupContext.data()
             expect('dataSup value').to.equal(supData.dataSup)
             expect('function').to.equal(typeof SupContext?.methods?.methodSup)
             expect('methodSup value').to.equal(SupContext.methods.methodSup())
+            expect('ComponentBase').to.equal(SupContext.name)
         })
     }
 )

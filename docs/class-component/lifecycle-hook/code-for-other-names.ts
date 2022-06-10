@@ -17,6 +17,6 @@ Vue option component
         option.hook2 = function () { }
     }
 })
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
 
 }

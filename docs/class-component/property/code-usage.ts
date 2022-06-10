@@ -13,6 +13,6 @@ Vue option component
 */
 
 @Component
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
     property = 'property value'
 }

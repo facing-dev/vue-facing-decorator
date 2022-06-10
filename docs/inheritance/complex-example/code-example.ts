@@ -21,7 +21,7 @@ class CompSuper extends SuperComp {
 @Component({
     mixins: [VueNativeComponent]
 })
-export class Comp extends CompSuper {
+export default class Comp extends CompSuper {
 
 }
 

@@ -10,6 +10,6 @@ Vue option component
 @Component({
     name:'VueComponentName'
 })
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
 
 }

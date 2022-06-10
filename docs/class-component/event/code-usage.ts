@@ -16,7 +16,7 @@ Vue option component
 */
 
 @Component
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
     @Emit
     triggerMethodNameEvent(){
         return 'triggerMethodNameEvent value'

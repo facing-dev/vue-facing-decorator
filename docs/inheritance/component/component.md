@@ -1,6 +1,6 @@
 ## Usage
 
-Use decorator `ComponentBase` to define a super component.
+Use decorator `ComponentBase` to define a super component. It's parameter is same to decorator `Component`'s.
 
 Components which `vue-facing-decorator` generated can inherit another directly.
 

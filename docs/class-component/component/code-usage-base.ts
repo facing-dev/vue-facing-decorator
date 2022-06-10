@@ -9,6 +9,6 @@ class MyComponent extends Vue {
 @Component({
     //Set your options here.
 })
-class MyComponentWithOptions extends Vue {
+export default class MyComponentWithOptions extends Vue {
 
 }

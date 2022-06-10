@@ -18,7 +18,7 @@ Vue option component
 */
 
 @Component
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
     @Emit
     triggerAsyncEvent() {
         return new Promise((resolver) => {

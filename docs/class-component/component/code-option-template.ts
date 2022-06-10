@@ -11,6 +11,6 @@ Vue option component
 @Component({
     template: '<div>template</div>'
 })
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
 
 }

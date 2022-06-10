@@ -26,7 +26,7 @@ interface VueNativeComponentContext {
     name: "MyComponent",
     mixins: [VueNativeComponent]
 })
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
     get VueNativeComponentContext(): VueNativeComponentContext {
         return this as any
     }

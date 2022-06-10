@@ -41,7 +41,7 @@ class Super extends Vue {
 }
 
 @Component
-class MyComponent extends Super {
+export default class MyComponent extends Super {
     propertyB = 'from MyComponent'
 
     property = 'from MyComponent'

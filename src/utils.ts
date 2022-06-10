@@ -2,6 +2,10 @@ import { Base } from './index'
 import type { BaseTypeIdentify } from './index'
 const SlotSymbol = Symbol('vue-facing-decorator-slot')
 class Slot {
+    master: any
+    constructor(master: any) {
+        this.master = master
+    }
     names: Map<string, Map<string, any>> = new Map
     obtainMap<T extends Map<string, any>>(name: string): T {
         let map = this.names.get(name)
@@ -15,13 +19,14 @@ class Slot {
         return map as any
     }
     inComponent = false
+    cachedVueComponent: any = null
 }
 
 export function makeSlot(obj: any): Slot {
     if (getSlot(obj)) {
         throw ''
     }
-    const slot = new Slot
+    const slot = new Slot(obj)
     Object.defineProperty(obj, SlotSymbol, {
         enumerable: false,
         value: slot
@@ -71,21 +76,33 @@ export function toComponentReverse(obj: any) {
     } while (curr.constructor !== Base && !getSlot(curr))
     return arr
 }
-
-export function extendSlotPath(obj: any): {
-    constructor: any
-}[] {
-    const arr: any[] = []
-    let curr = obj
+export function getSuperSlot(obj: any) {
+    let curr = Object.getPrototypeOf(obj)
 
     while (curr.constructor !== Base) {
-        if (getSlot(curr)) {
-            arr.push(curr)
+        const slot = getSlot(curr)
+        if (slot) {
+            return slot
         }
         curr = Object.getPrototypeOf(curr)
     }
-    return arr
+    return null
 }
+
+// export function extendSlotPath(obj: any): {
+//     constructor: any
+// }[] {
+//     const arr: any[] = []
+//     let curr = obj
+
+//     while (curr.constructor !== Base) {
+//         if (getSlot(curr)) {
+//             arr.push(curr)
+//         }
+//         curr = Object.getPrototypeOf(curr)
+//     }
+//     return arr
+// }
 
 export function excludeNames(names: string[], slot: Slot) {
     return names.filter(name => {

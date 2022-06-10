@@ -18,6 +18,6 @@ Vue option component
         option.methods.customMethod = function () { }
     }
 })
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
 
 }

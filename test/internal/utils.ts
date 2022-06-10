@@ -37,8 +37,6 @@ class Comp3Sup extends Comp2 {
     }
 }
 
-
-
 class Comp3 extends Comp3Sup {
     method3Comp() {
         return 'method3Comp value'
@@ -81,14 +79,6 @@ describe('internal utils',
 
             expect(Comp1).to.equal(path1[1].constructor)
             expect(true).to.equal(path1[1] instanceof Comp1Sup)
-        })
-
-        it('extendSlotPath', () => {
-            const path = Utils.extendSlotPath(Comp3.prototype)
-            expect(3).to.equal(path.length)
-            expect(Comp3.prototype).to.equal(path[0])
-            expect(Comp2.prototype).to.equal(path[1])
-            expect(Comp1.prototype).to.equal(path[2])
         })
     }
 )

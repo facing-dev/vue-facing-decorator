@@ -11,6 +11,6 @@ Vue option component
 @Component({
     emits: ['MyEvent']
 })
-class MyComponent extends Vue {
+export default class MyComponent extends Vue {
 
 }
