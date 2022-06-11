@@ -14,6 +14,16 @@ Install `vue-facing-decorator` with your favorite package manager.
 npm install --save vue-facing-decorator
 ```
 
+Enable `experimentalDecorators` in `tsconfig.json` in project root directory.
+
+```json
+{
+    "compilerOptions": {
+        "experimentalDecorators": true
+    }
+}
+```
+
 ## How to use?
 
 ### Define a class component
