@@ -45,8 +45,6 @@ In common used vue Single-File components(`.vue` files), the default exported vu
 
 If you don't want to use Single-File components, this is another choice. It use `.ts` file to define component and import template from `.tsx` file.
 
-> It also requires to export component as `default`.
-
 > Make style effective by webpack loaders as usual.
 
 [](./code-separated-files-tsx/Comp.render.tsx ':include :type=code tsx')
