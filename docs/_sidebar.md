@@ -5,11 +5,13 @@
     - [Property](class-component/property/property.md)
     - [Method](class-component/method/method.md)
     - [Lifecycle hooks](class-component/lifecycle-hook/lifecycle-hook.md)
+    - [Component property](class-component/component-property/component-property.md)
     - [Getter](class-component/getter/getter.md)
     - [Event](class-component/event/event.md)
     - [Reference](class-component/reference/reference.md)
     - [Watcher](class-component/watcher/watcher.md)
     - [Injection](class-component/injection/injection.md)
+    - [VModel](class-component/v-model/v-model.md)
 - Inheritance
     - [ECMAScript class](inheritance/es-class/es-class.md)
     - [Component](inheritance/component/component.md)

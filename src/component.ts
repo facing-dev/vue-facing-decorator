@@ -8,6 +8,7 @@ import { build as optionWatch, WatchConfig } from './option/watch'
 import { build as optionProps, PropsConfig } from './option/props'
 import { build as optionInject, InjectConfig } from './option/inject'
 import { build as optionEmit } from './option/emit'
+import { build as optionVModel, VModelConfig } from './option/vmodel'
 export interface OptionBuilder {
     name?: string
     data?: Record<string, any>
@@ -17,11 +18,13 @@ export interface OptionBuilder {
     watch?: Record<string, WatchConfig>
     props?: Record<string, PropsConfig>
     inject?: Record<string, InjectConfig>
+    beforeCreateCallbacks?:Function[]
 
 }
 export interface Cons { new(): any, prototype: any }
 function ComponentOption(cons: Cons, extend?: any) {
     const optionBuilder: OptionBuilder = {}
+    optionVModel(cons,optionBuilder)
     optionComputed(cons, optionBuilder)
     optionWatch(cons, optionBuilder)
     optionProps(cons, optionBuilder)

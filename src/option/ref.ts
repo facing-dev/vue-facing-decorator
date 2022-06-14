@@ -19,6 +19,4 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
             }
         })
     }
-
-
 }

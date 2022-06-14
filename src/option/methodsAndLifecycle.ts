@@ -50,6 +50,16 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
     })
 
     Object.assign(optionBuilder.methods, MethodFunctions)
+    const bccbs = optionBuilder.beforeCreateCallbacks
+    if (bccbs && bccbs.length > 0) {
+        const oldBc = LifecycleFunctions['beforeCreate']
+        LifecycleFunctions['beforeCreate']=function(){
+            bccbs.forEach(bccb=>bccb.apply(this,arguments))
+            if(oldBc){
+                oldBc.apply(this,arguments)
+            }
+        }
+    }
     Object.assign(optionBuilder.lifecycle, LifecycleFunctions)
 
 }
