@@ -41,7 +41,7 @@
     }
 
     window.$docsify.plugins = [].concat(function (hook) {
-      hook.beforeEach(function collect() {
+      hook.doneEach(function collect() {
         gtag('set', 'page_path', location.hash);
         gtag('event', 'page_view');
       })
