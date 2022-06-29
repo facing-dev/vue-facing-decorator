@@ -1,5 +1,5 @@
 
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, ComponentBase, Vue } from 'vue-facing-decorator'
 
 /*
 Vue option component
@@ -10,7 +10,7 @@ Vue option component
     }
 }
 */
-@Component({
+@ComponentBase({
     name: "SuperComponent"
 })
 class SuperComponent extends Vue {
