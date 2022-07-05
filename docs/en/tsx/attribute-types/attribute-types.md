@@ -12,7 +12,7 @@ To make enable TSX attribute types:
 
 [](./code-usage.tsx ':include :type=code tsx')
 
-## Type checking
+## Property types checking in component
 
 We could check if component implements properties by `implements`.
 
