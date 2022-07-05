@@ -1,4 +1,4 @@
-- [Information](/en/README.md)
+- [Information](/en/readme.md)
 - [Quick start](/en/quick-start/quick-start.md)
 - Class component
     - [Component](/en/class-component/component/component.md)

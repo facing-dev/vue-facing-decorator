@@ -1,4 +1,4 @@
-- [信息](/zh-cn/README.md)
+- [信息](/zh-cn/readme.md)
 - [开始](/zh-cn/quick-start/quick-start.md)
 - 类组件
     - [组件](/zh-cn/class-component/component/component.md)
