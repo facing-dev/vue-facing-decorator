@@ -18,5 +18,5 @@ export default class MyComponent extends Vue {
     @Prop({
         type: String
     })
-    p!: string
+    p?: string
 }

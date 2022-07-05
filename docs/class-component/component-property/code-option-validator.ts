@@ -22,5 +22,5 @@ export default class MyComponent extends Vue {
             return true
         }
     })
-    p!: string
+    p?: string
 }

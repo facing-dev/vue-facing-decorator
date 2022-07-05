@@ -1,6 +1,6 @@
 ## Usage
 
-You could define a method which triggers a vue event by `Emit` decorator.
+We could define a method which triggers a vue event by `Emit` decorator.
 
 The decorator received an optional event name paramater. Event will be triggered with this name and the method returned value. If the event name parameter is omitted, use method's name by default.
 

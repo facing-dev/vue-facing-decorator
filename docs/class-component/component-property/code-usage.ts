@@ -16,5 +16,5 @@ Vue option component
 @Component
 export default class MyComponent extends Vue {
     @Prop
-    p!: string
+    p?: string
 }

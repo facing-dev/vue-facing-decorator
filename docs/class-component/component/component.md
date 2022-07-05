@@ -54,6 +54,8 @@ This is the `render` in vue option component api.
 
 If you use vue Single-File component. The render will be applied to the `export default` component automatically.
 
+> This will overwrite the render in class body.
+
 [](./code-option-template.ts ':include :type=code typescript')
 
 ### template

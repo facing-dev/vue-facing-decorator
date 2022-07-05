@@ -7,17 +7,21 @@ export { decorator as Inject } from './option/inject'
 export { decorator as Emit } from './option/emit'
 export { decorator as VModel } from './option/vmodel'
 import type {
-    ComponentPublicInstance,
-    ComponentOptions
+    ComponentPublicInstance
 } from 'vue'
 const IdentifySymbol = Symbol('vue-facing-decorator-identify')
 export interface BaseTypeIdentify {
     [IdentifySymbol]: undefined
 }
+export function TSX<Properties extends {}>() {
+    return function <C extends { new(): ComponentPublicInstance & BaseTypeIdentify }>(cons: C) {
+        return cons as unknown as {
+            new(): Omit<ComponentPublicInstance<(InstanceType<C>['$props']) & Properties>, keyof Properties> & InstanceType<C>//& ComponentPublicInstance & BaseTypeIdentify
+        }
+    }
+}
 
 export const Base = class { } as {
     new(): ComponentPublicInstance & BaseTypeIdentify
 }
-
-
 export const Vue = Base

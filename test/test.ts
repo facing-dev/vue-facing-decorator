@@ -13,3 +13,5 @@ import './feature/lifecycle'
 import './feature/classExtends'
 import './feature/componentExtends'
 import './feature/extends'
+
+import './tsx/attributeTypes'

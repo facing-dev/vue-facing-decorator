@@ -17,7 +17,8 @@ export const LifecycleNames = [
     "renderTracked",
     "renderTriggered",
     "errorCaptured",
-    "serverPrefetch"
+    "serverPrefetch",
+    "render"
 ] as const
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {

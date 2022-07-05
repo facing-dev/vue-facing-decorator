@@ -23,9 +23,12 @@ Class component supports almost all lifecycle hooks in vanilla vue. Write then a
     "renderTracked",
     "renderTriggered",
     "errorCaptured",
-    "serverPrefetch"
+    "serverPrefetch",
+    "render"
 ]
 ```
+
+All these hooks must be methods of a class, not properties.
 
 ## For other names
 

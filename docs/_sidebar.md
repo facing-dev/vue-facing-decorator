@@ -16,3 +16,5 @@
     - [ECMAScript class](inheritance/es-class/es-class.md)
     - [Component](inheritance/component/component.md)
     - [Complex example](inheritance/complex-example/complex-example.md)
+- TSX
+    - [Attribute types](tsx/attribute-types/attribute-types.md)
