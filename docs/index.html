@@ -37,7 +37,15 @@
       coverpage: true,
       loadSidebar: true,
       maxLevel: 4,
-      subMaxLevel: 4
+      subMaxLevel: 4,
+      loadNavbar: true,
+      mergeNavbar: true,
+      alias: {
+        '/zh-cn/(.*)': '/zh-cn/$1',
+        '/en/(.*)': '/en/$1',
+        '/': '/readme.md',
+        '^/_(.*)': '/en/_$1'
+      }
     }
 
     window.$docsify.plugins = [].concat(function (hook) {
