@@ -35,7 +35,7 @@ A simplest class component must extends `Vue` base class and be decorated by `Co
 
 ### In vue Single-File components
 
-In common used vue Single-File components(`.vue` files), the default exported vue option component should be replaced by class component.
+In common used vue Single-File components(`.vue` files), the default exported vue options API should be replaced by class component.
 
 [](./code-how-to-use-sfc.vue ':include :type=code text')
 

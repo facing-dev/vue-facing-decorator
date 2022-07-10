@@ -11,7 +11,7 @@ const VueNativeComponent = defineComponent({
 })
 
 /*
-Vue option component
+Vue options API
 {
     name:"MyComponent"
     mixins:[VueNativeComponent]

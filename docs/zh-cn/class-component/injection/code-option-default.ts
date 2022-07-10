@@ -2,7 +2,7 @@
 import { Inject, Component, Vue } from 'vue-facing-decorator'
 
 /*
-Vue option component
+Vue options API
 {
     inject:{
         name:{

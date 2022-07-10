@@ -6,9 +6,13 @@
 
 2. 定义一个描述组件属性的接口（例如`Props`）。
 
-3. 使组件继承`TSX<Props>()(BaseComponent)`.
+3. 定义一个描述组件事件的接口（例如`Events`）。
 
-> `TSX<Props>`后有两个`()`。
+4. 使组件继承`TSX<Props,Events>()(BaseComponent)`.
+
+> `Events`中的键会变为首字母大写并被加前缀`on`，例如`myEvent` => `onMyEvent`。
+
+> `TSX<Props,Events>`后有两个`()`。
 
 [](./code-usage.tsx ':include :type=code tsx')
 

@@ -6,9 +6,13 @@ To make enable TSX attribute types:
 
 2. Define an interface(e.g. `Props`) to decribe properties in component.
 
-3. Make component extend from `TSX<Props>()(BaseComponent)`.
+3. Define an interface(e.g. `Events`) to decribe events in component.
 
-> There are two `()`s after `TSX<Props>`.
+4. Make component extend from `TSX<Props,Events>()(BaseComponent)`.
+
+>   The keys of `Events` will be capitalized and prefixed by `on`. e.g. `myEvent` => `onMyEvent`.
+
+> There are two `()`s after `TSX<Props,Events>`.
 
 [](./code-usage.tsx ':include :type=code tsx')
 

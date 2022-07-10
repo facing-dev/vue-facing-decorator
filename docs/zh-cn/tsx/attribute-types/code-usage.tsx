@@ -1,18 +1,26 @@
-import { TSX, Prop, Component, Vue } from 'vue-facing-decorator'
+import { TSX, Prop, Emit, Component, Vue } from 'vue-facing-decorator'
 
 interface Props {
     propString: string
 }
 
+interface Events {
+    myEvent: Function
+}
+
 @Component
-export default class MyComponent extends TSX<Props>()(Vue) {
+export default class MyComponent extends TSX<Props, Events>()(Vue) {
     @Prop({
         required: true
     })
     propString!: string
+    @Emit('myEvent')
+    triggerMyEvent() {
+        return 'event value'
+    }
 }
 
-//TypeScript会在TSX中检查组件的属性
+//TypeScript will check component attributes in TSX.
 function render() {
-    return <MyComponent propString='foobar'></MyComponent>
+    return <MyComponent propString='foobar' onMyEvent={(v: string) => { }}></MyComponent>
 }

@@ -7,7 +7,7 @@ import { Ref, Component, Vue } from 'vue-facing-decorator'
     <div ref="refEl"></div>
 </template>
 
-Vue option component
+Vue options API
 {
     computed:{
         refEl(){

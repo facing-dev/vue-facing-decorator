@@ -4,7 +4,7 @@
 <script lang="ts">
 // ！！！不要使用 <script setup>
 
-//vue option component.
+//vue options API.
 /*
 import { defineComponent } from "vue";
 export default defineComponent({});

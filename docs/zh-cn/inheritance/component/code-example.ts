@@ -2,7 +2,7 @@
 import { Component, ComponentBase, Vue } from 'vue-facing-decorator'
 
 /*
-Vue option component
+Vue options API
 {
     name:"MyComponent"
     extends:{

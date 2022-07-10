@@ -26,7 +26,7 @@ export default class Comp extends CompSuper {
 }
 
 /*
-Vue option component
+Vue options API
 {//这是Comp
     extends:{//这是 SuperComp
 

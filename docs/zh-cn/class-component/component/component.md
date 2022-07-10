@@ -14,7 +14,7 @@
 
 ### emits
 
-和vue option api中的`emits` in vue option component api.
+和vue option api中的`emits` in vue options API.
 
 [](./code-option-emits.ts ':include :type=code typescript')
 

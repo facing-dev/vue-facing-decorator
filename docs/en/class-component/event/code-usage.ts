@@ -2,7 +2,7 @@
 import { Emit, Component, Vue } from 'vue-facing-decorator'
 
 /*
-Vue option component
+Vue options API
 {
     methods:{
         triggerMethodNameEvent(){

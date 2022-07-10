@@ -3,7 +3,7 @@ import { Watch, Component, Vue } from 'vue-facing-decorator'
 
 /*
 
-Vue option component
+Vue options API
 {
     data(){
         return {
