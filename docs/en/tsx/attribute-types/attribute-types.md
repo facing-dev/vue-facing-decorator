@@ -10,7 +10,9 @@ To make enable TSX attribute types:
 
 4. Make component extend from `TSX<Props,Events>()(BaseComponent)`.
 
->   The keys of `Events` will be capitalized and prefixed by `on`. e.g. `myEvent` => `onMyEvent`.
+> The keys of `Events` will be capitalized and prefixed by `on`. e.g. `myEvent` => `onMyEvent`.
+
+> If a `Events` value has a non-function type, it's type will be transformed to a function that accepts only one parameter typed by the value's type and returns `any` type. e.g. `{myEvent:string}` => `{myEvent:(param:string)=>any}`.
 
 > There are two `()`s after `TSX<Props,Events>`.
 

@@ -12,6 +12,8 @@
 
 > `Events`中的键会变为首字母大写并被加前缀`on`，例如`myEvent` => `onMyEvent`。
 
+> 如果一个`Events`的值是非函数类型，它的类型会被转换为一个函数，这个函数仅仅接受一个前面定义值的类型的参数并且返回`any`类型。例如`{myEvent:string}` => `{myEvent:(param:string)=>any}`。
+
 > `TSX<Props,Events>`后有两个`()`。
 
 [](./code-usage.tsx ':include :type=code tsx')

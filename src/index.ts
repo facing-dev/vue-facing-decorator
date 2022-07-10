@@ -16,7 +16,7 @@ export interface BaseTypeIdentify {
 export function TSX<Properties extends {} = {}, Events extends {} = {}>() {
 
 
-    type Bundle = Properties & { [index in keyof Events as `on${Capitalize<index & string>}`]: Events[index] }
+    type Bundle = Properties & { [index in keyof Events as `on${Capitalize<index & string>}`]: Events[index] extends Function ? Events[index] : { (param: Events[index]): any } }
     return function <C extends { new(): ComponentPublicInstance & BaseTypeIdentify }>(cons: C) {
         return cons as unknown as {
             new(): Omit<ComponentPublicInstance<(InstanceType<C>['$props']) & Bundle>, keyof Bundle> & InstanceType<C>//& ComponentPublicInstance & BaseTypeIdentify
