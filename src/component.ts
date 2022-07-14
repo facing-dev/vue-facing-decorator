@@ -25,13 +25,14 @@ export interface Cons { new(): any, prototype: any }
 function ComponentOption(cons: Cons, extend?: any) {
     const optionBuilder: OptionBuilder = {}
     optionVModel(cons,optionBuilder)
-    optionComputed(cons, optionBuilder)
+    optionComputed(cons, optionBuilder)//after VModel
     optionWatch(cons, optionBuilder)
     optionProps(cons, optionBuilder)
     optionInject(cons, optionBuilder)
     optionEmit(cons, optionBuilder)
-    optionMethodsAndLifecycle(cons, optionBuilder)
-    optionRef(cons, optionBuilder)
+    optionRef(cons, optionBuilder)//after Computed
+    optionMethodsAndLifecycle(cons, optionBuilder)//after Ref
+    
 
     const raw = {
         data() {

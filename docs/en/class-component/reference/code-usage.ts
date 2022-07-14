@@ -7,14 +7,6 @@ import { Ref, Component, Vue } from 'vue-facing-decorator'
     <div ref="refEl"></div>
 </template>
 
-Vue options API
-{
-    computed:{
-        refEl(){
-            return this.refs['refEl']
-        }
-    }
-}
 */
 
 @Component

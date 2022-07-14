@@ -9,14 +9,23 @@ export const decorator = optoinNullableMemberDecorator(function (proto: any, nam
 
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
-    optionBuilder.computed ??= {}
     const slot = obtainSlot(cons.prototype)
     const names = slot.obtainMap<Map<string, any>>('ref')!
     if (names) {
-        names.forEach((value, name) => {
-            optionBuilder.computed![name] = function (this: any) {
-                return this.$refs[name]
-            }
+        optionBuilder.beforeCreateCallbacks??=[]
+        optionBuilder.beforeCreateCallbacks.push(function(this:any){
+
+            names.forEach((value, name) => {
+
+                Object.defineProperty(this,name,{
+                    get(this:any){
+                        console.log('vvv',name)
+                        return this.$refs[name]
+                    }
+                })
+            
+            })
         })
+
     }
 }
