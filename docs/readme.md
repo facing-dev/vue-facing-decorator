@@ -23,7 +23,7 @@ Suggestion and contribution welcome.
 
 Due to my poor english skils.😂 I wish someone can help me to improve the english document. If you want to do this, follow the steps to serve document local:
 
-1. **Clone this repo
+1. **Fork and clone this repo
 3. cd repo/docs
 4. npm install -g http-server
 5. http-server
