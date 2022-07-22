@@ -7,11 +7,22 @@ Designed for vue 3, do the same work like [vue-class-component](https://github.c
 * Community desired vue class component with typescript decorators.
 * Safety. Transform es class to vue option api according to specifications.
 * Performance. Once transform on project loading, ready for everywhere.
-* Support es class inherit, vue `extends` and vue `mixins`.
+* Support ES class inheritance, vue `extends` and vue `mixins`.
 
 
-Welcome to suggest and contribute. Message me on github.
+Welcome to suggest and contribute.
 
 # Document
 
 [To document](https://facing-dev.github.io/vue-facing-decorator/#/)
+
+# !!!HELP!!!
+
+Due to my poor english skils.😂 I wish someone can help me to improve the english document. If you want to do this, follow the steps to serve document local:
+
+1. **Clone this repo
+3. cd repo/docs
+4. npm install -g http-server
+5. http-server
+
+Then you could access the document from the url which shown in your terminal. Change the files in directory `en` and PR. Thank you very much:)

@@ -18,3 +18,14 @@ If you like deprecaed [vue-class-component](https://github.com/vuejs/vue-class-c
 Suggestion and contribution welcome.
 
 [Get started > ](/en/quick-start/quick-start.md)
+
+# !!!HELP!!!
+
+Due to my poor english skils.😂 I wish someone can help me to improve the english document. If you want to do this, follow the steps to serve document local:
+
+1. **Clone this repo
+3. cd repo/docs
+4. npm install -g http-server
+5. http-server
+
+Then you could access the document from the url which shown in your terminal. Change the files in directory `en` and PR. Thank you very much:)
