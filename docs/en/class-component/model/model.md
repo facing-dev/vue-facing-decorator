@@ -1,6 +1,8 @@
 ## Usage
 
-Use `VModel` decorator to define a model for vue `v-model` or `v-model:foo`. 
+Use `Model` decorator to define a model for vue `v-model` or `v-model:foo`. 
+
+> Alias of old `VModel` decorator. `VModel` will be supported in the future, but we recommend to update to `Model`.
 
 [](./code-usage.ts ':include :type=code typescript')
 

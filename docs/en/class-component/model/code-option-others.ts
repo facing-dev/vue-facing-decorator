@@ -1,7 +1,6 @@
-import { VModel, Component, Vue } from 'vue-facing-decorator'
+import { Model, Component, Vue } from 'vue-facing-decorator'
 
 /*
-
 Vue options API
 {
     props:{
@@ -22,20 +21,16 @@ Vue options API
         }
     }
 }
-
 */
 
 /*
-
 In other components:
-
 <MyComponent v-model="foo"></MyComponent>
-
 */
 
 @Component
 export default class MyComponent extends Vue {
-    @VModel({
+    @Model({
         type: String,
         default: 'bar',
         //...

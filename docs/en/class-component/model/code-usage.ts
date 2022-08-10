@@ -1,19 +1,18 @@
-import { VModel, Component, Vue } from 'vue-facing-decorator'
+import { Model, Component, Vue } from 'vue-facing-decorator'
 
 /*
-
 Vue options API
 {
     props:{
-        value:{}
+        modelValue:{}
     },
     computed:{
         valueAgent:{
             get(){
-                return this['value']
+                return this['modelValue']
             },
             set(value){
-                this.$emit('update:value',value)
+                this.$emit('update:modelValue',value)
             }
         }
     }
@@ -22,13 +21,11 @@ Vue options API
 
 /*
 In other components:
-<MyComponent v-model:value="foo"></MyComponent>
+<MyComponent v-model="foo"></MyComponent>
 */
 
 @Component
 export default class MyComponent extends Vue {
-    @VModel({
-        name: 'value'
-    })
+    @Model
     valueAgent!: string
 }

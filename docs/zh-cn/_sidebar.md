@@ -11,7 +11,7 @@
     - [引用](/zh-cn/class-component/reference/reference.md)
     - [监视器](/zh-cn/class-component/watcher/watcher.md)
     - [注入](/zh-cn/class-component/injection/injection.md)
-    - [VModel](/zh-cn/class-component/v-model/v-model.md)
+    - [Model](/zh-cn/class-component/model/model.md)
 - 继承
     - [ECMAScript 类 继承](/zh-cn/inheritance/es-class/es-class.md)
     - [组件 继承](/zh-cn/inheritance/component/component.md)

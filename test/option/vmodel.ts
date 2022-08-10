@@ -1,15 +1,15 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, VModel, Base } from '../../dist'
+import { Component, Model, Base } from '../../dist'
 
 @Component
 export class Comp extends Base {
 
-    @VModel
+    @Model
     defaultValueAgent!:string
 
-    @VModel({
+    @Model({
         name:'value',
         required:true
     })

@@ -1,6 +1,8 @@
 ## 用法
 
-使用装饰器`VModel`去定义vue `v-model`或`v-model:foo`。
+使用装饰器`Model`去定义vue `v-model`或`v-model:foo`。
+
+> 这是`VModel`装饰器的别名。`VModel`在未来会被继续支持，但是我们建议升级到`Model`.
 
 [](./code-usage.ts ':include :type=code typescript')
 

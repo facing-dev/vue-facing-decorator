@@ -5,7 +5,7 @@ export { decorator as Watch } from './option/watch'
 export { decorator as Prop } from './option/props'
 export { decorator as Inject } from './option/inject'
 export { decorator as Emit } from './option/emit'
-export { decorator as VModel } from './option/vmodel'
+export { decorator as VModel, decorator as Model } from './option/vmodel'
 import type {
     ComponentPublicInstance
 } from 'vue'

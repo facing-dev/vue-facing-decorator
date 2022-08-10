@@ -1,11 +1,14 @@
-import { VModel, Component, Vue } from 'vue-facing-decorator'
+import { Model, Component, Vue } from 'vue-facing-decorator'
 
 /*
-
 Vue options API
 {
     props:{
-        modelValue:{}
+        modelValue:{
+            type:String,
+            default:'bar',
+            //...
+        }
     },
     computed:{
         valueAgent:{
@@ -18,19 +21,19 @@ Vue options API
         }
     }
 }
-
 */
 
 /*
-
-In other components:
-
+在另一个组件中:
 <MyComponent v-model="foo"></MyComponent>
-
 */
 
 @Component
 export default class MyComponent extends Vue {
-    @VModel
+    @Model({
+        type: String,
+        default: 'bar',
+        //...
+    })
     valueAgent!: string
 }

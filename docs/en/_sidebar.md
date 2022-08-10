@@ -11,7 +11,7 @@
     - [Reference](/en/class-component/reference/reference.md)
     - [Watcher](/en/class-component/watcher/watcher.md)
     - [Injection](/en/class-component/injection/injection.md)
-    - [VModel](/en/class-component/v-model/v-model.md)
+    - [Model](/en/class-component/model/model.md)
 - Inheritance
     - [ECMAScript class](/en/inheritance/es-class/es-class.md)
     - [Component](/en/inheritance/component/component.md)
