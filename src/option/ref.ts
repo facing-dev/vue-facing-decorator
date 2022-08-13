@@ -19,7 +19,6 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
 
                 Object.defineProperty(this,name,{
                     get(this:any){
-                        console.log('vvv',name)
                         return this.$refs[name]
                     }
                 })
