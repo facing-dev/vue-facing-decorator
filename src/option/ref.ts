@@ -14,12 +14,12 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
     if (names) {
         optionBuilder.beforeCreateCallbacks??=[]
         optionBuilder.beforeCreateCallbacks.push(function(this:any){
-
+            const ctx = this
             names.forEach((value, name) => {
 
                 Object.defineProperty(this,name,{
                     get(this:any){
-                        return this.$refs[name]
+                        return ctx.$refs[name]
                     }
                 })
             
