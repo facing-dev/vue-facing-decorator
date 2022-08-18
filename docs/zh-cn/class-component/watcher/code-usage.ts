@@ -17,6 +17,15 @@ Vue options API
 
             }
         }
+        property2:[{
+            handler:function property2Watcher1(newValue: string, oldValue: string){
+
+            }
+        },{
+            handler:function property2Watcher2(newValue: string, oldValue: string){
+
+            }
+        }]
     }
 }
 */
@@ -27,6 +36,15 @@ export default class MyComponent extends Vue {
 
     @Watch("property")
     propertyWatcher(newValue: string, oldValue: string) {
+
+    }
+
+    @Watch("property2")
+    property2Watcher1(newValue: string, oldValue: string) {
+
+    }
+    @Watch("property2")
+    property2Watcher2(newValue: string, oldValue: string) {
 
     }
 }

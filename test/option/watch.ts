@@ -5,19 +5,30 @@ import { Component, Watch, Base } from '../../dist'
 
 @Component
 export class Comp extends Base {
-    
+
     @Watch('defaultWatchKey')
-    defaultWatcher(){
+    defaultWatcher() {
         return 'defaultWatcher test value'
     }
 
-    @Watch('fullWatchKey',{
-        deep:true,
-        immediate:true,
-        flush:'post'
+    @Watch('fullWatchKey', {
+        deep: true,
+        immediate: true,
+        flush: 'post'
     })
-    fullWatcher(){
+
+    fullWatcher() {
         return 'fullWatcher test value'
+    }
+    @Watch('arrayWatchKey')
+    arrayWatcher1() {
+        return 'arrayWatcher1 value'
+    }
+    @Watch('arrayWatchKey', {
+        immediate: true
+    })
+    arrayWatcher2() {
+        return 'arrayWatcher2 value'
     }
 }
 const CompContext = Comp as any
@@ -27,16 +38,21 @@ describe('decorator Watch',
         it('default', () => {
             expect('function').to.equal(typeof CompContext?.watch?.defaultWatchKey?.handler)
             expect('defaultWatcher test value').to.equal(CompContext.watch.defaultWatchKey.handler())
-   
+
         })
-        it('full option',()=>{
+        it('full option', () => {
             expect('function').to.equal(typeof CompContext?.watch?.fullWatchKey?.handler)
             expect('fullWatcher test value').to.equal(CompContext.watch.fullWatchKey.handler())
             expect(true).to.equal(CompContext.watch.fullWatchKey.deep)
             expect(true).to.equal(CompContext.watch.fullWatchKey.immediate)
             expect('post').to.equal(CompContext.watch.fullWatchKey.flush)
         })
-        it('method',()=>{
+        it('array', () => {
+            expect(true).to.equal(Array.isArray(CompContext?.watch?.arrayWatchKey))
+            expect('arrayWatcher1 value').to.equal(CompContext.watch.arrayWatchKey[0].handler())
+            expect(true).to.equal(CompContext.watch.arrayWatchKey[1].immediate)
+        })
+        it('method', () => {
             expect('function').to.equal(typeof CompContext?.methods?.defaultWatcher)
             expect('defaultWatcher test value').to.equal(CompContext.methods.defaultWatcher())
         })

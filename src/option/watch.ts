@@ -13,24 +13,34 @@ export function decorator(key: string, option?: Option) {
 
     return function (proto: any, name: string) {
         const slot = obtainSlot(proto)
-        let map = slot.obtainMap<Map<string, WatchConfig>>('watch');
+        let map = slot.obtainMap<Map<string, WatchConfig | WatchConfig[]>>('watch');
 
 
         const opt = Object.assign({}, option ?? {}, {
             key: key,
             handler: proto[name]
         })
-        map.set(name, opt)
+        if (map.has(key)) {
+            const t = map.get(key)!
+            if (Array.isArray(t)) {
+                t.push(opt)
+            } else {
+                map.set(key, [t, opt])
+            }
+        }
+        else {
+            map.set(key, opt)
+        }
     }
 }
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.watch ??= {}
     const slot = obtainSlot(cons.prototype)
-    const names = slot.obtainMap('watch')
-    if (names) {
-        names.forEach(value => {
-            optionBuilder.watch![value.key] = value
+    const keys = slot.obtainMap('watch')
+    if (keys) {
+        keys.forEach((value, key) => {
+            optionBuilder.watch![key] = value
         })
     }
 
