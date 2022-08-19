@@ -17,4 +17,5 @@
     - [组件 继承](/zh-cn/inheritance/component/component.md)
     - [复杂示例](/zh-cn/inheritance/complex-example/complex-example.md)
 - TSX
+    - [TSX](/zh-cn/tsx/tsx-render/tsx-render.md)
     - [属性类型](/zh-cn/tsx/attribute-types/attribute-types.md)
