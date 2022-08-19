@@ -16,6 +16,10 @@ Welcome to suggest and contribute.
 
 [To document](https://facing-dev.github.io/vue-facing-decorator/#/)
 
+# Discussion
+
+[To discord https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)
+
 # !!!HELP!!!
 
 Due to my poor english skils.😂 I wish someone can help me to improve the english document. If you want to do this, follow the steps to serve document local:
