@@ -30,6 +30,16 @@ export class Comp extends Base {
     arrayWatcher2() {
         return 'arrayWatcher2 value'
     }
+
+    @Watch('multiKey1', {
+        immediate: true
+    })
+    @Watch('multiKey2', {
+
+    })
+    multiKeyWatcher() {
+        return 'multiKeyWatcher value'
+    }
 }
 const CompContext = Comp as any
 
@@ -55,6 +65,13 @@ describe('decorator Watch',
         it('method', () => {
             expect('function').to.equal(typeof CompContext?.methods?.defaultWatcher)
             expect('defaultWatcher test value').to.equal(CompContext.methods.defaultWatcher())
+        })
+        it('multi key', () => {
+            expect('function').to.equal(typeof CompContext?.watch?.multiKey1?.handler)
+            expect('function').to.equal(typeof CompContext?.watch?.multiKey2?.handler)
+            expect(true).to.equal(CompContext.watch.multiKey1.handler === CompContext.watch.multiKey2.handler)
+            expect(true).to.equal(!! CompContext.watch.multiKey1.immediate)
+            expect(false).to.equal(!! CompContext.watch.multiKey2.immediate)
         })
     }
 )
