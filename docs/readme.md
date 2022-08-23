@@ -23,9 +23,9 @@ Suggestion and contribution welcome.
 
 [To discord https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)
 
-# Documents translation wanted
+# Document translations wanted
 
-If you would like to help us to improve out documents, follow the steps:
+If you would like to help us to improve document translations, follow the steps:
 
 1. **Fork and clone this repo
 3. cd repo/docs

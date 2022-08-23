@@ -4,9 +4,14 @@ import { Component, Vue } from 'vue-facing-decorator'
 /*
 Vue options API
 {
+    data(){
+        return {
+            foo:''
+        }
+    },
     computed:{
-        set(){
-            return 'value'
+        set(bar){
+            this.foo = bar
         }
     }
 }
