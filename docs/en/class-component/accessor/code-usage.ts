@@ -5,7 +5,7 @@ import { Component, Vue } from 'vue-facing-decorator'
 Vue options API
 {
     computed:{
-        getter(){
+        get(){
             return 'value'
         }
     }

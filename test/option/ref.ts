@@ -15,12 +15,8 @@ describe('decorator Ref',
     () => {
         it('default', () => {
             expect('function').to.equal(typeof CompContext?.beforeCreate)
-            // expect('refValue').to.equal(CompContext.computed.refName.apply({
-            //     $refs: {
-            //         refName: 'refValue'
-            //     }
-            // }))
         })
     }
 )
+
 export default {}

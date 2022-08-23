@@ -1,4 +1,5 @@
-import { Cons, OptionBuilder } from '../component'
+import { Cons } from '../component'
+import { OptionBuilder, applyAccessors } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 
 export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, option?: {}) {
@@ -12,19 +13,17 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
     const names = slot.obtainMap<Map<string, any>>('ref')!
     if (names) {
-        optionBuilder.beforeCreateCallbacks??=[]
-        optionBuilder.beforeCreateCallbacks.push(function(this:any){
-            const ctx = this
+        applyAccessors(optionBuilder, (ctx: any) => {
+            const data: Map<string, { get: () => any, set: undefined }> = new Map
             names.forEach((value, name) => {
-
-                Object.defineProperty(this,name,{
-                    get(this:any){
+                data.set(name, {
+                    get: function (this: any) {
                         return ctx.$refs[name]
-                    }
+                    },
+                    set: undefined
                 })
-            
             })
+            return data
         })
-
     }
 }

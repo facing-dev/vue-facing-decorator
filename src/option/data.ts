@@ -1,5 +1,6 @@
 import { makeObject } from '../utils'
-import { Cons, OptionBuilder } from '../component'
+import { Cons } from '../component'
+import { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, excludeNames, getValidNames } from '../utils'
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.data ??= {}

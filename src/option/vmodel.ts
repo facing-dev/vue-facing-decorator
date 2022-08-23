@@ -1,4 +1,5 @@
-import { Cons, OptionBuilder } from '../component'
+import { Cons } from '../component'
+import { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 import { decorator as PropsDecorator, PropsConfig } from './props'
 export type VModelConfig = PropsConfig & {

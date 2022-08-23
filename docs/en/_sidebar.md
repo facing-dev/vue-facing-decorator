@@ -6,7 +6,7 @@
     - [Method](/en/class-component/method/method.md)
     - [Lifecycle hooks](/en/class-component/lifecycle-hook/lifecycle-hook.md)
     - [Component property](/en/class-component/component-property/component-property.md)
-    - [Getter](/en/class-component/getter/getter.md)
+    - [Accessor](/en/class-component/accessor/accessor.md)
     - [Event](/en/class-component/event/event.md)
     - [Reference](/en/class-component/reference/reference.md)
     - [Watcher](/en/class-component/watcher/watcher.md)

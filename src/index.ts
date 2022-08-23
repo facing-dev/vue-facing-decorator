@@ -6,6 +6,7 @@ export { decorator as Prop } from './option/props'
 export { decorator as Inject } from './option/inject'
 export { decorator as Emit } from './option/emit'
 export { decorator as VModel, decorator as Model } from './option/vmodel'
+export { decorator as Vanilla } from './option/vanilla'
 import type {
     ComponentPublicInstance
 } from 'vue'

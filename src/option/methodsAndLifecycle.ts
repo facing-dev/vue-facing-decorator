@@ -1,5 +1,6 @@
 import { makeObject, obtainSlot } from '../utils'
-import { Cons, OptionBuilder } from '../component'
+import { Cons } from '../component'
+import { OptionBuilder } from '../optionBuilder'
 import { toComponentReverse, excludeNames, getValidNames } from '../utils'
 export const LifecycleNames = [
     "beforeCreate",

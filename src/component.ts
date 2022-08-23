@@ -9,31 +9,21 @@ import { build as optionProps, PropsConfig } from './option/props'
 import { build as optionInject, InjectConfig } from './option/inject'
 import { build as optionEmit } from './option/emit'
 import { build as optionVModel, VModelConfig } from './option/vmodel'
-export interface OptionBuilder {
-    name?: string
-    data?: Record<string, any>
-    methods?: Record<string, Function>
-    lifecycle?: Record<string, Function>
-    computed?: Record<string, any>
-    watch?: Record<string, WatchConfig>
-    props?: Record<string, PropsConfig>
-    inject?: Record<string, InjectConfig>
-    beforeCreateCallbacks?:Function[]
+import { build as optionAccessor } from './option/accessor'
+import { OptionBuilder } from './optionBuilder'
 
-}
 export interface Cons { new(): any, prototype: any }
 function ComponentOption(cons: Cons, extend?: any) {
     const optionBuilder: OptionBuilder = {}
-    optionVModel(cons,optionBuilder)
+    optionVModel(cons, optionBuilder)
     optionComputed(cons, optionBuilder)//after VModel
     optionWatch(cons, optionBuilder)
     optionProps(cons, optionBuilder)
     optionInject(cons, optionBuilder)
     optionEmit(cons, optionBuilder)
     optionRef(cons, optionBuilder)//after Computed
-    optionMethodsAndLifecycle(cons, optionBuilder)//after Ref
-    
-
+    optionMethodsAndLifecycle(cons, optionBuilder)//after Ref Computed
+    optionAccessor(cons, optionBuilder)
     const raw = {
         data() {
             const optionBuilder: OptionBuilder = {}

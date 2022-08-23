@@ -1,5 +1,6 @@
 
-import { Cons, OptionBuilder } from '../component'
+import { Cons } from '../component'
+import { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 export interface InjectConfig {
     from?: string | Symbol
