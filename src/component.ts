@@ -93,7 +93,9 @@ function build(cons: Cons, option: ComponentOption) {
         }
     }
     const component = buildComponent(cons, option, superSlot === null ? undefined : superSlot.cachedVueComponent)
+    component.__vfdConstructor = cons
     slot.cachedVueComponent = component
+
 }
 function _Component(arg: ComponentConsOption, cb: (cons: Cons, option: ComponentOption) => any) {
     if (typeof arg === 'function') {
@@ -119,7 +121,9 @@ export function Component(arg: ComponentConsOption): any {
         // })
         // console.log('kkkk', '__vccOpts' in cons, cons)
         // return cons
-        return obtainSlot(cons.prototype).cachedVueComponent
+        let ff =  obtainSlot(cons.prototype).cachedVueComponent
+
+        return ff
     })
 
 }
