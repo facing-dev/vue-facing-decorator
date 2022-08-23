@@ -1,7 +1,7 @@
 export * from './index'
 import { Component as ComponentOld } from './index'
-export function Component(this: any) {
-    const res = ComponentOld.apply(this, arguments as any)
+export function Component(this: any,...args:Parameters<typeof ComponentOld>) {
+    const res = ComponentOld.apply(this, args)
     function process(res: any) {
         const cons = res.__vfdConstructor
 

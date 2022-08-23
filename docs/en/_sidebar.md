@@ -19,3 +19,5 @@
 - TSX
     - [TSX render](/en/tsx/tsx-render/tsx-render.md)
     - [Attribute types](/en/tsx/attribute-types/attribute-types.md)
+- Compatibility
+    - [reflect-metadata](/en/compatibility/reflect-metadata/reflect-metadata.md)

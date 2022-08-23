@@ -9,7 +9,7 @@ Works on TypeScript and decorator.
 * Community desired vue class component with typescript decorators.
 * Safety. Transform es class to vue options api according to specifications.
 * Performance. Once transform on project loading, ready for everywhere.
-* Support es class inherit, vue `extends` and vue `mixins`.
+* Support ES class inherit, vue `extends` and vue `mixins`.
 
 [](./quick-start/code-what-it-is-example.ts ':include :type=code typescript')
 

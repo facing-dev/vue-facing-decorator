@@ -19,3 +19,5 @@
 - TSX
     - [TSX](/zh-cn/tsx/tsx-render/tsx-render.md)
     - [属性类型](/zh-cn/tsx/attribute-types/attribute-types.md)
+- 兼容性
+    - [reflect-metadata](/zh-cn/compatibility/reflect-metadata/reflect-metadata.md)
