@@ -13,7 +13,7 @@ Works on TypeScript and decorator.
 
 [](/en/quick-start/code-what-it-is-example.ts ':include :type=code typescript')
 
-If you like deprecaed [vue-class-component](https://github.com/vuejs/vue-class-component) and deprecaed [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator), try this!
+If you like deprecaed [vue-class-component](https://github.com/vuejs/vue-class-component) and deprecated [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator), try this!
 
 Suggestion and contribution welcome.
 
