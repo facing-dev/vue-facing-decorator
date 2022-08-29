@@ -121,9 +121,6 @@ export function Component(arg: ComponentConsOption): any {
         // })
         // console.log('kkkk', '__vccOpts' in cons, cons)
         // return cons
-        let ff =  obtainSlot(cons.prototype).cachedVueComponent
-
-        return ff
+        return obtainSlot(cons.prototype).cachedVueComponent
     })
-
 }
