@@ -6,7 +6,9 @@ Class component supports almost all lifecycle hooks in vanilla vue. Write them a
 
 [](./code-usage.ts ':include :type=code typescript')
 
-## Lsit of lifecycle hook names
+
+
+## Internal hook names list
 
 ```javascript
 [
@@ -32,7 +34,7 @@ Class component supports almost all lifecycle hooks in vanilla vue. Write them a
 
 ## For other names
 
-If your hook names aren't in the above list. You could use `options` or `modifier` in `Component` decorator.
+If your hook names aren't in the above list. You could use decorator `Hook`.
 
 > e.g. Hooks from `vue-router`.
 

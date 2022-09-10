@@ -5,7 +5,7 @@ export interface OptionBuilder {
     name?: string
     data?: Record<string, any>
     methods?: Record<string, Function>
-    lifecycle?: Record<string, Function>
+    hooks?: Record<string, Function>
     computed?: Record<string, any>
     watch?: Record<string, WatchConfig | WatchConfig[]>
     props?: Record<string, PropsConfig>

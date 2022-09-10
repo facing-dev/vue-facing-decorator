@@ -1,23 +1,31 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Ref, Base } from '../../dist'
+import { Component, Base, Hook } from '../../dist'
 
 @Component
 export class Comp extends Base {
-    mounted(){
+    mounted() {
         return 'mounted test value'
+    }
+    @Hook
+    testHook(){
+        return 'testHook test value'
     }
 
 }
 const CompContext = Comp as any
 
-describe('feature lifecycle',
+describe('feature hooks',
     () => {
         it('default', () => {
             expect('undefined').to.equal(typeof CompContext?.methods?.mounted)
             expect('function').to.equal(typeof CompContext?.mounted)
             expect('mounted test value').to.equal(CompContext?.mounted())
+
+            expect('undefined').to.equal(typeof CompContext?.methods?.testHook)
+            expect('function').to.equal(typeof CompContext?.testHook)
+            expect('testHook test value').to.equal(CompContext?.testHook())
         })
     }
 )

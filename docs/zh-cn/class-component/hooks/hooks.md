@@ -6,7 +6,7 @@
 
 [](./code-usage.ts ':include :type=code typescript')
 
-## 钩子名称列表
+## 内部钩子名称列表
 
 ```javascript
 [
@@ -32,7 +32,7 @@
 
 ## 其他钩子名称
 
-如果你的钩子名称不再上面的列表中，你可以使用装饰器`Component`的`options`或`modifier`选项。
+如果你的钩子名称不再上面的列表中，你可以使用装饰器`Hook`。
 
 > 例如`vue-router`中的钩子。
 

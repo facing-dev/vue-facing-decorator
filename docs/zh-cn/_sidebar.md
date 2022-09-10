@@ -4,7 +4,7 @@
     - [组件](/zh-cn/class-component/component/component.md)
     - [属性](/zh-cn/class-component/property/property.md)
     - [方法](/zh-cn/class-component/method/method.md)
-    - [生命周期钩子](/zh-cn/class-component/lifecycle-hook/lifecycle-hook.md)
+    - [钩子](/zh-cn/class-component/hooks/hooks.md)
     - [组件属性](/zh-cn/class-component/component-property/component-property.md)
     - [存取器](/zh-cn/class-component/accessor/accessor.md)
     - [事件](/zh-cn/class-component/event/event.md)

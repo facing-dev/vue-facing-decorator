@@ -4,7 +4,7 @@
     - [Component](/en/class-component/component/component.md)
     - [Property](/en/class-component/property/property.md)
     - [Method](/en/class-component/method/method.md)
-    - [Lifecycle hooks](/en/class-component/lifecycle-hook/lifecycle-hook.md)
+    - [Hooks](/en/class-component/hooks/hooks.md)
     - [Component property](/en/class-component/component-property/component-property.md)
     - [Accessor](/en/class-component/accessor/accessor.md)
     - [Event](/en/class-component/event/event.md)

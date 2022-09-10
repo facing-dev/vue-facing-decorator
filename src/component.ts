@@ -2,7 +2,7 @@ import { defineComponent, ComponentCustomOptions } from 'vue';
 import { obtainSlot, getSuperSlot, getSlot } from './utils'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
-import { build as optionMethodsAndLifecycle } from './option/methodsAndLifecycle'
+import { build as optionMethodsAndHooks } from './option/methodsAndHooks'
 import { build as optionRef } from './option/ref'
 import { build as optionWatch, WatchConfig } from './option/watch'
 import { build as optionProps, PropsConfig } from './option/props'
@@ -22,7 +22,7 @@ function ComponentOption(cons: Cons, extend?: any) {
     optionInject(cons, optionBuilder)
     optionEmit(cons, optionBuilder)
     optionRef(cons, optionBuilder)//after Computed
-    optionMethodsAndLifecycle(cons, optionBuilder)//after Ref Computed
+    optionMethodsAndHooks(cons, optionBuilder)//after Ref Computed
     optionAccessor(cons, optionBuilder)
     const raw = {
         data() {
@@ -35,7 +35,7 @@ function ComponentOption(cons: Cons, extend?: any) {
         watch: optionBuilder.watch,
         props: optionBuilder.props,
         inject: optionBuilder.inject,
-        ...optionBuilder.lifecycle,
+        ...optionBuilder.hooks,
         extends: extend
     }
     return raw as any

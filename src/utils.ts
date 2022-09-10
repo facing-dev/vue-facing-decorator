@@ -107,7 +107,7 @@ export function getSuperSlot(obj: any) {
 export function excludeNames(names: string[], slot: Slot) {
     return names.filter(name => {
         for (const mapName of slot.names.keys()) {
-            if (mapName === 'watch') {
+            if (['watch', 'hooks'].includes(mapName)) {
                 continue
             }
             const map = slot.names.get(mapName)!

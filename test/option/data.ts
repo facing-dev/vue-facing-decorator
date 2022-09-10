@@ -15,6 +15,7 @@ describe('option data',
         it('default', () => {
             expect('function').to.equal(typeof CompContext?.data)
             expect('data value').to.equal(CompContext.data().data)
+            expect(1).to.equal(Object.keys(CompContext.data()).length)
         })
     }
 )
