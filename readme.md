@@ -32,3 +32,21 @@ Welcome to suggest and contribute.
 # Discussion
 
 [To discord https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)
+
+# Recommend packages
+
+## recursive-free
+
+> [Github](https://github.com/facing-dev/recursive-free)
+
+> Make your recursive-like functions leave stack overflow.
+
+* Simulate function stack to void stack overflow in recursive-like functions.
+* High performance implemented by JavaScript Map.
+
+
+### @facing/event-bus
+
+> [Github](https://github.com/facing-dev/event-bus)
+
+> Event bus JavaScript implementation
