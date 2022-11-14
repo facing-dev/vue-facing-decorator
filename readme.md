@@ -31,7 +31,9 @@ Welcome to suggest and contribute.
 
 # Discussion
 
-[To discord https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)
+To discord [https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)
+
+QQ群号 766350254
 
 # Recommend packages
 
