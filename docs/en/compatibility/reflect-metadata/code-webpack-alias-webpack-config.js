@@ -2,6 +2,10 @@ module.exports = {
     //...
     resolve: {
         //...
-        'vue-facing-decorator': 'vue-facing-decorator/dist/index-return-cons'
+        alias: {
+            //...
+            'vue-facing-decorator': 'vue-facing-decorator/dist/index-return-cons'
+        }
+
     }
 }
