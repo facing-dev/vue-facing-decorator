@@ -56,7 +56,7 @@
 
 > 这个选项会覆盖类中的render方法。
 
-[](./code-option-template.ts ':include :type=code typescript')
+[](./code-option-render.ts ':include :type=code typescript')
 
 ### template
 

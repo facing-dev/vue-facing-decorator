@@ -56,7 +56,7 @@ If you use vue Single-File component. The render will be applied to the `export 
 
 > This will overwrite the render in class body.
 
-[](./code-option-template.ts ':include :type=code typescript')
+[](./code-option-render.ts ':include :type=code typescript')
 
 ### template
 
