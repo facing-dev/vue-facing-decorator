@@ -11,6 +11,7 @@ export { decorator as Hook } from './option/methodsAndHooks'
 import type {
     ComponentPublicInstance
 } from 'vue'
+import type { OptionBuilder } from './optionBuilder'
 const IdentifySymbol = Symbol('vue-facing-decorator-identify')
 export interface BaseTypeIdentify {
     [IdentifySymbol]: undefined
@@ -19,15 +20,25 @@ export function TSX<Properties extends {} = {}, Events extends {} = {}>() {
 
 
     type Bundle = Properties & { [index in keyof Events as `on${Capitalize<index & string>}`]: Events[index] extends Function ? Events[index] : { (param: Events[index]): any } }
-    return function <C extends { new(): ComponentPublicInstance & BaseTypeIdentify }>(cons: C) {
+    return function <C extends VueCons>(cons: C) {
         return cons as unknown as {
             new(): Omit<ComponentPublicInstance<(InstanceType<C>['$props']) & Bundle>, keyof Bundle> & InstanceType<C>//& ComponentPublicInstance & BaseTypeIdentify
         }
     }
 }
 
-export const Base = class { } as {
-    new(): ComponentPublicInstance & BaseTypeIdentify
+export type VueCons  = {
+    new(optionBuilder: OptionBuilder, vueInstance: any): ComponentPublicInstance & BaseTypeIdentify
 }
-export const Vue = Base
 
+export const Base = class {
+    constructor(optionBuilder: OptionBuilder, vueInstance: any) {
+        const props = optionBuilder.props
+        if (props) {
+            Object.keys(props).forEach(key => {
+                (this as any)[key] = vueInstance[key]
+            })
+        }
+    }
+} as VueCons
+export const Vue = Base

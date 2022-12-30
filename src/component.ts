@@ -11,8 +11,9 @@ import { build as optionEmit } from './option/emit'
 import { build as optionVModel, VModelConfig } from './option/vmodel'
 import { build as optionAccessor } from './option/accessor'
 import { OptionBuilder } from './optionBuilder'
-
-export interface Cons { new(): any, prototype: any }
+import type { VueCons } from './index'
+export type Cons = VueCons
+// export interface Cons { new(): any, prototype: any }
 function ComponentOption(cons: Cons, extend?: any) {
     const optionBuilder: OptionBuilder = {}
     optionVModel(cons, optionBuilder)
@@ -26,8 +27,8 @@ function ComponentOption(cons: Cons, extend?: any) {
     optionAccessor(cons, optionBuilder)
     const raw = {
         data() {
-            const optionBuilder: OptionBuilder = {}
-            optionData(cons, optionBuilder)
+            delete optionBuilder.data
+            optionData(cons, optionBuilder, this)
             return optionBuilder.data ?? {}
         },
         methods: optionBuilder.methods,

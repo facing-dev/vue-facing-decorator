@@ -2,7 +2,6 @@
 import { mount } from '@vue/test-utils'
 import { expect } from 'chai';
 import 'mocha';
-import { wrap } from 'module';
 import { Component, Base ,Vanilla} from '../../dist'
 
 @Component
