@@ -1,6 +1,6 @@
 {
   "name": "vue-facing-decorator",
-  "version": "2.1.12",
+  "version": "2.1.13",
   "description": "Vue typescript class and decorator based component.",
   "main": "dist/index.js",
   "keywords": [
