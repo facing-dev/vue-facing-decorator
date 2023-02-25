@@ -1,7 +1,8 @@
-import { Cons } from '../component'
-import { OptionBuilder } from '../optionBuilder'
+import type { Cons } from '../component'
+import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, } from '../utils'
 import type { WatchCallback } from 'vue'
+
 export interface WatchConfig {
     key: string
     handler: WatchCallback,

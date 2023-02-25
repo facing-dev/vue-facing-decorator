@@ -1,4 +1,3 @@
-
 export { Component, ComponentBase } from './component'
 export { decorator as Ref } from './option/ref'
 export { decorator as Watch } from './option/watch'
@@ -8,17 +7,14 @@ export { decorator as Emit } from './option/emit'
 export { decorator as VModel, decorator as Model } from './option/vmodel'
 export { decorator as Vanilla } from './option/vanilla'
 export { decorator as Hook } from './option/methodsAndHooks'
-import type {
-    ComponentPublicInstance
-} from 'vue'
+import type { ComponentPublicInstance } from 'vue'
 import type { OptionBuilder } from './optionBuilder'
+
 const IdentifySymbol = Symbol('vue-facing-decorator-identify')
 export interface BaseTypeIdentify {
     [IdentifySymbol]: undefined
 }
 export function TSX<Properties extends {} = {}, Events extends {} = {}>() {
-
-
     type Bundle = Properties & { [index in keyof Events as `on${Capitalize<index & string>}`]: Events[index] extends Function ? Events[index] : { (param: Events[index]): any } }
     return function <C extends VueCons>(cons: C) {
         return cons as unknown as {
@@ -27,7 +23,7 @@ export function TSX<Properties extends {} = {}, Events extends {} = {}>() {
     }
 }
 
-export type VueCons  = {
+export type VueCons = {
     new(optionBuilder: OptionBuilder, vueInstance: any): ComponentPublicInstance & BaseTypeIdentify
 }
 
@@ -41,4 +37,5 @@ export const Base = class {
         }
     }
 } as VueCons
+
 export const Vue = Base

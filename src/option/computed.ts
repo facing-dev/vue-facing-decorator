@@ -1,8 +1,7 @@
-import { makeObject } from '../utils'
-
 import { Cons } from '../component'
 import { obtainSlot, toComponentReverse, getValidNames } from '../utils'
 import { OptionBuilder } from '../optionBuilder'
+
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.computed ??= {}
     const slot = obtainSlot(cons.prototype)

@@ -1,5 +1,5 @@
-import { Cons } from '../component'
-import { OptionBuilder,applyAccessors} from '../optionBuilder'
+import type { Cons } from '../component'
+import { OptionBuilder, applyAccessors} from '../optionBuilder'
 import { toComponentReverse, obtainSlot } from '../utils'
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
@@ -7,7 +7,7 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
     let vanillaMap = slot.obtainMap('vanilla')
     const protoArr = toComponentReverse(cons.prototype)
     const map: Map<string, { get: (() => any) | undefined, set: ((v: any) => any) | undefined }> = new Map
- 
+
     applyAccessors(optionBuilder,(ctx:any)=>{
         protoArr.forEach(proto => {
             const deses = Object.getOwnPropertyDescriptors(proto)

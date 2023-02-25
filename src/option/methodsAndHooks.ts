@@ -1,6 +1,5 @@
-
-import { Cons } from '../component'
-import { OptionBuilder } from '../optionBuilder'
+import type { Cons } from '../component'
+import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, toComponentReverse, excludeNames, getValidNames, optoinNullableMemberDecorator } from '../utils'
 
 export const HookNames = [
