@@ -4,14 +4,14 @@ import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 
 export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, option?: {}) {
     const slot = obtainSlot(proto)
-    let map = slot.obtainMap<Map<string, any>>('ref')
+    let map = slot.obtainMap('ref')
     map.set(name, true)
 })
 
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
-    const names = slot.obtainMap<Map<string, any>>('ref')!
+    const names = slot.obtainMap('ref')!
     if (names) {
         applyAccessors(optionBuilder, (ctx: any) => {
             const data: Map<string, { get: () => any, set: undefined }> = new Map

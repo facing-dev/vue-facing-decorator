@@ -1,22 +1,40 @@
 import { Base } from './index'
 import type { BaseTypeIdentify } from './index'
+import type { InjectConfig } from "./option/inject";
+import type { EmitConfig } from "./option/emit";
+import type { PropsConfig } from "./option/props";
+import type { HookConfig } from "./option/methodsAndHooks";
+import type { VModelConfig } from "./option/vmodel";
+import type { WatchConfig } from "./option/watch";
+
 const SlotSymbol = Symbol('vue-facing-decorator-slot')
+
+export type SlotMapTypes = {
+    vanilla: Map<string, boolean>
+    computed: Map<string, boolean>
+    inject: Map<string, InjectConfig>
+    emit: Map<string, EmitConfig>
+    emits: Map<string, boolean>
+    props: Map<string, PropsConfig>
+    hooks: Map<string, HookConfig>
+    'v-model': Map<string, VModelConfig>
+    watch: Map<string, WatchConfig | WatchConfig[]>
+    ref: Map<string, boolean>
+}
+
 class Slot {
     master: any
     constructor(master: any) {
         this.master = master
     }
-    names: Map<string, Map<string, any>> = new Map
-    obtainMap<T extends Map<string, any>>(name: string): T {
+    names: Map<string, SlotMapTypes[keyof SlotMapTypes]> = new Map()
+    obtainMap<T extends keyof SlotMapTypes>(name: T): SlotMapTypes[T] {
         let map = this.names.get(name)
         if (!map) {
-
-            map = new Map
+            map = new Map()
             this.names.set(name, map)
-        } else {
-
         }
-        return map as any
+        return map as SlotMapTypes[T]
     }
     inComponent = false
     cachedVueComponent: any = null
@@ -33,6 +51,7 @@ export function makeSlot(obj: any): Slot {
     })
     return slot
 }
+
 export function getSlot(obj: any): Slot | undefined {
 
     return Object.getOwnPropertyDescriptor(obj, SlotSymbol)?.value

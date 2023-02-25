@@ -4,7 +4,7 @@ import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 export type EmitConfig = null | string
 export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, key?: string) {
     const slot = obtainSlot(proto)
-    let map = slot.obtainMap<Map<string, EmitConfig>>('emit');
+    let map = slot.obtainMap('emit');
     map.set(name, typeof key === 'undefined' ? null : key)
 })
 
