@@ -1,6 +1,6 @@
-import { WatchConfig } from './option/watch'
-import { PropsConfig } from './option/props'
-import { InjectConfig } from './option/inject'
+import type { WatchConfig } from './option/watch'
+import type { PropsConfig } from './option/props'
+import type { InjectConfig } from './option/inject'
 export interface OptionBuilder {
     name?: string
     data?: Record<string, any>
@@ -11,7 +11,6 @@ export interface OptionBuilder {
     props?: Record<string, PropsConfig>
     inject?: Record<string, InjectConfig>
     beforeCreateCallbacks?: Function[]
-
 }
 
 export function applyAccessors(optionBuilder: OptionBuilder, dataFunc: (ctx: any) => Map<string, { get: (() => any) | undefined, set: ((v: any) => any) | undefined }>) {
@@ -24,6 +23,7 @@ export function applyAccessors(optionBuilder: OptionBuilder, dataFunc: (ctx: any
         })
     })
 }
+
 // export function applyGetters(optionBuilder: OptionBuilder, dataFunc: (ctx: any) => Map<string, () => any>) {
 //     optionBuilder.beforeCreateCallbacks ??= []
 //     optionBuilder.beforeCreateCallbacks.push(function (this: any) {

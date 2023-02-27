@@ -1,4 +1,4 @@
-import { Cons } from '../component'
+import type { Cons } from '../component'
 import { OptionBuilder, applyAccessors } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 

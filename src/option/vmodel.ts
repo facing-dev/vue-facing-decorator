@@ -1,10 +1,12 @@
-import { Cons } from '../component'
-import { OptionBuilder } from '../optionBuilder'
+import type { Cons } from '../component'
+import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 import { decorator as PropsDecorator, PropsConfig } from './props'
+
 export type VModelConfig = PropsConfig & {
     name?: string
 }
+
 export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, option?: VModelConfig) {
     option ??= {}
     const slot = obtainSlot(proto)
