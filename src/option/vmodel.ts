@@ -1,7 +1,7 @@
 import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
-import { decorator as PropsDecorator, PropsConfig } from './props'
+import { decorator as PropsDecorator, type PropsConfig } from './props'
 
 export type VModelConfig = PropsConfig & {
     name?: string
@@ -17,7 +17,7 @@ export const decorator = optoinNullableMemberDecorator(function (proto: any, nam
         delete propsConfig.name
     }
     PropsDecorator(propsConfig)(proto, vmodelName)
-    let map = slot.obtainMap('v-model')
+    const map = slot.obtainMap('v-model')
     map.set(name, option)
 })
 
@@ -28,7 +28,7 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const names = slot.obtainMap('v-model')!
     if (names && names.size > 0) {
         names.forEach((value, name) => {
-            let vmodelName = (value && value.name) ?? 'modelValue'
+            const vmodelName = (value && value.name) ?? 'modelValue'
             optionBuilder.computed![name] = {
                 get: function (this: any) {
                     return this[vmodelName]

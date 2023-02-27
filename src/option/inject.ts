@@ -3,13 +3,13 @@ import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 
 export interface InjectConfig {
-    from?: string | Symbol
+    from?: string | symbol
     default?: any
 }
 
 export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, option?: InjectConfig) {
     const slot = obtainSlot(proto)
-    let map = slot.obtainMap('inject')
+    const map = slot.obtainMap('inject')
     const opt = Object.assign({}, option ?? {})
     map.set(name, opt)
 })

@@ -1,4 +1,4 @@
-import { defineComponent, ComponentCustomOptions } from 'vue';
+import { defineComponent, type ComponentCustomOptions } from 'vue';
 import { obtainSlot, getSuperSlot } from './utils'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
@@ -10,7 +10,7 @@ import { build as optionInject } from './option/inject'
 import { build as optionEmit } from './option/emit'
 import { build as optionVModel } from './option/vmodel'
 import { build as optionAccessor } from './option/accessor'
-import { OptionBuilder } from './optionBuilder'
+import type { OptionBuilder } from './optionBuilder'
 import type { VueCons } from './index'
 export type Cons = VueCons
 // export interface Cons { new(): any, prototype: any }
@@ -58,7 +58,7 @@ type ComponentOption = {
 }
 type ComponentConsOption = Cons | ComponentOption
 function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
-    let option = ComponentOption(cons, extend)
+    const option = ComponentOption(cons, extend)
     const slot = obtainSlot(cons.prototype)
     Object.keys(arg).reduce<Record<string, any>>((option, name: string) => {
         if (['options', 'modifier', 'emits'].includes(name)) {

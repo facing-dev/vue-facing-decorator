@@ -25,7 +25,7 @@ export const HookNames = [
 export type HookConfig = null
 export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string) {
     const slot = obtainSlot(proto)
-    let map = slot.obtainMap('hooks');
+    const map = slot.obtainMap('hooks');
     map.set(name, null)
 })
 
