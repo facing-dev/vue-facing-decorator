@@ -3,6 +3,7 @@
   "version": "2.1.14",
   "description": "Vue typescript class and decorator based component.",
   "main": "dist/index.js",
+  "module": "dist/esm/index.js",
   "keywords": [
     "vue",
     "class",
@@ -15,9 +16,11 @@
     "vue component decorator"
   ],
   "scripts": {
-    "test-build": "npm run build && npm run test",
-    "test": "./node_modules/.bin/mocha -r ts-node/register test/test.ts",
-    "build": "./node_modules/.bin/tsc",
+    "test-build": "npm run test && npm run build",
+    "test": "mocha -r ts-node/register test/test.ts",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "./node_modules/.bin/tsc",
+    "build:esm": "./node_modules/.bin/tsc -outDir dist/esm -module ES6",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
