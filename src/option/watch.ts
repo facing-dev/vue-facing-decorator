@@ -1,7 +1,8 @@
-import { Cons } from '../component'
-import { OptionBuilder } from '../optionBuilder'
+import type { Cons } from '../component'
+import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, } from '../utils'
 import type { WatchCallback } from 'vue'
+
 export interface WatchConfig {
     key: string
     handler: WatchCallback,
@@ -13,7 +14,7 @@ type Option = Omit<WatchConfig, 'handler' | 'key'>
 export function decorator(key: string, option?: Option) {
     return function (proto: any, name: string) {
         const slot = obtainSlot(proto)
-        let map = slot.obtainMap<Map<string, WatchConfig | WatchConfig[]>>('watch');
+        const map = slot.obtainMap('watch');
         const opt = Object.assign({}, option ?? {}, {
             key: key,
             handler: proto[name]
@@ -35,9 +36,9 @@ export function decorator(key: string, option?: Option) {
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.watch ??= {}
     const slot = obtainSlot(cons.prototype)
-    const names = slot.obtainMap<Map<string, WatchConfig | WatchConfig[]>>('watch')
+    const names = slot.obtainMap('watch')
     if (names) {
-        names.forEach((value, name) => {
+        names.forEach((value, _name) => {
             const values = Array.isArray(value) ? value : [value]
             values.forEach(v => {
                 if (!optionBuilder.watch![v.key]) {

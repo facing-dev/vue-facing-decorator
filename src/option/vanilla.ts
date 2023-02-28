@@ -1,7 +1,7 @@
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 
-export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, option?: {}) {
+export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string) {
     const slot = obtainSlot(proto)
-    let map = slot.obtainMap<Map<string, any>>('vanilla')
+    const map = slot.obtainMap('vanilla')
     map.set(name, true)
 })

@@ -1,13 +1,13 @@
-import { Cons } from '../component'
-import { OptionBuilder } from '../optionBuilder'
+import type { Cons } from '../component'
+import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 export type EmitConfig = null | string
+
 export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, key?: string) {
     const slot = obtainSlot(proto)
-    let map = slot.obtainMap<Map<string, EmitConfig>>('emit');
+    const map = slot.obtainMap('emit');
     map.set(name, typeof key === 'undefined' ? null : key)
 })
-
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.methods ??= {}

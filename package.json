@@ -16,11 +16,13 @@
     "vue component decorator"
   ],
   "scripts": {
-    "test-build": "npm run build:cjs && npm run test",
+    "test-build": "npm run test && npm run build",
     "test": "mocha -r ts-node/register test/test.ts",
     "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc",
-    "build:esm": "tsc -outDir dist/esm -module ES6"
+    "build:cjs": "./node_modules/.bin/tsc",
+    "build:esm": "./node_modules/.bin/tsc -outDir dist/esm -module ES6",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "author": "",
   "license": "MIT",
@@ -32,8 +34,11 @@
     "@types/chai": "^4.3.1",
     "@types/mocha": "^9.1.1",
     "@types/node": "^17.0.41",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
     "@vue/test-utils": "^2.0.2",
     "chai": "^4.3.6",
+    "eslint": "^8.35.0",
     "jsdom": "^20.0.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^10.0.0",
