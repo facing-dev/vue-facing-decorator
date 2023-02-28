@@ -1,12 +1,12 @@
-import { Cons } from '../component'
+import type { Cons } from '../component'
 import { obtainSlot, toComponentReverse, getValidNames } from '../utils'
-import { OptionBuilder } from '../optionBuilder'
+import type { OptionBuilder } from '../optionBuilder'
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.computed ??= {}
     const slot = obtainSlot(cons.prototype)
-    let map = slot.obtainMap('computed')
-    let vanillaMap = slot.obtainMap('vanilla')
+    const map = slot.obtainMap('computed')
+    const vanillaMap = slot.obtainMap('vanilla')
     const protoArr = toComponentReverse(cons.prototype)
     protoArr.forEach(proto => {
         getValidNames(proto, (des, name) => {

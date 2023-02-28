@@ -14,7 +14,7 @@ type Option = Omit<WatchConfig, 'handler' | 'key'>
 export function decorator(key: string, option?: Option) {
     return function (proto: any, name: string) {
         const slot = obtainSlot(proto)
-        let map = slot.obtainMap('watch');
+        const map = slot.obtainMap('watch');
         const opt = Object.assign({}, option ?? {}, {
             key: key,
             handler: proto[name]
@@ -38,7 +38,7 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
     const names = slot.obtainMap('watch')
     if (names) {
-        names.forEach((value, name) => {
+        names.forEach((value, _name) => {
             const values = Array.isArray(value) ? value : [value]
             values.forEach(v => {
                 if (!optionBuilder.watch![v.key]) {
