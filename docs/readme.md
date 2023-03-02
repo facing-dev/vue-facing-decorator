@@ -19,6 +19,11 @@ Suggestion and contribution welcome.
 
 [Get started > ](/en/quick-start/quick-start.md)
 
+# Donate
+
+[DONATE](https://facing-dev.github.io/vue-facing-decorator/donate/donate.html)
+
+
 # Discussion
 
 [To discord https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)

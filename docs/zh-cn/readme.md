@@ -1,6 +1,6 @@
 # 信息
 
-![GitHub](https://img.shields.io/github/license/facing-dev/vue-facing-decorator) ![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/facing-dev/vue-facing-decorator/release) ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/vue-facing-decorator/peer/vue)
+![GitHub](https://img.shields.io/github/license/facing-dev/vue-facing-decorator) ![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/facing-dev/vue-facing-decorator/release) ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/vue-facing-decorator/peer/vue) ![lts](https://img.shields.io/badge/LTS-prepared-blue)
 
 `vue-facing-decorator` 让你在vue3中使用类的方式来写组件。
 
@@ -18,3 +18,7 @@
 欢迎讨论和贡献代码。
 
 [开始 > ](/zh-cn/quick-start/quick-start.md)
+
+# 捐献
+
+[捐献](https://facing-dev.github.io/vue-facing-decorator/donate/donate.html)
