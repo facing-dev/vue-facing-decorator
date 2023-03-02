@@ -1,6 +1,5 @@
-
-import { Cons } from '../component'
-import { OptionBuilder } from '../optionBuilder'
+import type { Cons } from '../component'
+import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, toComponentReverse, excludeNames, getValidNames, optoinNullableMemberDecorator } from '../utils'
 
 export const HookNames = [
@@ -26,7 +25,7 @@ export const HookNames = [
 export type HookConfig = null
 export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string) {
     const slot = obtainSlot(proto)
-    let map = slot.obtainMap<Map<string, HookConfig>>('hooks');
+    const map = slot.obtainMap('hooks');
     map.set(name, null)
 })
 

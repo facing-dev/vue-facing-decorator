@@ -1,3 +1,9 @@
 dist
 .DS_Store
 node_modules
+
+
+# Editor directories and files
+.vscode
+.idea
+*.iml

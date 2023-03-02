@@ -1,5 +1,6 @@
 export * from './index'
 import { Component as ComponentOld } from './index'
+
 export function Component(this: any,...args:Parameters<typeof ComponentOld>) {
     const res = ComponentOld.apply(this, args)
     function process(res: any) {
