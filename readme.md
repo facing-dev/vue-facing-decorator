@@ -23,6 +23,10 @@ Welcome to suggest and contribute.
 
 欢迎提出建议，贡献代码。
 
+# Donate
+
+[DONATE 捐献](https://facing-dev.github.io/vue-facing-decorator/donate/donate.html)
+
 # Document
 
 [To document](https://facing-dev.github.io/vue-facing-decorator/#/)
