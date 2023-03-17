@@ -126,7 +126,6 @@ export function getSuperSlot(obj: any) {
 export function excludeNames(names: string[], slot: Slot) {
     return names.filter(name => {
         let currSlot: Slot | null = slot
-
         while (currSlot != null) {
             for (const mapName of currSlot.names.keys()) {
                 if (['watch', 'hooks'].includes(mapName)) {
@@ -137,7 +136,7 @@ export function excludeNames(names: string[], slot: Slot) {
                     return false
                 }
             }
-            currSlot = getSuperSlot(slot.master)
+            currSlot = getSuperSlot(currSlot.master)
         }
     
         return true

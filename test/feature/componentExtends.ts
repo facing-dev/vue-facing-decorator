@@ -2,6 +2,7 @@
 import { expect } from 'chai';
 import 'mocha';
 import { Component, ComponentBase, Base } from '../../dist'
+
 @ComponentBase({
     name:'ComponentBase'
 })
@@ -11,6 +12,7 @@ class Sup extends Base {
         return 'methodSup value'
     }
 }
+
 @Component
 export class Comp extends Sup {
     dataComp = 'dataComp value'
