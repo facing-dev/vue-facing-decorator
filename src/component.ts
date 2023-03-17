@@ -13,8 +13,10 @@ import { build as optionAccessor } from './option/accessor'
 import type { OptionBuilder } from './optionBuilder'
 import type { VueCons } from './index'
 export type Cons = VueCons
+
 // export interface Cons { new(): any, prototype: any }
 function ComponentOption(cons: Cons, extend?: any) {
+    
     const optionBuilder: OptionBuilder = {}
     optionVModel(cons, optionBuilder)
     optionComputed(cons, optionBuilder)//after VModel

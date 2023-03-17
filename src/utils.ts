@@ -125,15 +125,21 @@ export function getSuperSlot(obj: any) {
 
 export function excludeNames(names: string[], slot: Slot) {
     return names.filter(name => {
-        for (const mapName of slot.names.keys()) {
-            if (['watch', 'hooks'].includes(mapName)) {
-                continue
+        let currSlot: Slot | null = slot
+
+        while (currSlot != null) {
+            for (const mapName of currSlot.names.keys()) {
+                if (['watch', 'hooks'].includes(mapName)) {
+                    continue
+                }
+                const map = currSlot.names.get(mapName)!
+                if (map.has(name)) {
+                    return false
+                }
             }
-            const map = slot.names.get(mapName)!
-            if (map.has(name)) {
-                return false
-            }
+            currSlot = getSuperSlot(slot.master)
         }
+    
         return true
     })
 }
