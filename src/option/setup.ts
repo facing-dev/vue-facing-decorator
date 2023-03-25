@@ -1,4 +1,3 @@
-import { proxyRefs } from 'vue';
 import type { Ref, SetupContext, ShallowUnwrapRef } from 'vue';
 import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
@@ -28,16 +27,14 @@ export function build(cons: Cons, optionBuilder: OptionBuilder): Record<string, 
                     }
                     promise = promise.then(() => {
                         return setupState.then((value: any) => {
-                            setupData[name] = proxyRefs(value)
-                            return {}
+                            setupData[name] = value
                         })
                     })
                 } else {
-                    setupData[name] = setupState;
+                    setupData[name] = setupState
                 }
             }
         }
-
         return promise ?? {};
     }
     return setupData;
