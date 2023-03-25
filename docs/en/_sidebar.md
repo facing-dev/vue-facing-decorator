@@ -2,6 +2,7 @@
 - [Quick start](/en/quick-start/quick-start.md)
 - Class component
     - [Component](/en/class-component/component/component.md)
+    - [Setup](/en/class-component/setup/setup.md)
     - [Property](/en/class-component/property/property.md)
     - [Method](/en/class-component/method/method.md)
     - [Hooks](/en/class-component/hooks/hooks.md)
