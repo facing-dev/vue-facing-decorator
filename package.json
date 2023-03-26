@@ -16,7 +16,7 @@
     "vue component decorator"
   ],
   "scripts": {
-    "test-build": "npm run test && npm run build",
+    "test-build": "npm run build && npm run test",
     "test": "mocha -r ts-node/register test/test.ts",
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "./node_modules/.bin/tsc",

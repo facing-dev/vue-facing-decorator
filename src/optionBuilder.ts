@@ -1,8 +1,10 @@
+import type { RenderFunction, SetupContext } from 'vue';
 import type { WatchConfig } from './option/watch'
 import type { PropsConfig } from './option/props'
 import type { InjectConfig } from './option/inject'
 export interface OptionBuilder {
     name?: string
+    setup?: (this: void, props: Readonly<any>, ctx: SetupContext<any>) => Promise<any> | any | RenderFunction | void
     data?: Record<string, any>
     methods?: Record<string, Function>
     hooks?: Record<string, Function>

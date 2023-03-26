@@ -1,4 +1,5 @@
 export { Component, ComponentBase } from './component'
+export { setup } from './option/setup'
 export { decorator as Ref } from './option/ref'
 export { decorator as Watch } from './option/watch'
 export { decorator as Prop } from './option/props'
