@@ -4,22 +4,22 @@ import { mount } from '@vue/test-utils'
 import { expect } from 'chai'
 import { mountSuspense } from '../utils'
 import 'mocha'
-import { Component, Base, Prop, setup } from '../../dist'
+import { Component, Base, Use } from '../../dist'
 
 const SETUP_AXIOM = 'setup is working to allow composition API usage'
 const DATA_AXIOM = 'data is injected into the template'
 const injectionKey = Symbol('injection test key')
 
 function useInjectedValue() {
-    return inject(injectionKey)
+    return inject(injectionKey) as string
 }
 
 @Component({
     render() { return [] }
 })
 export class SyncComp extends Base {
-
-    injectedValue = setup(() => useInjectedValue())
+    @Use(useInjectedValue)
+    injectedValue !: string
 
 }
 
@@ -29,35 +29,23 @@ const SyncCompContext = SyncComp as any
     render() { return [] }
 })
 export class AsyncComp extends Base {
-
-    injectedValue = setup(() => {
+    @Use(() => {
         const value = useInjectedValue()
-        return new Promise((resolve) => {
+        return new Promise<string>((resolve) => {
             setTimeout(() => {
                 resolve(value)
-            }, 1)  
+            }, 1)
         })
     })
-
+    injectedValue !: string
 }
 
 const AsyncCompContext = AsyncComp as any
 
-@Component({
-    setup() {
-        const injectedValue = useInjectedValue()
-        return { injectedValue }
-    },
-    template: '{{ injectedValue }} {{ dataValue }}'
-})
-export class SetupComp extends Base {
-    dataValue = DATA_AXIOM 
-}
 
-const SetupCompContext = SetupComp as any
 
 describe('setup function', () => {
-    describe('synchronous setup', () => {
+    describe('synchronous use', () => {
         const wrapper = mount(SyncCompContext, {
             global: {
                 provide: {
@@ -71,7 +59,7 @@ describe('setup function', () => {
         })
     })
 
-    describe('asynchronous setup', () => {
+    describe('asynchronous use', () => {
         it('injects the value provided to the component via composition API', async () => {
             const wrapper = await mountSuspense(AsyncCompContext, {
                 global: {
@@ -86,18 +74,6 @@ describe('setup function', () => {
     })
 })
 
-describe('setup option', () => {
-    const wrapper = mount(SetupCompContext, {
-        global: {
-            provide: {
-                [injectionKey]: SETUP_AXIOM
-            }
-        }
-    })
-    it('can inject variables into the template', () => {
-        expect(wrapper.text()).to.contain(SETUP_AXIOM)
-        expect(wrapper.text()).to.contain(DATA_AXIOM)
-    })
-})
+
 
 export default {}

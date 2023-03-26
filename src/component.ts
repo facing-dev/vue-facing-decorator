@@ -1,6 +1,6 @@
 import { defineComponent, type ComponentCustomOptions } from 'vue';
 import { obtainSlot, getSuperSlot } from './utils'
-import { build as optionSetup } from './option/setup'
+import { build as optionUse } from './option/use'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
 import { build as optionMethodsAndHooks } from './option/methodsAndHooks'
@@ -16,11 +16,11 @@ import type { OptionBuilder } from './optionBuilder'
 import type { VueCons } from './index'
 export type Cons = VueCons
 
-// export interface Cons { new(): any, prototype: any }
+export type SetupFunction = (this: void, props: Readonly<any>, ctx: SetupContext<any>) => any
 function ComponentOption(cons: Cons, extend?: any) {
-    
+
     const optionBuilder: OptionBuilder = {}
-    const setupData = optionSetup(cons, optionBuilder)
+    optionUse(cons, optionBuilder)
     optionVModel(cons, optionBuilder)
     optionComputed(cons, optionBuilder)//after VModel
     optionWatch(cons, optionBuilder)
@@ -30,14 +30,16 @@ function ComponentOption(cons: Cons, extend?: any) {
     optionRef(cons, optionBuilder)//after Computed
     optionMethodsAndHooks(cons, optionBuilder)//after Ref Computed
     optionAccessor(cons, optionBuilder)
+
+    const setupFunction: SetupFunction | undefined = optionBuilder.use ? function (props,ctx) {
+        return optionBuilder.use!(props,ctx)
+    } : undefined
+
     const raw = {
-        setup: optionBuilder.setup,
+        setup:setupFunction,
         data() {
             delete optionBuilder.data
             optionData(cons, optionBuilder, this)
-            if (optionBuilder.data && Object.keys(setupData).length > 0) {
-                Object.assign(optionBuilder.data, setupData)
-            }
             return optionBuilder.data ?? {}
         },
         methods: optionBuilder.methods,
@@ -53,7 +55,6 @@ function ComponentOption(cons: Cons, extend?: any) {
 
 type ComponentOption = {
     name?: string
-    setup?: (this: void, props: Readonly<any>, ctx: SetupContext<any>) => Promise<any> | any | RenderFunction | void,
     emits?: string[]
     provide?: Record<string, any> | Function
     components?: Record<string, any>

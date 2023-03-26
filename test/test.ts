@@ -2,7 +2,7 @@ require('jsdom-global/keys.js').push('SVGElement')
 require('jsdom-global')()
 import './internal/utils'
 import './component'
-import './option/setup'
+import './option/use'
 import './option/data'
 import './option/methods'
 import './option/computed'
