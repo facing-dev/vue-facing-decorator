@@ -1,5 +1,6 @@
-## Usage
+## Utilização
 
-Use `Ref` decorator to define a property getter  `this.$refs[name]` on vue component instance. The reference name is the name of property.
+Utilize o decorator `Ref` para definir um getter na propriedade `this.$refs[name]` da instância de um componente. O nome da referência será o nome da propriedade. 
+
 
 [](./code-usage.ts ':include :type=code typescript')

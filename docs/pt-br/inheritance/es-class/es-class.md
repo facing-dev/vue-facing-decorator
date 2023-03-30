@@ -1,11 +1,11 @@
-## Usage
+## Utilização
 
-ECMAScript class inheritance is simulated to vue components by this repo.
+As herenças de clases do ECMAScript são possíveis em componentes vue utilizando vue-facing-decorator.  
 
-Consider code:
+Considere o código:
 
 [](./code-example.ts ':include :type=code typescript')
 
-There is only one vue component generated. Class `MyComponent` and `Super` will be merged by by this repo.
+Tem apenas um componente vue gerado. A classe `MyComponent` e `Super` serão mescladas pelo vue-facing-decorator.
 
-> We can't use any decorators in a class without `Component` decorated, e.g. `Super` class.
+> Nós não podemos utilizar nenhum decorator na classe sem que o componente tenha o decorator `Component` em cima dele, veja a classe `Super`. 

@@ -1,22 +1,22 @@
-## Usage
+## Utilização
 
-Use `Model` decorator to define a model for vue `v-model` or `v-model:foo`. 
+Utilize o decorator `Model` para definir um data binding para o `v-model` ou `v-model:foo`.
 
-> Alias of old `VModel` decorator. `VModel` will be supported in the future, but we recommend to update to `Model`.
+> Alias do antigo decorator `VModel`. `VModel` será suportado no futuro, mas recomendamos atualizar `Model`.
 
 [](./code-usage.ts ':include :type=code typescript')
 
-## Options
+## Opções
 
 ### name
 
-The name of `v-model` property, default is `modelValue`.
+O nome da proprieddade `v-model`, o valor default é `modelValue`.
 
 [](./code-option-name.ts ':include :type=code typescript')
 
-### Same options in `Prop` decorator.
+### Mesmas opções do decorator `Prop`
 
-The other options are same as in `Prop` decorator.
+As outras opções são as mesmas encontradas no decorator `Prop`.
 
 [](./code-option-others.ts ':include :type=code typescript')
 

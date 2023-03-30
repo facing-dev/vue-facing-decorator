@@ -7,7 +7,7 @@ const VueComponent = defineComponent({
 })
 
 /*
-Vue options component
+Componente Vue com options API
 {
     mixins:[VueComponent]
 }

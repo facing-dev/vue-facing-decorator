@@ -1,20 +1,20 @@
-## Introduction
+## Introdução
 
-`vue-facing-decorator` provides abilities to build vue components with OOP classes and typescript decorators.
+`vue-facing-decorator` te possibilita construir componentes vue utilizando o paradigma orientado a objetos e decorators do typescript.  
 
-A sample example:
+Um exemplo simples:
 
 [](./code-what-it-is-example.ts ':include :type=code typescript')
 
-## Installation
+## Instalação
 
-Install `vue-facing-decorator` with your favorite package manager.
+Instale `vue-facing-decorator` com o seu gerenciador de pacotes preferido.
 
 ```
 npm install --save vue-facing-decorator
 ```
 
-Enable `experimentalDecorators` in `tsconfig.json` in project root directory.
+Habilite `experimentalDecorators` em `tsconfig.json`, na raiz do seu projeto.
 
 ```json
 {
@@ -24,28 +24,28 @@ Enable `experimentalDecorators` in `tsconfig.json` in project root directory.
 }
 ```
 
-## How to use?
+## Como usar ?
 
-### Define a class component
+### Defina um componente com class
 
-A simplest class component must extends `Vue` base class and be decorated by `Component` from this repo.
+O componente por mais simples que seja precisa estender a classe base `Vue` e possuir acima dele o decorator `Component`.
 
 [](./code-how-to-use-simplest-class-component.ts ':include :type=code typescript')
 
 
-### In vue Single-File components
+### Em Single File components (SFC)
 
-In common used vue Single-File components(`.vue` files), the default exported vue options API should be replaced by class component.
+No caso mais comum do componente vue SFC (arquivos `.vue`), o export default do vue com options API deve ser substituido por componentes em classes. 
 
-[](./code-how-to-use-sfc.vue ':include :type=code text')
+[](./code-how-to-use-sfc.vue ':include :type=code vue')
 
-> DO NOT USE composition api script `<script setup lang="ts">`.
+> NÃO USE composition api script `<script setup lang="ts">`.
 
-### In separated files with TSX
+### Em arquivos separados com TSX
 
-If you don't want to use Single-File components, this is another choice. It use `.ts` file to define component and import template from `.tsx` file.
+Se você não quiser utilizar SFC ( Single file components ), existe uma outra possibilidade. Ela utiliza `.ts` para definir o componente e importa o template do arquivo `.tsx`  
 
-> Make style effective by webpack loaders as usual.
+> Como de costume, utiliza webpack loaders para fazer o estilo de uma forma mais eficiente.
 
 [](./code-separated-files-tsx/Comp.render.tsx ':include :type=code tsx')
 

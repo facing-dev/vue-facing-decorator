@@ -1,23 +1,23 @@
-## Usage
+## Utilização
 
-Property getters will be tranformed into `{computed:{get:Foo}}`.
+Getters de uma propriedade será transformada em `{computed:{get:Foo}}`.
 
 [](./code-usage.ts ':include :type=code typescript')
 
-## Writable
+## Escrita
 
-Property setters will be tranformed into `{computed:{set:Foo}}`.
+Setters de uma propriedade será transformada em `{computed:{set:Foo}}`.
 
 [](./code-writable.ts ':include :type=code typescript')
 
 ## Vanilla getter
 
-We can define a ES vanilla getter by `@Vanilla`.
+Nós podemos definir um getter utilizando ES vanilla com `@Vanilla`.
 
 [](./code-vanilla-getter.ts ':include :type=code typescript')
 
 ## Vanilla setter
 
-We can define a ES vanilla setter by `@Vanilla`.
+Nós podemos definir também um setter utilizando ES vanilla com `@Vanilla`.
 
 [](./code-vanilla-setter.ts ':include :type=code typescript')

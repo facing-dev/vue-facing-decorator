@@ -4,10 +4,10 @@ class MyComponent extends Vue {
 
 }
 
-//or
+//ou
 
 @Component({
-    //Set your options here.
+    //Coloque as opções desejadas aqui.
 })
 export default class MyComponentWithOptions extends Vue {
 

@@ -1,29 +1,29 @@
-## Usage
+## Utilização
 
-Use `Watch` decorator to define a watcher in vue's `watch`. 
+Utilize o decorator `Watch` para definir um watcher na propriedade `watch` do vue. 
 
-The first parameter is the name watched.
+O primeiro parametro é o nome do parametro a ser observado.
 
-Same as vue `watch`, the watcher receives two paremeters: new value and old value.
+Igual a opção `watch` do vue, o watcher recebe dois parametros: o novo valor e o valor antigo.
 
 [](./code-usage.ts ':include :type=code typescript')
 
-## Options
+## Opções
 
 ### deep
 
-This is the `deep` in vue `watch`.
+Assim fica a opção `deep` na propriedade `watch`.
 
 [](./code-option-deep.ts ':include :type=code typescript')
 
 ### flush
 
-This is the `flush` in vue `watch`.
+Assim fica a opção `flush` na propriedade `watch`.
 
 [](./code-option-flush.ts ':include :type=code typescript')
 
 ### immediate
 
-This is the `immediate` in vue `watch`.
+Assim fica a opção `immediate` na propriedade `watch`.
 
 [](./code-option-immediate.ts ':include :type=code typescript')

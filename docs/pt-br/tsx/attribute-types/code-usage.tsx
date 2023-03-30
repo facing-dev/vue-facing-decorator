@@ -25,7 +25,7 @@ export default class MyComponent extends TSX<Props, Events>()(Vue) {
     }
 }
 
-//TypeScript will check component attributes in TSX.
+//TypeScript vai validar os atributos do componente em TSX.
 function render() {
     return <MyComponent propString='foobar' onMyEvent={(v: string) => { }} onMyEvent2={(v:string)=>{}}></MyComponent>
 }

@@ -7,7 +7,7 @@ class MyAnotherComponent extends Vue {
 }
 
 /*
-Vue options component
+Componente Vue com options API
 {
     components:{
         MyAnotherComponent

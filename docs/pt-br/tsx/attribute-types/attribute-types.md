@@ -1,32 +1,32 @@
-## Usage
+## Utilização
 
-To make enable TSX attribute types:
+Para habilitar tipagem em atributos com TSX:
 
-1. Import `TSX` function from this repo.
+1. Importe a função `TSX` do vue-facing-decorator.
 
-2. Define an interface(e.g. `Props`) to decribe properties in component.
+2. Define a interface ( ex: `Props` ) para declarar as propriedades do componente.
+ 
+3. Define a interface ( ex: `Events` ) para declarar os eventos do componente.
 
-3. Define an interface(e.g. `Events`) to decribe events in component.
+4. Faça um componente que estenda `TSX<Props,Events>()(BaseComponent)`.
 
-4. Make component extend from `TSX<Props,Events>()(BaseComponent)`.
+> As chaves de `Events` serão capitalizadas e prefixadas com `on`. ex: `myEvent` => `onMyEvent`
 
-> The keys of `Events` will be capitalized and prefixed by `on`. e.g. `myEvent` => `onMyEvent`.
+> Se o valor de `Events` tem o tipo diferente de função, o tipo será transformado numa função que aceite apenas um parametro tipado pelo mesmo tipo do valor recebido e irá retornar um tipo `any`. exemplo: `{myEvent:string}` => `{myEvent:(param:string)=>any}`.
 
-> If a `Events` value has a non-function type, it's type will be transformed to a function that accepts only one parameter typed by the value's type and returns `any` type. e.g. `{myEvent:string}` => `{myEvent:(param:string)=>any}`.
-
-> There are two `()`s after `TSX<Props,Events>`.
+> Tem-se dois `()` depois de `TSX<Props,Events>`.
 
 [](./code-usage.tsx ':include :type=code tsx')
 
-## Property types checking in component
+## Validando os tipos das propriedades dos componentes 
 
-We could check if component implements properties by `implements`.
+Nós podemos validar se o componente implementa uma propriedade com o `implements`.
 
 [](./code-type-checking.tsx ':include :type=code tsx')
 
-## Component inheritance
+## Herança de componentes
 
-TSX attributes supports component inheritance.
+Atributos TSX suportam herança de componentes.
 
 [](./code-component-inheritance.tsx ':include :type=code tsx')
 

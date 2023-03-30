@@ -2,7 +2,7 @@
 import { Component, Vue } from 'vue-facing-decorator'
 
 /*
-Vue options component
+Componente Vue com options API
 {
     directives:{
         MyDirective:{}

@@ -1,43 +1,43 @@
-# Information
+# Informações
 
 ![GitHub](https://img.shields.io/github/license/facing-dev/vue-facing-decorator) ![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/facing-dev/vue-facing-decorator/release) ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/vue-facing-decorator/peer/vue) ![lts](https://img.shields.io/badge/LTS-prepared-blue)
 
-`vue-facing-decorator` is designed for vue 3 to write vue components in classes.
+`vue-facing-decorator` é designado para o vue 3, para a escrita de componentes vue utilizando classes.
 
-Works on TypeScript and decorator.
+Funciona com Typescript e decorators.
 
-* Community desired vue class component with typescript decorators.
-* Safety. Transform es class to vue options api according to specifications.
-* Performance. Once transform on project loading, ready for everywhere.
-* Support ES class inherit, vue `extends` and vue `mixins`.
-* [Official recommended](https://class-component.vuejs.org)
+* Desejado pela comunidade. Componentes escritos com classes e Typescript decorators.  
+* Seguro. Transforme ES classes para vue options API de acordo com a especificação.
+* Performático. Uma vez adicionado no carregamento do projeto, está pronto para uso em todo o projeto.
+* Suporte a heranças de classes, vue `extends` e vue `mixins`.
+* [Recomendação Oficial](https://class-component.vuejs.org)
 
 [](./quick-start/code-what-it-is-example.ts ':include :type=code typescript')
 
-If you like deprecaed [vue-class-component](https://github.com/vuejs/vue-class-component) and deprecated [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator), try this!
+Se você quiser as versões deprecadas do [vue-class-component](https://github.com/vuejs/vue-class-component) e a versão deprecada do [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator), acesse os links!
 
-Suggestion and contribution welcome.
+Sugestões e contribuições são bem-vindas.
 
-[Get started > ](/en/quick-start/quick-start.md)
+[Iniciar > ](/en/quick-start/quick-start.md)
 
-# Donate
+# Doações
 
-[DONATE](https://facing-dev.github.io/vue-facing-decorator/donate/donate.html)
+[Doação](https://facing-dev.github.io/vue-facing-decorator/donate/donate.html)
 
 
-# Discussion
+# Discussões
 
-[To discord https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)
+[Acessar no Discord https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)
 
-# Document translations wanted
+# Tradução da documentação
 
-If you would like to help us to improve document translations, follow the steps:
+Se você quiser nos ajudar a melhorar a tradução da documentação, siga os passos: 
 
-1. **Fork and clone this repo
+1. **Fork e clone esse repo
 3. cd repo/docs
 4. npm install -g http-server
 5. http-server
 
-Then you could access the document from the url which shown in your terminal. Change the files in directory `en` and PR.
+Então você poderá acessar a documentação pela url mostrada no seu terminal. Altere os arquivos no diretório `en` e crie a Pull Request.
 
-Thank you very much:)
+Muito obrigado:)

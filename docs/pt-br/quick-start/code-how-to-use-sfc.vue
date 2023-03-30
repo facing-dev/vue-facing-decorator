@@ -2,7 +2,7 @@
   <div></div>
 </template>
 <script lang="ts">
-// DO NOT USE <script setup>
+// NÃO USE <script setup>
 
 //vue options API.
 /*
@@ -10,7 +10,7 @@ import { defineComponent } from "vue";
 export default defineComponent({});
 */
 
-//class component
+//Componente com class
 import { Component, Vue } from "vue-facing-decorator";
 @Component
 export default class MyComponent extends Vue {}

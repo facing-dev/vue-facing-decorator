@@ -6,52 +6,52 @@ Vue options API
 {
     data(){
         return {
-            propertyA:'from Super',
-            propertyB:'from MyComponent',
-            property:'from MyComponent'
+            propertyA:'do componente Super',
+            propertyB:'do componente MyComponent',
+            property:'do componente MyComponent'
         }
     },
     methods:{
         methodA() {
-            console.log('from Super')
+            console.log('do componente Super')
         },
         methodB() {
-            console.log('from MyComponent')
+            console.log('do componente MyComponent')
         },
         methodC() {
             super.methodC()
-            console.log('from MyComponent')
+            console.log('do componente MyComponent')
         }
     }
 }
 */
 
 class Super extends Vue {
-    propertyA = 'from Super'
+    propertyA = 'do componente Super'
 
-    property = 'from Super'
+    property = 'do componente Super'
 
     methodA() {
-        console.log('from Super')
+        console.log('do componente Super')
     }
 
     methodC() {
-        console.log('from Super')
+        console.log('do componente Super')
     }
 }
 
 @Component
 export default class MyComponent extends Super {
-    propertyB = 'from MyComponent'
+    propertyB = 'do componente MyComponent'
 
-    property = 'from MyComponent'
+    property = 'do componente MyComponent'
 
     methodB() {
-        console.log('from MyComponent')
+        console.log('do componente MyComponent')
     }
 
     methodC() {
         super.methodC()
-        console.log('from MyComponent')
+        console.log('do componente MyComponent')
     }
 }

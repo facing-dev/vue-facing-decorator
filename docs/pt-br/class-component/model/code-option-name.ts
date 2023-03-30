@@ -20,7 +20,7 @@ Vue options API
 */
 
 /*
-In other components:
+Em outros componentes:
 <MyComponent v-model:value="foo"></MyComponent>
 */
 

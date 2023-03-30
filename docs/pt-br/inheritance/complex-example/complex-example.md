@@ -1,12 +1,12 @@
-## Example
+## Exemplo
 
-Consider code:
+Considere o código:
 
 [](./code-example.ts ':include :type=code typescript')
 
-There are three components: `Comp`(includes `CompSper`), `SuperComp`(includes `SuperCompSuper`) and `VueNativeComponent`.
+Existem três componentes: `Comp`(inclui `CompSper`), `SuperComp`(inclui `SuperCompSuper`) e `VueNativeComponent`.
 
-The inheritance relationship is:
+A relação de herença será:
 
 ```
 (Comp ECMAScript extends CompSuper)
@@ -14,4 +14,4 @@ The inheritance relationship is:
         vue extends (SuperComp ECMAScript extends SuperCompSuper)
 ```
 
-Due to vue implemention, `VueNativeComponent`(useing vue `mixins`) will overwrite `SuperComp`(useing vue `extends`).
+Devido a implementação do vue, `VueNativeComponent`(usando vue `mixins`) irá sobrescrever `SuperComp`(usando vue `extends`).

@@ -1,19 +1,19 @@
-## Usage
+## Utilização
 
-Use `Inject` decorator to define a injected value in vue's `inject`.
+Utilize o decorator `Inject` para injetar um valor na opção `inject` do vue.
 
 [](./code-usage.ts ':include :type=code typescript')
 
-## Options
+## Opções
 
 ### from
 
-This is the `from` in vue `inject`.
+Assim fica a opção `from` na propriedade `inject`.
 
 [](./code-option-from.ts ':include :type=code typescript')
 
 ### default
 
-This is the `default` in vue `inject`.
+Assim fica a opção `default` na propriedade `inject`.
 
 [](./code-option-default.ts ':include :type=code typescript')

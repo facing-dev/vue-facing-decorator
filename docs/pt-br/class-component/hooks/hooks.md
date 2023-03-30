@@ -1,14 +1,13 @@
-## Usage
+## Utilização
 
-Class component supports almost all lifecycle hooks in vanilla vue. Write them as class methods directly. Hooks won't be tranformed into `methods`.
+Componentes no formato de classes suportam quase todos os hooks de ciclo de vida definidos no vue. Você pode escrever todos os métodos diretamente na classe. Os Hooks não serão transformados em `methods`.
 
-> All these hooks must be methods of a class, not properties.
+> Todos esses hooks precisam ser métodos internos da classe e não propriedades.
 
 [](./code-usage.ts ':include :type=code typescript')
 
 
-
-## Internal hook names list
+## Lista com os nomes dos hooks internos
 
 ```javascript
 [
@@ -32,11 +31,11 @@ Class component supports almost all lifecycle hooks in vanilla vue. Write them a
 ]
 ```
 
-## For other names
+## Para outros nomes
 
-If your hook names aren't in the above list. You could use decorator `Hook`.
+Se o seu hook não está listado acima, você pode utilizar o decorator `Hook`. 
 
-> e.g. Hooks from `vue-router`.
+> ex: Hooks do `vue-router`.
 
 [](./code-for-other-names.ts ':include :type=code typescript')
 

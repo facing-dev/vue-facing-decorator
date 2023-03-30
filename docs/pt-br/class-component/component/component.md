@@ -1,89 +1,90 @@
-## Usage
+## Utilização
 
-Use decorator `Component` to decorate a class which extends from `Vue` base class.
+Utilize o decorator `Component` para declarar uma classe a qual irá estender a classe base `Vue`.
 
 [](./code-usage-base.ts ':include :type=code typescript')
 
-## Options
+## Opções
 
-### name
+### nome
 
-This is the `name` in vue options API.
+Assim fica a propriedade `name` do vue options API.
 
 [](./code-option-name.ts ':include :type=code typescript')
 
 ### emits
 
-This is the `emits` in vue options API.
+Assim fica a propriedade `emits` do vue options API.
 
 [](./code-option-emits.ts ':include :type=code typescript')
 
 ### provide
 
-This is the `provide` in vue options API.
+Assim fica a propriedade `provide` do vue options API.
 
 [](./code-option-provide.ts ':include :type=code typescript')
 
-### components
+### componentes
 
-This is the `components` in vue options API.
+Assim fica a propriedade `components` do vue options API.
 
 [](./code-option-components.ts ':include :type=code typescript')
 
-### directives
+### directivas
 
-This is the `directives` in vue options API.
+Assim fica a propriedade `directives` do vue options API.
 
 [](./code-option-directives.ts ':include :type=code typescript')
 
 ### inheritAttrs
 
-This is the `inheritAttrs` in vue options API.
+Assim fica a propriedade `inheritAttrs` do vue options API.
 
 [](./code-option-inherit-attrs.ts ':include :type=code typescript')
 
 ### expose
 
-This is the `expose` in vue options API.
+Assim fica a propriedade `expose` do vue options API.
 
 [](./code-option-expose.ts ':include :type=code typescript')
 
 ### render
 
-This is the `render` in vue options API.
+Assim fica a propriedade `render` do vue options API.
 
-If you use vue Single-File component. The render will be applied to the `export default` component automatically.
+Se você utiliza SFC ( Single File components ). O método render será aplicado ao `export default` do componente automáticamente.
 
-> This will overwrite the render in class body.
+> Isso irá sobrescrever o método render de dentro da classe.
 
 [](./code-option-render.ts ':include :type=code typescript')
 
 ### template
 
-This is the `template` in vue options API.
+Assim fica a propriedade `template` do vue options API.
 
-> To use these feature, you need the full bundle of vue includes template compiler.
+
+> Para usar esse recurso, você precisa que o bundle do vue inclua o vue template compiler.
 
 [](./code-option-template.ts ':include :type=code typescript')
 
 ### mixins
 
-This is the `mixins` in vue options API.
+Assim fica a propriedade `mixins` do vue options API.
 
 [](./code-option-mixins.ts ':include :type=code typescript')
 
-### options
+### opções
 
-It will be assigned to vue options API before `modifier`.
+Será inserido no vue options API antes de `modifier`.
 
-> This option belongs to `vue-facing-decorator`.
+> Essa opção pertence ao `vue-facing-decorator`.
 
 [](./code-option-options.ts ':include :type=code typescript')
 
-### modifier
+### modificador
 
-Finally, we can use this function to modify the generated vue options API directly.
+Finalmente, nós podemos utilizar essa função para modificar diretamente o vue options API gerado.
 
-> This option belongs to `vue-facing-decorator`.
+> Essa opção também pertence ao `vue-facing-decorator`.
 
 [](./code-option-modifier.ts ':include :type=code typescript')

@@ -1,5 +1,6 @@
-## Usage
+## Utilização
 
-In a class component, we could define methods of vue options API as class methods directly. This repo will analyze methods and transform them into `methods` option.
+Em um componente feito com classes, nós podemos definir métodos diretamente no escopo da classe. Será feita analises e transformações dos métodos que serão então retornadas na opção `methods`. 
+
 
 [](./code-usage.ts ':include :type=code typescript')

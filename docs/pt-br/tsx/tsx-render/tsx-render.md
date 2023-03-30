@@ -1,3 +1,3 @@
-## Usage
+## Utilização
 
-[Link to section](/en/quick-start/quick-start?id=in-separated-files-with-tsx)
+[Link para a seção](/pt-br/quick-start/quick-start?id=em-arquivos-separados-com-tsx)

@@ -27,7 +27,7 @@ export default class Comp extends CompSuper {
 
 /*
 Vue options API
-{//this is Comp
+{//Isso é um componente
     extends:{//this is SuperComp
 
     },

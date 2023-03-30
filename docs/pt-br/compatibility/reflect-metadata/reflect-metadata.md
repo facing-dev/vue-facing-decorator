@@ -1,15 +1,15 @@
-## Usage
+## Utilização
 
-To work with `reflect-metadata`, we should use `vue-facing-decorator/dist/index-return-cons` instead of `vue-facing-decorator` in code.
+Para trabalhar com `reflect-metadata`, nós devemos utilizar `vue-facing-decorator/dist/index-return-cons` ao invés de `vue-facing-decorator` no código.
 
 [](./code-usage.ts ':include :type=code typescript')
 
 ## Webpack `alias`
 
-In `webpack.config.js`.
+Em `webpack.config.js`.
 
 [](./code-webpack-alias-webpack-config.js ':include :type=code typescript')
 
-Or in `vue.config.js`.
+Ou em `vue.config.js`.
 
 [](./code-webpack-alias-vue-config.js ':include :type=code typescript')

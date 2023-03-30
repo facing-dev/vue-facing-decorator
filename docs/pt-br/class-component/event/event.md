@@ -1,13 +1,16 @@
-## Usage
+## Utilização
 
-We could define a method which triggers a vue event by `Emit` decorator.
+Nós podemos definir um método o qual irá disparar um evento vue, utilizano o decorator `Emit`. 
 
-The decorator received an optional event name paramater. Event will be triggered with this name and the method returned value. If the event name parameter is omitted, use method's name by default.
+
+Esse decorator pode receber o nome do evento como parametro opicional. 
+O evento será disparado com o nome definido, e com o valor retornado no método. 
+Se o nome do evento não é declarado, o nome do evento será por default o nome do método. 
 
 [](./code-usage.ts ':include :type=code typescript')
 
-## Asynchronous event
+## Eventos assíncronos
 
-If one event method returns a promise, Event will be triggered after the promise resolved with the promise value.
+Se o método do evento retorna uma promise, o evento será disparado depois que a promise for resolvida, com o valor atribuido na resolução da promise. 
 
 [](./code-asynchronous.ts ':include :type=code typescript')

@@ -1,7 +1,7 @@
-## Usage
+## Utilização
 
-In a class component, we could define data of vue options API as class properties directly.  This repo will analyze properties and transform them as return value of `data` function.
+Em um componente feito com classes, nós podemos definir propriedades diretamente no escopo da classe. Será feita analises e transformações das propriedades que serão então retornadas na opção `data`. 
 
-> Of course properties are vue reactive.
+> Essas propriedades serão reativas.
 
 [](./code-usage.ts ':include :type=code typescript')
