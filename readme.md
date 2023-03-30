@@ -24,6 +24,21 @@ Welcome to suggest and contribute.
 
 欢迎提出建议，贡献代码。
 
+-----------------
+
+Designado para funcionar junto ao vue 3. Escreva componentes vue utilizando classes. 
+Faz o mesmo trabalho que [vue-class-component](https://github.com/vuejs/vue-class-component) e [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator).
+
+* Desejado pela comunidade. Componentes escritos com classes e Typescript decorators.  
+* Seguro. Transforme ES classes para vue options API de acordo com a especificação.
+* Performático. Uma vez adicionado no carregamento do projeto, está pronto para uso em todo o projeto.
+* Suporte a heranças de classes, vue `extends` e vue `mixins`.
+* [Recomendação Oficial](https://class-component.vuejs.org)
+
+Sugestões e contribuições são bem-vindas !
+
+-----------------
+
 # Donate
 
 [DONATE 捐献](https://facing-dev.github.io/vue-facing-decorator/donate/donate.html)
