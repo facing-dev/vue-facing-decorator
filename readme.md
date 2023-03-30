@@ -49,6 +49,8 @@ Sugestões e contribuições são bem-vindas !
 
 [中文文档](https://facing-dev.github.io/vue-facing-decorator/#/zh-cn/readme)
 
+[Documentação](https://facing-dev.github.io/vue-facing-decorator/#/pt-br/readme)
+
 # Discussion
 
 To discord [https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)
