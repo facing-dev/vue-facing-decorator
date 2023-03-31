@@ -15,62 +15,18 @@ Welcome to suggest and contribute.
 
 -----------------
 
-支持vue 3, 提供类似[vue-class-component](https://github.com/vuejs/vue-class-component) 和 [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator)的功能。
-
-* 通过TypeScript装饰器实现社区期望的vue类组件开发。
-* 安全， 根据规范将ES类转换到vue option api。
-* 高性能，仅在项目加载时转换一次。
-* 支持ES类继承，vue `extends` 和 vue `mixins`。
-
-欢迎提出建议，贡献代码。
-
------------------
-
-Designado para funcionar junto ao vue 3. Escreva componentes vue utilizando classes. 
-Faz o mesmo trabalho que [vue-class-component](https://github.com/vuejs/vue-class-component) e [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator).
-
-* Desejado pela comunidade. Componentes escritos com classes e Typescript decorators.  
-* Seguro. Transforme ES classes para vue options API de acordo com a especificação.
-* Performático. Uma vez adicionado no carregamento do projeto, está pronto para uso em todo o projeto.
-* Suporte a heranças de classes, vue `extends` e vue `mixins`.
-* [Recomendação Oficial](https://class-component.vuejs.org)
-
-Sugestões e contribuições são bem-vindas !
-
------------------
-
 # Donate
 
-[DONATE 捐献](https://facing-dev.github.io/vue-facing-decorator/donate/donate.html)
+[DONATE](https://facing-dev.github.io/vue-facing-decorator/donate/donate.html)
 
 # Document
 
 [To document](https://facing-dev.github.io/vue-facing-decorator/#/)
 
-[中文文档](https://facing-dev.github.io/vue-facing-decorator/#/zh-cn/readme)
-
-[Documentação](https://facing-dev.github.io/vue-facing-decorator/#/pt-br/readme)
+Document languages: English, 简体中文, Portuguese
 
 # Discussion
 
 To discord [https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)
 
 QQ群号 766350254
-
-# Recommend packages
-
-## recursive-free
-
-> [Github](https://github.com/facing-dev/recursive-free)
-
-> Make your recursive-like functions leave stack overflow.
-
-* Simulate function stack to void stack overflow in recursive-like functions.
-* High performance implemented by JavaScript Map.
-
-
-### @facing/event-bus
-
-> [Github](https://github.com/facing-dev/event-bus)
-
-> Event bus JavaScript implementation
