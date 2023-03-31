@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils'
 import { expect } from 'chai'
 import { mountSuspense } from '../utils'
 import 'mocha'
-import { Component, Base, Use } from '../../dist'
+import { Component, Base, Setup } from '../../dist'
 
 const SETUP_AXIOM = 'setup is working to allow composition API usage'
 const DATA_AXIOM = 'data is injected into the template'
@@ -18,7 +18,7 @@ function useInjectedValue() {
     render() { return [] }
 })
 export class SyncComp extends Base {
-    @Use(useInjectedValue)
+    @Setup(useInjectedValue)
     injectedValue !: string
 
 }
@@ -26,10 +26,15 @@ export class SyncComp extends Base {
 const SyncCompContext = SyncComp as any
 
 @Component({
-    render() { return [] }
+    render() { return [] },
+    setup(){
+        return {
+            componentSetup:'componentSetupV'
+        }
+    }
 })
 export class AsyncComp extends Base {
-    @Use(() => {
+    @Setup(() => {
         const value = useInjectedValue()
         return new Promise<string>((resolve) => {
             setTimeout(() => {
@@ -41,8 +46,6 @@ export class AsyncComp extends Base {
 }
 
 const AsyncCompContext = AsyncComp as any
-
-
 
 describe('setup function', () => {
     describe('synchronous use', () => {
@@ -70,6 +73,7 @@ describe('setup function', () => {
             })
             const vm = wrapper.findComponent(AsyncCompContext).vm
             expect(vm.injectedValue).to.equal(SETUP_AXIOM)
+            expect(vm.componentSetup).to.equal('componentSetupV')
         })
     })
 })

@@ -1,6 +1,0 @@
-## Usage
-
-Use the decorator `Use` exported from `'vue-facing-decorator'` to inject [composables](https://vuejs.org/guide/reusability/composables.html) into your component's class as proeprty.
-
-[](./code-usage-base.ts ':include :type=code typescript')
-

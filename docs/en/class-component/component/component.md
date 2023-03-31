@@ -58,6 +58,12 @@ If you use vue Single-File component. The render will be applied to the `export 
 
 [](./code-option-render.ts ':include :type=code typescript')
 
+### setup
+
+This is the `setup` in vue options API, but can not return a render function.
+
+[](./code-option-setup.ts ':include :type=code typescript')
+
 ### template
 
 This is the `template` in vue options API.

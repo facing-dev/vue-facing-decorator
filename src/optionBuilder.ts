@@ -1,7 +1,7 @@
 import type { WatchConfig } from './option/watch'
 import type { PropsConfig } from './option/props'
 import type { InjectConfig } from './option/inject'
-import type { SetupFunction } from './component'
+import type { OptionSetupFunction } from './component'
 export interface OptionBuilder {
     name?: string
     // setup?: (this: void, props: Readonly<any>, ctx: SetupContext<any>) => Promise<any> | any | RenderFunction | void
@@ -12,7 +12,7 @@ export interface OptionBuilder {
     watch?: Record<string, WatchConfig | WatchConfig[]>
     props?: Record<string, PropsConfig>
     inject?: Record<string, InjectConfig>
-    use?: SetupFunction
+    setup?: OptionSetupFunction
     beforeCreateCallbacks?: Function[]
 }
 

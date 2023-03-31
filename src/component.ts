@@ -1,6 +1,6 @@
 import { defineComponent, type ComponentCustomOptions } from 'vue';
 import { obtainSlot, getSuperSlot } from './utils'
-import { build as optionUse } from './option/use'
+import { build as optionSetup } from './option/setup'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
 import { build as optionMethodsAndHooks } from './option/methodsAndHooks'
@@ -11,16 +11,18 @@ import { build as optionInject } from './option/inject'
 import { build as optionEmit } from './option/emit'
 import { build as optionVModel } from './option/vmodel'
 import { build as optionAccessor } from './option/accessor'
-import type { SetupContext, RenderFunction } from 'vue';
+import type { SetupContext } from 'vue';
 import type { OptionBuilder } from './optionBuilder'
 import type { VueCons } from './index'
 export type Cons = VueCons
 
-export type SetupFunction = (this: void, props: Readonly<any>, ctx: SetupContext<any>) => any
+type SetupFunction<T> = (this: void, props: Readonly<any>, ctx: SetupContext<any>) => T | Promise<T>
+export type OptionSetupFunction = SetupFunction<any>
+export type ComponentSetupFunction = SetupFunction<Record<string,any>>
 function ComponentOption(cons: Cons, extend?: any) {
 
     const optionBuilder: OptionBuilder = {}
-    optionUse(cons, optionBuilder)
+    optionSetup(cons, optionBuilder)
     optionVModel(cons, optionBuilder)
     optionComputed(cons, optionBuilder)//after VModel
     optionWatch(cons, optionBuilder)
@@ -31,12 +33,11 @@ function ComponentOption(cons: Cons, extend?: any) {
     optionMethodsAndHooks(cons, optionBuilder)//after Ref Computed
     optionAccessor(cons, optionBuilder)
 
-    const setupFunction: SetupFunction | undefined = optionBuilder.use ? function (props,ctx) {
-        return optionBuilder.use!(props,ctx)
+    const setupFunction: OptionSetupFunction | undefined = optionBuilder.setup ? function (props, ctx) {
+        return optionBuilder.setup!(props, ctx)
     } : undefined
-
     const raw = {
-        setup:setupFunction,
+        setup: setupFunction,
         data() {
             delete optionBuilder.data
             optionData(cons, optionBuilder, this)
@@ -66,13 +67,14 @@ type ComponentOption = {
     options?: ComponentCustomOptions & Record<string, any>
     template?: string
     mixins?: any[]
+    setup?: ComponentSetupFunction
 }
 type ComponentConsOption = Cons | ComponentOption
 function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     const option = ComponentOption(cons, extend)
     const slot = obtainSlot(cons.prototype)
     Object.keys(arg).reduce<Record<string, any>>((option, name: string) => {
-        if (['options', 'modifier', 'emits'].includes(name)) {
+        if (['options', 'modifier', 'emits','setup'].includes(name)) {
             return option
         }
         option[name] = arg[name as keyof ComponentOption]
@@ -83,7 +85,29 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
         emits = Array.from(new Set([...emits, ...arg.emits]))
     }
     option.emits = emits
+    if (arg.setup) {
+        if (!option.setup) {
+            option.setup = arg.setup
+        } else {
+            const oldSetup: OptionSetupFunction = option.setup
+            const newSetup: ComponentSetupFunction = arg.setup
+            
+            const setup:  ComponentSetupFunction = function (props, ctx) {
+                const newRet = newSetup(props, ctx)
+                const oldRet = oldSetup(props, ctx)
+                if(oldRet instanceof Promise || newRet instanceof Promise){
+                    return Promise.all([newRet,oldRet]).then((arr)=>{
+                        return Object.assign({},arr[0],arr[1])
+                    })
+                }else{
 
+                    return Object.assign({},newRet,oldRet)
+                }
+
+            }
+            option.setup = setup
+        }
+    }
     if (arg.options) {
         Object.assign(option, arg.options)
     }

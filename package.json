@@ -22,7 +22,8 @@
     "build:cjs": "./node_modules/.bin/tsc",
     "build:esm": "./node_modules/.bin/tsc -outDir dist/esm -module ES6",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "watch":"./node_modules/.bin/tsc -outDir dist/esm -module ES6 --watch"
   },
   "author": "",
   "license": "MIT",

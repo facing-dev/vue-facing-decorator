@@ -12,7 +12,7 @@
     - [Watcher](/en/class-component/watcher/watcher.md)
     - [Injection](/en/class-component/injection/injection.md)
     - [Model](/en/class-component/model/model.md)
-    - [Use](/en/class-component/use/use.md)
+    - [Setup](/en/class-component/setup/setup.md)
 - Inheritance
     - [ECMAScript class](/en/inheritance/es-class/es-class.md)
     - [Component](/en/inheritance/component/component.md)

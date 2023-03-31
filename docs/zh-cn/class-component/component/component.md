@@ -58,6 +58,12 @@
 
 [](./code-option-render.ts ':include :type=code typescript')
 
+### setup
+
+和vue option api中的`setup`相同, 但是不能返回render函数。
+
+[](./code-option-setup.ts ':include :type=code typescript')
+
 ### template
 
 和vue option api中的`template`相同。

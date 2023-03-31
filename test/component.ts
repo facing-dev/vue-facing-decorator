@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Base } from '../dist'
+import { Component, Base, Setup } from '../dist'
 import { isEmptyObject } from './utils';
 
 @Component
@@ -26,7 +26,7 @@ const FullOptionOpt = {
   },
   inheritAttrs: true,
   expose: ['expose1', 'expose2'],
-  modifier(option: any) {
+  modifier: function (option: any) {
     option.modifierCalled = true
     return option
   },
@@ -43,13 +43,19 @@ const FullOptionOpt = {
 
       }
     }
-  }]
+  }],
+  setup() {
+    return Promise.resolve({
+      setupA: 'setupVA'
+    })
+  }
 }
 
 @Component(FullOptionOpt)
 export class FullOption extends Base {
 
 }
+
 const FullOptionContext = FullOption as any
 describe('Component',
   () => {
@@ -68,9 +74,9 @@ describe('Component',
         }
       })
     })
-    it('Full option', () => {
+    it('Full option', async () => {
       expect('object').to.equal(typeof FullOptionContext)
-      Object.keys(FullOptionOpt).forEach(key => {
+      for (const key of Object.keys(FullOptionOpt)) {
         const opt = (FullOptionOpt as any)[key]
         switch (key) {
           case 'emits':
@@ -84,11 +90,17 @@ describe('Component',
             break;
           case 'modifier':
             expect(true).to.equal(FullOptionContext['modifierCalled'])
-            return;
+            break
+          case 'setup':
+            const pro = FullOptionContext['setup']()
+            expect(true).to.equal( pro instanceof Promise)
+            const r = await pro
+            expect('setupVA').to.equal(r.setupA)
+            break
           default:
             expect(opt).to.equal(FullOptionContext[key])
         }
-      })
+      }
     })
   }
 )

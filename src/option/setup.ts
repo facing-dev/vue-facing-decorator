@@ -1,18 +1,18 @@
-import { SetupFunction } from '../component'
+import type { OptionSetupFunction } from '../component'
 import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot } from '../utils'
 
-export type UseConfig = {
-    useFunction: SetupFunction
+export type SetupConfig = {
+    setupFunction: OptionSetupFunction
 }
 
-export function decorator(useFunction: SetupFunction) {
+export function decorator(setupFunction: OptionSetupFunction) {
     return function (proto: any, name: string) {
         const slot = obtainSlot(proto)
-        const map = slot.obtainMap('use')
+        const map = slot.obtainMap('setup')
         map.set(name, {
-            useFunction
+            setupFunction
         })
     }
 
@@ -23,31 +23,31 @@ const isPromise = (v: any): v is Promise<any> => v instanceof Promise
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
-    const map = slot.obtainMap('use')
+    const map = slot.obtainMap('setup')
     if (map.size === 0) {
         return
     }
-    const use: SetupFunction = function (props, ctx) {
-        const useData: Record<string, any> = {};
+    const setup: OptionSetupFunction = function (props, ctx) {
+        const setupData: Record<string, any> = {};
         let promises: Promise<any>[] | null = null;
         for (const name of map.keys()) {
-            const useState = map.get(name)!.useFunction(props, ctx)
-            if (isPromise(useState)) {
+            const setupState = map.get(name)!.setupFunction(props, ctx)
+            if (isPromise(setupState)) {
                 promises ??= []
-                promises.push(useState.then((v) => {
-                    useData[name] = v
+                promises.push(setupState.then((v) => {
+                    setupData[name] = v
                 }))
             } else {
-                useData[name] = useState
+                setupData[name] = setupState
             }
         }
         if (Array.isArray(promises)) {
             return Promise.all(promises).then(() => {
-                return useData
+                return setupData
             })
         } else {
-            return useData
+            return setupData
         }
     }
-    optionBuilder.use = use
+    optionBuilder.setup = setup
 }

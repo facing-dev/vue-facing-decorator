@@ -6,7 +6,7 @@ import type { PropsConfig } from "./option/props";
 import type { HookConfig } from "./option/methodsAndHooks";
 import type { VModelConfig } from "./option/vmodel";
 import type { WatchConfig } from "./option/watch";
-import type { UseConfig } from './option/use'
+import type { SetupConfig } from './option/setup'
 const SlotSymbol = Symbol('vue-facing-decorator-slot')
 
 export type SlotMapTypes = {
@@ -20,7 +20,7 @@ export type SlotMapTypes = {
     'v-model': Map<string, VModelConfig>
     watch: Map<string, WatchConfig | WatchConfig[]>
     ref: Map<string, boolean>
-    use: Map<string, UseConfig>
+    setup: Map<string, SetupConfig>
 }
 
 class Slot {
@@ -123,13 +123,31 @@ export function getSuperSlot(obj: any) {
 //     }
 //     return arr
 // }
+// export function 
+// export function collect<>(slot: Slot,mapName:keyof SlotMapTypes,) {
+//     let currSlot: Slot | null = slot
+//     while (currSlot != null) {
+//         for (const mapName of currSlot.names.keys()) {
+//             if (['watch', 'hooks', 'setup'].includes(mapName)) {
+//                 continue
+//             }
+//             const map = currSlot.names.get(mapName)!
+//             if (map.has(name)) {
+//                 return false
+//             }
+//         }
+//         currSlot = getSuperSlot(currSlot.master)
+//     }
+
+//     return true
+// }
 
 export function excludeNames(names: string[], slot: Slot) {
     return names.filter(name => {
         let currSlot: Slot | null = slot
         while (currSlot != null) {
             for (const mapName of currSlot.names.keys()) {
-                if (['watch', 'hooks', 'use'].includes(mapName)) {
+                if (['watch', 'hooks', 'setup'].includes(mapName)) {
                     continue
                 }
                 const map = currSlot.names.get(mapName)!
