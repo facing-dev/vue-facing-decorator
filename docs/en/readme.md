@@ -22,9 +22,6 @@ Suggestion and contribution welcome.
 
 # Donate
 
-[DONATE](https://facing-dev.github.io/vue-facing-decorator/donate/donate.html)
-
-
 # Discussion
 
 [To discord https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)

@@ -22,8 +22,7 @@ Sugestões e contribuições são bem-vindas.
 
 # Doações
 
-[Doação](https://facing-dev.github.io/vue-facing-decorator/donate/donate.html)
-
+Doação
 
 # Discussões
 

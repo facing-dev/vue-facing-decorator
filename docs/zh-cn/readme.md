@@ -21,5 +21,3 @@
 [开始 > ](/zh-cn/quick-start/quick-start.md)
 
 # 捐献
-
-[捐献](https://facing-dev.github.io/vue-facing-decorator/donate/donate.html)
