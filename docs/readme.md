@@ -10,6 +10,7 @@ Works on TypeScript and decorator.
 * Safety. Transform es class to vue options api according to specifications.
 * Performance. Once transform on project loading, ready for everywhere.
 * Support ES class inherit, vue `extends` and vue `mixins`.
+* [Official recommended](https://class-component.vuejs.org)
 
 [](/en/quick-start/code-what-it-is-example.ts ':include :type=code typescript')
 
