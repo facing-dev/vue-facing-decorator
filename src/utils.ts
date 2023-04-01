@@ -147,7 +147,8 @@ export function excludeNames(names: string[], slot: Slot) {
         let currSlot: Slot | null = slot
         while (currSlot != null) {
             for (const mapName of currSlot.names.keys()) {
-                if (['watch', 'hooks', 'setup'].includes(mapName)) {
+
+                if (['watch', 'hooks', 'setup','emits'].includes(mapName)) {
                     continue
                 }
                 const map = currSlot.names.get(mapName)!
