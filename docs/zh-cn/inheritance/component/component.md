@@ -10,6 +10,12 @@
 
 这里有两个组件：`MyComponent`和`SuperComponent`。继承是通过vue `extends`实现的。
 
+## 继承多组件
+
+使用 `mixins` 函数来继承多个通过 `ComponentBase` 装饰的组件。
+
+[](./code-mixins-function.ts ':include :type=code typescript')
+
 ## 关于vue原生组件
 
 使用`mixins`来合并vue原生组件。

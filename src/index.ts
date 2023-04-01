@@ -8,6 +8,7 @@ export { decorator as Emit } from './option/emit'
 export { decorator as VModel, decorator as Model } from './option/vmodel'
 export { decorator as Vanilla } from './option/vanilla'
 export { decorator as Hook } from './option/methodsAndHooks'
+export { mixins } from './mixins'
 import type { ComponentPublicInstance } from 'vue'
 import type { OptionBuilder } from './optionBuilder'
 
@@ -24,8 +25,8 @@ export function TSX<Properties extends {} = {}, Events extends {} = {}>() {
     }
 }
 
-export type VueCons = {
-    new(optionBuilder: OptionBuilder, vueInstance: any): ComponentPublicInstance & BaseTypeIdentify
+export type VueCons<T = {}> = {
+    new(optionBuilder: OptionBuilder, vueInstance: any): ComponentPublicInstance & BaseTypeIdentify & T
 }
 
 export const Base = class {

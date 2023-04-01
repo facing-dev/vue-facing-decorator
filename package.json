@@ -23,7 +23,7 @@
     "build:esm": "./node_modules/.bin/tsc -outDir dist/esm -module ES6",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "watch":"./node_modules/.bin/tsc -outDir dist/esm -module ES6 --watch"
+    "watch": "./node_modules/.bin/tsc -outDir dist/esm -module ES6 --watch"
   },
   "author": "",
   "license": "MIT",
@@ -44,13 +44,13 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^10.0.0",
     "ts-node": "^10.8.1",
-    "typescript": "latest",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "typescript": "latest"
   },
   "homepage": "https://github.com/facing-dev/vue-facing-decorator",
   "repository": {
     "type": "git",
     "url": "git@github.com:facing-dev/vue-facing-decorator.git"
-  },
-  "dependencies": {}
+  }
+
 }

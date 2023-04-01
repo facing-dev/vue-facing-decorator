@@ -17,6 +17,7 @@ import './feature/hooks'
 import './feature/classExtends'
 import './feature/componentExtends'
 import './feature/extends'
+import './feature/mixinsFunction'
 
 
 import './tsx/attributeTypes'

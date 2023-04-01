@@ -18,7 +18,7 @@ export type Cons = VueCons
 
 type SetupFunction<T> = (this: void, props: Readonly<any>, ctx: SetupContext<any>) => T | Promise<T>
 export type OptionSetupFunction = SetupFunction<any>
-export type ComponentSetupFunction = SetupFunction<Record<string,any>>
+export type ComponentSetupFunction = SetupFunction<Record<string, any>>
 function ComponentOption(cons: Cons, extend?: any) {
 
     const optionBuilder: OptionBuilder = {}
@@ -74,7 +74,7 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     const option = ComponentOption(cons, extend)
     const slot = obtainSlot(cons.prototype)
     Object.keys(arg).reduce<Record<string, any>>((option, name: string) => {
-        if (['options', 'modifier', 'emits','setup'].includes(name)) {
+        if (['options', 'modifier', 'emits', 'setup'].includes(name)) {
             return option
         }
         option[name] = arg[name as keyof ComponentOption]
@@ -91,17 +91,17 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
         } else {
             const oldSetup: OptionSetupFunction = option.setup
             const newSetup: ComponentSetupFunction = arg.setup
-            
-            const setup:  ComponentSetupFunction = function (props, ctx) {
+
+            const setup: ComponentSetupFunction = function (props, ctx) {
                 const newRet = newSetup(props, ctx)
                 const oldRet = oldSetup(props, ctx)
-                if(oldRet instanceof Promise || newRet instanceof Promise){
-                    return Promise.all([newRet,oldRet]).then((arr)=>{
-                        return Object.assign({},arr[0],arr[1])
+                if (oldRet instanceof Promise || newRet instanceof Promise) {
+                    return Promise.all([newRet, oldRet]).then((arr) => {
+                        return Object.assign({}, arr[0], arr[1])
                     })
-                }else{
+                } else {
 
-                    return Object.assign({},newRet,oldRet)
+                    return Object.assign({}, newRet, oldRet)
                 }
 
             }
@@ -151,12 +151,6 @@ export function ComponentBase(arg: ComponentConsOption): any {
 export function Component(arg: ComponentConsOption): any {
     return _Component(arg, function (cons: Cons, option: ComponentOption) {
         build(cons, option)
-        // const slot = getSlot(cons.prototype)!
-        // Object.defineProperty(cons, '__vccOpts', {
-        //     value: slot.cachedVueComponent
-        // })
-        // console.log('kkkk', '__vccOpts' in cons, cons)
-        // return cons
         return obtainSlot(cons.prototype).cachedVueComponent
     })
 }

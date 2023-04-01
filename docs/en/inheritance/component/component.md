@@ -10,6 +10,13 @@ Consider code:
 
 There are two components: `MyComponent` and `SuperComponent`. The inheritance is implemented by vue `extends`.
 
+## Extends multiple components
+
+Use `mixins` function to extends multiple components decorated by `ComponentBase`.
+
+[](./code-mixins-function.ts ':include :type=code typescript')
+
+
 ## For vue native components
 
 Use `mixins` to merge vue native components.
