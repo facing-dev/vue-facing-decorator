@@ -32,7 +32,8 @@ export function compatibleClassDecorator(deco: Function) {
 export function compatibleMemberDecorator(deco: Function) {
     return function (arg: any, ctx: DecoratorContext | string) {
         if (typeof ctx === 'object') {//stage 3
-            const proto = Compatible.fakePrototype ??= {}
+            const proto = Compatible.fakePrototype ??= {};
+            proto[ctx.name!] = arg
             return deco(proto, ctx.name)
         } else {
             return deco(arg, ctx)

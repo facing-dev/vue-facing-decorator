@@ -27,7 +27,7 @@
   },
   "author": "",
   "license": "MIT",
-  "types": "dist/index.d.ts",
+
   "peerDependencies": {
     "vue": "^3.0.0"
   },
