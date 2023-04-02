@@ -1,21 +1,21 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Model, Base } from '../../dist'
+import { Component, Model, Base, toNative } from '../../dist'
 
 @Component
-export class Comp extends Base {
+class Comp extends Base {
 
     @Model
-    defaultValueAgent!:string
+    defaultValueAgent!: string
 
     @Model({
-        name:'value',
-        required:true
+        name: 'value',
+        required: true
     })
-    valueAgent!:string
+    valueAgent!: string
 }
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 describe('decorator Watch',
     () => {
@@ -25,14 +25,14 @@ describe('decorator Watch',
             expect('object').to.equal(typeof CompContext.computed)
             expect(true).to.equal('defaultValueAgent' in CompContext.computed)
             expect('test').to.equal(CompContext.computed['defaultValueAgent'].get.apply({
-                modelValue:'test'
+                modelValue: 'test'
             }))
             CompContext.computed['defaultValueAgent'].set.apply({
-                $emit(name:string,value:any){
+                $emit(name: string, value: any) {
                     expect('update:modelValue').to.equal(name)
                     expect('test').to.equal(value)
                 }
-            },['test'])
+            }, ['test'])
         })
         it('value', () => {
             expect('object').to.equal(typeof CompContext.props)
@@ -40,14 +40,14 @@ describe('decorator Watch',
             expect('object').to.equal(typeof CompContext.computed)
             expect(true).to.equal('valueAgent' in CompContext.computed)
             expect('test').to.equal(CompContext.computed['valueAgent'].get.apply({
-                value:'test'
+                value: 'test'
             }))
             CompContext.computed['valueAgent'].set.apply({
-                $emit(name:string,value:any){
+                $emit(name: string, value: any) {
                     expect('update:value').to.equal(name)
                     expect('test').to.equal(value)
                 }
-            },['test'])
+            }, ['test'])
         })
     }
 )

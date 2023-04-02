@@ -1,14 +1,15 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Base, Setup } from '../dist'
+import { Component, Base, toNative } from '../dist'
 import { isEmptyObject } from './utils';
 
 @Component
-export class Empty extends Base {
+class Empty extends Base {
 
 }
-const EmptyContext = Empty as any
+
+const EmptyContext = toNative(Empty) as any
 
 const FullOptionOpt = {
   name: 'FullOption',
@@ -52,11 +53,11 @@ const FullOptionOpt = {
 }
 
 @Component(FullOptionOpt)
-export class FullOption extends Base {
+class FullOption extends Base {
 
 }
 
-const FullOptionContext = FullOption as any
+const FullOptionContext = toNative(FullOption) as any
 describe('Component',
   () => {
     it('Empty', () => {
@@ -93,7 +94,7 @@ describe('Component',
             break
           case 'setup':
             const pro = FullOptionContext['setup']()
-            expect(true).to.equal( pro instanceof Promise)
+            expect(true).to.equal(pro instanceof Promise)
             const r = await pro
             expect('setupVA').to.equal(r.setupA)
             break

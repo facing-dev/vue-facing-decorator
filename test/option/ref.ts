@@ -1,15 +1,15 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Ref, Base } from '../../dist'
+import { Component, Ref, Base, toNative } from '../../dist'
 
 @Component
-export class Comp extends Base {
+class Comp extends Base {
     @Ref
     readonly refName!: any
 
 }
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 describe('decorator Ref',
     () => {

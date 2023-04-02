@@ -31,13 +31,23 @@ export type VueCons<T = {}> = {
 
 export const Base = class {
     constructor(optionBuilder: OptionBuilder, vueInstance: any) {
+
         const props = optionBuilder.props
+
         if (props) {
             Object.keys(props).forEach(key => {
-                (this as any)[key] = vueInstance[key]
+                (this as any)[key] = vueInstance[key];
             })
         }
+        (global as any).kkk = this
+        console.log('base', (this as any).prop)
+        console.log('base', (global as any).kkk.prop)
+        setTimeout(() => {
+            console.log('base', (global as any).kkk.prop)
+        }, 0);
     }
 } as VueCons
 
 export const Vue = Base
+
+export { toNative } from './component'

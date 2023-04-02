@@ -1,16 +1,16 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Ref, Base } from '../../dist'
+import { Component, Base, toNative } from '../../dist'
 
 @Component
-export class Comp extends Base {
+class Comp extends Base {
     method() {
         return 'method value'
     }
 
 }
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 describe('option methods',
     () => {

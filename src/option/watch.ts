@@ -2,7 +2,7 @@ import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, } from '../utils'
 import type { WatchCallback } from 'vue'
-
+import { compatibleMemberDecorator } from '../deco3/utils'
 export interface WatchConfig {
     key: string
     handler: WatchCallback,
@@ -12,7 +12,7 @@ export interface WatchConfig {
 }
 type Option = Omit<WatchConfig, 'handler' | 'key'>
 export function decorator(key: string, option?: Option) {
-    return function (proto: any, name: string) {
+    return compatibleMemberDecorator(function (proto: any, name: string) {
         const slot = obtainSlot(proto)
         const map = slot.obtainMap('watch');
         const opt = Object.assign({}, option ?? {}, {
@@ -30,7 +30,7 @@ export function decorator(key: string, option?: Option) {
         else {
             map.set(name, opt)
         }
-    }
+    })
 }
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {

@@ -14,13 +14,13 @@ import { build as optionAccessor } from './option/accessor'
 import type { SetupContext } from 'vue';
 import type { OptionBuilder } from './optionBuilder'
 import type { VueCons } from './index'
+import * as DecoratorCompatible from './deco3/utils'
 export type Cons = VueCons
 
 type SetupFunction<T> = (this: void, props: Readonly<any>, ctx: SetupContext<any>) => T | Promise<T>
 export type OptionSetupFunction = SetupFunction<any>
 export type ComponentSetupFunction = SetupFunction<Record<string, any>>
 function ComponentOption(cons: Cons, extend?: any) {
-
     const optionBuilder: OptionBuilder = {}
     optionSetup(cons, optionBuilder)
     optionVModel(cons, optionBuilder)
@@ -36,6 +36,7 @@ function ComponentOption(cons: Cons, extend?: any) {
     const setupFunction: OptionSetupFunction | undefined = optionBuilder.setup ? function (props, ctx) {
         return optionBuilder.setup!(props, ctx)
     } : undefined
+
     const raw = {
         setup: setupFunction,
         data() {
@@ -85,29 +86,34 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
         emits = Array.from(new Set([...emits, ...arg.emits]))
     }
     option.emits = emits
-    if (arg.setup) {
-        if (!option.setup) {
-            option.setup = arg.setup
-        } else {
-            const oldSetup: OptionSetupFunction = option.setup
-            const newSetup: ComponentSetupFunction = arg.setup
+    arg.setup ??= function () { return {} }
 
-            const setup: ComponentSetupFunction = function (props, ctx) {
-                const newRet = newSetup(props, ctx)
-                const oldRet = oldSetup(props, ctx)
-                if (oldRet instanceof Promise || newRet instanceof Promise) {
-                    return Promise.all([newRet, oldRet]).then((arr) => {
-                        return Object.assign({}, arr[0], arr[1])
-                    })
-                } else {
+    if (!option.setup) {
 
-                    return Object.assign({}, newRet, oldRet)
-                }
+        option.setup = arg.setup
+    } else {
+   
+        const oldSetup: OptionSetupFunction = option.setup
+        const newSetup: ComponentSetupFunction = arg.setup
 
+        const setup: ComponentSetupFunction = function (props, ctx) {
+            const newRet = newSetup(props, ctx)
+            const oldRet = oldSetup(props, ctx)
+            if (oldRet instanceof Promise || newRet instanceof Promise) {
+                return Promise.all([newRet, oldRet]).then((arr) => {
+                    const ret = Object.assign({}, arr[0], arr[1])
+                    return ret
+                })
+            } else {
+
+                const ret = Object.assign({}, newRet, oldRet)
+                return ret
             }
-            option.setup = setup
+
         }
+        option.setup = setup
     }
+
     if (arg.options) {
         Object.assign(option, arg.options)
     }
@@ -133,24 +139,33 @@ function build(cons: Cons, option: ComponentOption) {
     slot.cachedVueComponent = component
 
 }
-function _Component(arg: ComponentConsOption, cb: (cons: Cons, option: ComponentOption) => any) {
+function _Component(cb: (cons: Cons, option: ComponentOption) => any, arg: ComponentConsOption, ctx?: ClassDecoratorContext) {
     if (typeof arg === 'function') {
-        return cb(arg, {})
+        return DecoratorCompatible.compatibleClassDecorator(function (cons: Cons) {
+            return cb(cons, {})
+        })(arg, ctx)
     }
-    return function (cons: Cons) {
+    return DecoratorCompatible.compatibleClassDecorator(function (cons: Cons) {
         return cb(cons, arg)
-    }
+    })
 }
-export function ComponentBase(arg: ComponentConsOption): any {
-    return _Component(arg, function (cons: Cons, option: ComponentOption) {
+export function ComponentBase(arg: ComponentConsOption, ctx?: ClassDecoratorContext): any {
+    return _Component(function (cons: Cons, option: ComponentOption) {
         build(cons, option)
         return cons
-    })
+    }, arg, ctx)
 }
 
-export function Component(arg: ComponentConsOption): any {
-    return _Component(arg, function (cons: Cons, option: ComponentOption) {
-        build(cons, option)
-        return obtainSlot(cons.prototype).cachedVueComponent
-    })
+export const Component = ComponentBase
+
+export function toNative<T extends Cons>(cons: T): T {
+    const slot = obtainSlot(cons.prototype)
+    if (!slot.inComponent) {
+        throw 'to native 1'
+    }
+    const cached = slot.cachedVueComponent
+    if (!cached) {
+        throw 'to native 2'
+    }
+    return cached
 }

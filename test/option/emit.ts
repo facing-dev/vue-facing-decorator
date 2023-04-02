@@ -1,10 +1,10 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Emit, Base } from '../../dist'
+import { Component, Emit, Base, toNative } from '../../dist'
 
 @Component
-export class Comp extends Base {
+class Comp extends Base {
     @Emit
     defaultEmit() {
         return 'defaultEmit value'
@@ -26,7 +26,7 @@ export class Comp extends Base {
     }
 
 }
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 describe('decorator Emit',
     () => {

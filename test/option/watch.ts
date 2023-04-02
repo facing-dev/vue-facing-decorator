@@ -1,10 +1,10 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Watch, Base } from '../../dist'
+import { Component, Watch, Base, toNative } from '../../dist'
 
 @Component
-export class Comp extends Base {
+class Comp extends Base {
 
     @Watch('defaultWatchKey')
     defaultWatcher() {
@@ -41,7 +41,7 @@ export class Comp extends Base {
         return 'multiKeyWatcher value'
     }
 }
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 describe('decorator Watch',
     () => {
@@ -70,8 +70,8 @@ describe('decorator Watch',
             expect('function').to.equal(typeof CompContext?.watch?.multiKey1?.handler)
             expect('function').to.equal(typeof CompContext?.watch?.multiKey2?.handler)
             expect(true).to.equal(CompContext.watch.multiKey1.handler === CompContext.watch.multiKey2.handler)
-            expect(true).to.equal(!! CompContext.watch.multiKey1.immediate)
-            expect(false).to.equal(!! CompContext.watch.multiKey2.immediate)
+            expect(true).to.equal(!!CompContext.watch.multiKey1.immediate)
+            expect(false).to.equal(!!CompContext.watch.multiKey2.immediate)
         })
     }
 )

@@ -7,6 +7,7 @@ import type { HookConfig } from "./option/methodsAndHooks";
 import type { VModelConfig } from "./option/vmodel";
 import type { WatchConfig } from "./option/watch";
 import type { SetupConfig } from './option/setup'
+import { compatibleMemberDecorator } from './deco3/utils';
 const SlotSymbol = Symbol('vue-facing-decorator-slot')
 
 export type SlotMapTypes = {
@@ -41,11 +42,15 @@ class Slot {
     cachedVueComponent: any = null
 }
 
-export function makeSlot(obj: any): Slot {
+export function makeSlot(obj: any, defaultSlot?: Slot): Slot {
     if (getSlot(obj)) {
         throw ''
     }
-    const slot = new Slot(obj)
+    if (defaultSlot) {
+        defaultSlot.master = obj
+    }
+    const slot = defaultSlot ?? new Slot(obj)
+
     Object.defineProperty(obj, SlotSymbol, {
         enumerable: false,
         value: slot
@@ -58,14 +63,14 @@ export function getSlot(obj: any): Slot | undefined {
     return Object.getOwnPropertyDescriptor(obj, SlotSymbol)?.value
 }
 
-export function obtainSlot(obj: any): Slot {
+export function obtainSlot(obj: any, defaultSlot?: Slot): Slot {
+
     const slot = getSlot(obj)
     if (slot) {
         return slot
     }
-    return makeSlot(obj)
 
-
+    return makeSlot(obj, defaultSlot)
 }
 
 export function makeObject(names: string[], obj: any) {
@@ -148,7 +153,7 @@ export function excludeNames(names: string[], slot: Slot) {
         while (currSlot != null) {
             for (const mapName of currSlot.names.keys()) {
 
-                if (['watch', 'hooks', 'setup','emits'].includes(mapName)) {
+                if (['watch', 'hooks', 'setup', 'emits'].includes(mapName)) {
                     continue
                 }
                 const map = currSlot.names.get(mapName)!
@@ -171,14 +176,17 @@ export function getValidNames(obj: any, filter: (des: PropertyDescriptor, name: 
 export function optoinNullableMemberDecorator<T>(handler: { (proto: any, name: string, option?: T): any }) {
     function decorator(option?: T): any
     function decorator(proto: BaseTypeIdentify, name: any): any
-    function decorator(optionOrProto?: T | BaseTypeIdentify, name?: any): any {
+    function decorator(value: any, ctx: ClassMemberDecoratorContext): any //deco stage 3
+    function decorator(optionOrProto?: T | BaseTypeIdentify | any, name?: string | ClassMemberDecoratorContext): any {
         if (name) {
-            handler(optionOrProto, name)
+            compatibleMemberDecorator(function (proto: any, name: any) {
+                handler(proto, name)
+            })(optionOrProto, name)
         }
         else {
-            return function (proto: any, name: any) {
+            return compatibleMemberDecorator(function (proto: any, name: any) {
                 handler(proto, name, optionOrProto as T | undefined)
-            }
+            })
         }
     }
 
