@@ -92,7 +92,7 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
 
         option.setup = arg.setup
     } else {
-   
+
         const oldSetup: OptionSetupFunction = option.setup
         const newSetup: ComponentSetupFunction = arg.setup
 
@@ -136,8 +136,8 @@ function build(cons: Cons, option: ComponentOption) {
     }
     const component = buildComponent(cons, option, superSlot === null ? undefined : superSlot.cachedVueComponent)
     component.__vfdConstructor = cons
-    slot.cachedVueComponent = component
-
+    slot.cachedVueComponent = component;
+    (cons as any).__vccOpts = component
 }
 function _Component(cb: (cons: Cons, option: ComponentOption) => any, arg: ComponentConsOption, ctx?: ClassDecoratorContext) {
     if (typeof arg === 'function') {
