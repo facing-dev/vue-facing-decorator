@@ -13,7 +13,6 @@ export interface WatchConfig {
 type Option = Omit<WatchConfig, 'handler' | 'key'>
 export function decorator(key: string, option?: Option) {
     return compatibleMemberDecorator(function (proto: any, name: string) {
-        console.log('watch deco',proto,name,option)
         const slot = obtainSlot(proto)
         const map = slot.obtainMap('watch');
         const opt = Object.assign({}, option ?? {}, {

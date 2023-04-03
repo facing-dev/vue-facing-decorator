@@ -14,6 +14,5 @@ export function build(cons: Cons, optionBuilder: OptionBuilder, vueInstance: any
 
     const slot = obtainSlot(cons.prototype)
     names = excludeNames(names, slot)
-    console.log(names)
     Object.assign(optionBuilder.data, makeObject(names, sample))
 }

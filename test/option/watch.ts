@@ -42,7 +42,6 @@ class Comp extends Base {
     }
 }
 const CompContext = toNative(Comp) as any
-console.log(CompContext)
 describe('decorator Watch',
     () => {
         it('default', () => {
