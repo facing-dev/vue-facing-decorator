@@ -19,5 +19,6 @@ import './feature/componentExtends'
 import './feature/extends'
 import './feature/mixinsFunction'
 
-
 import './tsx/attributeTypes'
+
+import './custom/custom'
