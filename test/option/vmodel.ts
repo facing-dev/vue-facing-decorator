@@ -17,7 +17,7 @@ export class Comp extends Base {
 }
 const CompContext = Comp as any
 
-describe('decorator Watch',
+describe('decorator VModal',
     () => {
         it('default', () => {
             expect('object').to.equal(typeof CompContext.props)
@@ -27,6 +27,8 @@ describe('decorator Watch',
             expect('test').to.equal(CompContext.computed['defaultValueAgent'].get.apply({
                 modelValue:'test'
             }))
+
+            expect(true).to.equal(CompContext.emits.includes('update:modelValue'))
             CompContext.computed['defaultValueAgent'].set.apply({
                 $emit(name:string,value:any){
                     expect('update:modelValue').to.equal(name)
@@ -42,6 +44,7 @@ describe('decorator Watch',
             expect('test').to.equal(CompContext.computed['valueAgent'].get.apply({
                 value:'test'
             }))
+            expect(true).to.equal(CompContext.emits.includes('update:value'))
             CompContext.computed['valueAgent'].set.apply({
                 $emit(name:string,value:any){
                     expect('update:value').to.equal(name)
