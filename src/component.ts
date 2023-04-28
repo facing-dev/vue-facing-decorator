@@ -11,6 +11,7 @@ import { build as optionInject } from './option/inject'
 import { build as optionEmit } from './option/emit'
 import { build as optionVModel } from './option/vmodel'
 import { build as optionAccessor } from './option/accessor'
+import { CustomRecords } from './custom/custom'
 import type { SetupContext } from 'vue';
 import type { OptionBuilder } from './optionBuilder'
 import type { VueCons } from './index'
@@ -32,7 +33,6 @@ function ComponentOption(cons: Cons, extend?: any) {
     optionRef(cons, optionBuilder)//after Computed
     optionMethodsAndHooks(cons, optionBuilder)//after Ref Computed
     optionAccessor(cons, optionBuilder)
-
 
     const setupFunction: OptionSetupFunction | undefined = optionBuilder.setup ? function (props, ctx) {
         return optionBuilder.setup!(props, ctx)
@@ -87,14 +87,12 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     }
     option.emits = emits
 
+    CustomRecords.forEach(rec => {
+        rec.creator.apply({}, [option, rec.key])
+    })
+    // clear records for next component
+    CustomRecords.splice(0,CustomRecords.length)
 
-    const decorators = cons.__d
-
-    if (decorators) {
-        decorators.forEach(rec => {
-            rec.creator.apply({}, [option, rec.key])
-        })
-    }
 
     if (arg.setup) {
         if (!option.setup) {

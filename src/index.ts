@@ -12,7 +12,6 @@ export { createDecorator } from './custom/custom'
 export { mixins } from './mixins'
 import type { ComponentPublicInstance } from 'vue'
 import type { OptionBuilder } from './optionBuilder'
-import type { CustomDecorator } from './custom/custom'
 
 const IdentifySymbol = Symbol('vue-facing-decorator-identify')
 export interface BaseTypeIdentify {
@@ -29,7 +28,6 @@ export function TSX<Properties extends {} = {}, Events extends {} = {}>() {
 
 export type VueCons<T = {}> = {
     new(optionBuilder: OptionBuilder, vueInstance: any): ComponentPublicInstance & BaseTypeIdentify & T
-    __d?: CustomDecorator[]
 }
 
 export const Base = class {
