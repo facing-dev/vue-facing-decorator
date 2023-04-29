@@ -20,5 +20,7 @@
 - TSX
     - [TSX render](/pt-br/tsx/tsx-render/tsx-render.md)
     - [Tipando Atributos](/pt-br/tsx/attribute-types/attribute-types.md)
+- Custom Decorator
+    - [Custom Decorator](/pt-br/custom/custom.md)
 - Compatibilidade
     - [reflect-metadata](/pt-br/compatibility/reflect-metadata/reflect-metadata.md)
