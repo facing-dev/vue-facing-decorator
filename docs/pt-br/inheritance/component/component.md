@@ -10,6 +10,14 @@ Considere o código:
 
 Exitem dois componentes: `MyComponent` e `SuperComponent`. A herança é implementada pelo vue com `extends`. 
 
+## Estender múltiplos componentes
+
+Use `mixins` para estender múltiplos componentes que utilizam o decorator `ComponentBase`.
+
+[](./code-mixins-function.ts ':include :type=code typescript')
+
+
+
 ## Para componentes nativos
 
 Use `mixins` para mesclar dois componentes nativos.
