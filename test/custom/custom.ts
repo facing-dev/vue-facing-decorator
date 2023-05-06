@@ -13,6 +13,8 @@ function CustomDeco(param?: String) {
         options.methods[key] = function (...args: any[]) {
             return `${old.apply(this, args)} ${param}`
         }
+    },{
+        preserve:true
     })
 }
 

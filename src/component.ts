@@ -11,7 +11,6 @@ import { build as optionInject } from './option/inject'
 import { build as optionEmit } from './option/emit'
 import { build as optionVModel } from './option/vmodel'
 import { build as optionAccessor } from './option/accessor'
-import { CustomRecords } from './custom/custom'
 import type { SetupContext } from 'vue';
 import type { OptionBuilder } from './optionBuilder'
 import type { VueCons } from './index'
@@ -89,13 +88,6 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     }
     option.emits = emits
 
-
-
-    CustomRecords.forEach(rec => {
-        rec.creator.apply({}, [option, rec.key])
-    })
-
-
     arg.setup ??= function () { return {} }
 
     if (!option.setup) {
@@ -123,6 +115,10 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
         }
         option.setup = setup
     }
+
+    slot.obtainMap('customDecorator').forEach((v) => {
+        v.creator.apply({}, [option, v.key])
+    })
 
     if (arg.options) {
         Object.assign(option, arg.options)
