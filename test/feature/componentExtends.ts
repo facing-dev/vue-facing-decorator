@@ -1,27 +1,27 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, ComponentBase, Base } from '../../dist'
+import { Component, ComponentBase, Base, toNative } from '../../dist'
 
 @ComponentBase({
-    name:'ComponentBase'
+    name: 'ComponentBase'
 })
 class Sup extends Base {
     dataSup = 'dataSup value'
-    methodSup(){
+    methodSup() {
         return 'methodSup value'
     }
 }
 
 @Component
-export class Comp extends Sup {
+class Comp extends Sup {
     dataComp = 'dataComp value'
-    methodComp(){
+    methodComp() {
         return 'methodComp value'
     }
 }
 
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 const SupContext = CompContext.extends
 describe('feature component extends',
     () => {
@@ -32,12 +32,12 @@ describe('feature component extends',
             expect('function').to.equal(typeof CompContext?.methods?.methodComp)
             expect('methodComp value').to.equal(CompContext.methods.methodComp())
 
-        
+
 
 
         })
-        it('sup',()=>{
-        
+        it('sup', () => {
+
             expect('object').to.equal(typeof SupContext)
             expect('function').to.equal(typeof SupContext?.data)
             const supData = SupContext.data()

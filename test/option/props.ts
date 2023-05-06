@@ -1,13 +1,13 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Prop, Base } from '../../dist'
+import { Component, Prop, Base, toNative } from '../../dist'
 import { isEmptyObject } from '../utils'
 function Full_validator() {
     return true
 }
 @Component
-export class Comp extends Base {
+class Comp extends Base {
     @Prop
     readonly propName!: any
 
@@ -20,7 +20,7 @@ export class Comp extends Base {
     readonly fullPropName!: any
 
 }
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 describe('decorator Prop',
     () => {
@@ -28,7 +28,7 @@ describe('decorator Prop',
             expect('object').to.equal(typeof CompContext?.props?.propName)
             expect(true).to.equal(isEmptyObject(CompContext.props.propName))
         })
-        it('full option',()=>{
+        it('full option', () => {
             expect('object').to.equal(typeof CompContext?.props?.fullPropName)
             expect(Boolean).to.equal(CompContext.props.fullPropName.type)
             expect(true).to.equal(CompContext.props.fullPropName.required)

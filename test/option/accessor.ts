@@ -2,10 +2,10 @@
 import { mount } from '@vue/test-utils'
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Base ,Vanilla} from '../../dist'
+import { Component, Base, Vanilla, toNative } from '../../dist'
 
 @Component
-export class Comp extends Base {
+class Comp extends Base {
 
     @Vanilla
     get getData() {
@@ -19,7 +19,7 @@ export class Comp extends Base {
 
 }
 
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 
 describe('decorator computed',
@@ -27,9 +27,9 @@ describe('decorator computed',
         const wrapper = mount(CompContext)
         const vm = wrapper.vm
         it('default', () => {
-            expect('function').to.equal(typeof Object.getOwnPropertyDescriptor(vm,'getData')!.get)
-            expect('function').to.equal(typeof Object.getOwnPropertyDescriptor(vm,'setData')!.set)
-     
+            expect('function').to.equal(typeof Object.getOwnPropertyDescriptor(vm, 'getData')!.get)
+            expect('function').to.equal(typeof Object.getOwnPropertyDescriptor(vm, 'setData')!.set)
+
         })
     }
 )

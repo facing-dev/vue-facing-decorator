@@ -1,10 +1,10 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Inject, Base } from '../../dist'
+import { Component, Inject, Base, toNative } from '../../dist'
 import { isEmptyObject } from '../utils'
 @Component
-export class Comp extends Base {
+class Comp extends Base {
     @Inject()
     readonly defaultInjectName!: any
 
@@ -15,7 +15,7 @@ export class Comp extends Base {
     readonly fullInjectName!: any
 
 }
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 describe('decorator Inject',
     () => {

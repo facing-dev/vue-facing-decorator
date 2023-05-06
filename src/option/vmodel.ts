@@ -2,7 +2,7 @@ import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 import { decorator as PropsDecorator, type PropsConfig } from './props'
-
+import { compatibleMemberDecorator } from '../deco3/utils'
 export type VModelConfig = PropsConfig & {
     name?: string
 }
@@ -20,7 +20,6 @@ export const decorator = optoinNullableMemberDecorator(function (proto: any, nam
     const map = slot.obtainMap('v-model')
     map.set(name, option)
 })
-
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.computed ??= {}

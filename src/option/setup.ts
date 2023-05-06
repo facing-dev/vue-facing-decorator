@@ -1,3 +1,4 @@
+import { compatibleMemberDecorator} from '../deco3/utils'
 import type { OptionSetupFunction } from '../component'
 import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
@@ -8,14 +9,13 @@ export type SetupConfig = {
 }
 
 export function decorator(setupFunction: OptionSetupFunction) {
-    return function (proto: any, name: string) {
+    return compatibleMemberDecorator(function (proto: any, name: string) {
         const slot = obtainSlot(proto)
         const map = slot.obtainMap('setup')
         map.set(name, {
             setupFunction
         })
-    }
-
+    })
 }
 
 const isPromise = (v: any): v is Promise<any> => v instanceof Promise
@@ -28,10 +28,13 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
         return
     }
     const setup: OptionSetupFunction = function (props, ctx) {
+        
         const setupData: Record<string, any> = {};
         let promises: Promise<any>[] | null = null;
         for (const name of map.keys()) {
+
             const setupState = map.get(name)!.setupFunction(props, ctx)
+
             if (isPromise(setupState)) {
                 promises ??= []
                 promises.push(setupState.then((v) => {
@@ -49,5 +52,6 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
             return setupData
         }
     }
+
     optionBuilder.setup = setup
 }

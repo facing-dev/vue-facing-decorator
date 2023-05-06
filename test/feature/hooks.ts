@@ -1,20 +1,20 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Base, Hook } from '../../dist'
+import { Component, Base, Hook, toNative } from '../../dist'
 
 @Component
-export class Comp extends Base {
+class Comp extends Base {
     mounted() {
         return 'mounted test value'
     }
     @Hook
-    testHook(){
+    testHook() {
         return 'testHook test value'
     }
 
 }
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 describe('feature hooks',
     () => {

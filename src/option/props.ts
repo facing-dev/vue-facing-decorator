@@ -1,7 +1,7 @@
 import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
-
+import { compatibleMemberDecorator } from '../deco3/utils'
 export interface PropsConfig {
     type?: any
     required?: boolean

@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, ComponentBase, Base } from '../../dist'
+import { Component, ComponentBase, Base ,toNative} from '../../dist'
 
 class Comp1Sup extends Base {
     method1Sup() {
@@ -43,7 +43,7 @@ class Comp3 extends Comp3Sup {
     }
 }
 
-const Comp3Context = Comp3 as any
+const Comp3Context = toNative(Comp3) as any
 
 describe('feature extends',
     () => {

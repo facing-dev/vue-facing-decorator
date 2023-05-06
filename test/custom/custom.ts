@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Base, createDecorator } from '../../dist'
+import { Component, Base, createDecorator,toNative } from '../../dist'
 
 function CustomDeco(param?: String) {
     return createDecorator(function (options: any, key: string) {
@@ -17,7 +17,7 @@ function CustomDeco(param?: String) {
 }
 
 @Component
-export class Comp extends Base {
+class Comp extends Base {
     @CustomDeco('DecoParam')
     method(this: any, param: string) {
         this.contextKey = 'contextValue'
@@ -25,7 +25,7 @@ export class Comp extends Base {
     }
 }
 
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 describe('create decorator',
     () => {

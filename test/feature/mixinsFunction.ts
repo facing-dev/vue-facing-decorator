@@ -1,11 +1,11 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, ComponentBase, Vue, mixins } from '../../dist'
+import { Component, ComponentBase, Vue, mixins, toNative } from '../../dist'
 
 @ComponentBase
 class A extends Vue {
-    methodA(){
+    methodA() {
         return 'methodAValue'
     }
 }
@@ -13,17 +13,17 @@ class A extends Vue {
 @ComponentBase
 class B extends Vue {
 
-    methodB(){
+    methodB() {
         return 'methodBValue'
     }
 }
 
 @Component
-class Comp extends mixins(A,B){
+class Comp extends mixins(A, B) {
 
 }
 
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 
 

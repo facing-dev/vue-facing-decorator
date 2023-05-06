@@ -35,10 +35,14 @@ export const Base = class {
         const props = optionBuilder.props
         if (props) {
             Object.keys(props).forEach(key => {
-                (this as any)[key] = vueInstance[key]
+                (this as any)[key] = vueInstance[key];
             })
         }
+
     }
+
 } as VueCons
 
 export const Vue = Base
+
+export { toNative } from './component'

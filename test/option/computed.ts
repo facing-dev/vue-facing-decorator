@@ -1,20 +1,20 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Base } from '../../dist'
+import { Component, Base, toNative } from '../../dist'
 
 @Component
-export class Comp extends Base {
-    get computedData(){
+class Comp extends Base {
+    get computedData() {
         return 'computedData value'
     }
 
-    set computedData(v:any){
+    set computedData(v: any) {
 
     }
 
 }
-const CompContext = Comp as any
+const CompContext = toNative(Comp) as any
 
 describe('decorator computed',
     () => {

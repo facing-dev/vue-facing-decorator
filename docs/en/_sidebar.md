@@ -24,3 +24,5 @@
     - [Custom Decorator](/en/custom/custom.md)
 - Compatibility
     - [reflect-metadata](/en/compatibility/reflect-metadata/reflect-metadata.md)
+- Next version
+    - [Next version](/en/next-version/next-version.md)

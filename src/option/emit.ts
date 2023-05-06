@@ -1,6 +1,7 @@
 import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
+import { compatibleMemberDecorator } from '../deco3/utils'
 export type EmitConfig = null | string
 
 export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, key?: string) {

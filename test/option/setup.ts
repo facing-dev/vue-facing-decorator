@@ -4,12 +4,11 @@ import { mount } from '@vue/test-utils'
 import { expect } from 'chai'
 import { mountSuspense } from '../utils'
 import 'mocha'
-import { Component, Base, Setup } from '../../dist'
+import { Component, Base, Setup, toNative } from '../../dist'
 
 const SETUP_AXIOM = 'setup is working to allow composition API usage'
 const DATA_AXIOM = 'data is injected into the template'
 const injectionKey = Symbol('injection test key')
-
 function useInjectedValue() {
     return inject(injectionKey) as string
 }
@@ -17,23 +16,22 @@ function useInjectedValue() {
 @Component({
     render() { return [] }
 })
-export class SyncComp extends Base {
+class SyncComp extends Base {
     @Setup(useInjectedValue)
     injectedValue !: string
 
 }
 
-const SyncCompContext = SyncComp as any
-
+const SyncCompContext = toNative(SyncComp) as any
 @Component({
     render() { return [] },
-    setup(){
+    setup() {
         return {
-            componentSetup:'componentSetupV'
+            componentSetup: 'componentSetupV'
         }
     }
 })
-export class AsyncComp extends Base {
+class AsyncComp extends Base {
     @Setup(() => {
         const value = useInjectedValue()
         return new Promise<string>((resolve) => {
@@ -45,7 +43,7 @@ export class AsyncComp extends Base {
     injectedValue !: string
 }
 
-const AsyncCompContext = AsyncComp as any
+const AsyncCompContext = toNative(AsyncComp) as any
 
 describe('setup function', () => {
     describe('synchronous use', () => {

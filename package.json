@@ -1,6 +1,6 @@
 {
   "name": "vue-facing-decorator",
-  "version": "2.1.20",
+  "version": "3.0.0",
   "description": "Vue typescript class and decorator based component.",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
@@ -17,7 +17,9 @@
   ],
   "scripts": {
     "test-build": "npm run build && npm run test",
-    "test": "mocha -r ts-node/register test/test.ts",
+    "test":"npm run test-stage2 && npm run test-stage3",
+    "test-stage2": "env TS_NODE_COMPILER_OPTIONS='{\"experimentalDecorators\": true }' mocha -r ts-node/register test/test.ts",
+    "test-stage3": "env TS_NODE_COMPILER_OPTIONS='{\"experimentalDecorators\": false }' mocha -r ts-node/register test/test.ts",
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "./node_modules/.bin/tsc",
     "build:esm": "./node_modules/.bin/tsc -outDir dist/esm -module ES6",
@@ -27,7 +29,6 @@
   },
   "author": "",
   "license": "MIT",
-  "types": "dist/index.d.ts",
   "peerDependencies": {
     "vue": "^3.0.0"
   },
@@ -52,5 +53,4 @@
     "type": "git",
     "url": "git@github.com:facing-dev/vue-facing-decorator.git"
   }
-
 }
