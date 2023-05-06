@@ -33,12 +33,16 @@ class Slot {
     }
     names: Map<string, SlotMapTypes[keyof SlotMapTypes]> = new Map()
     obtainMap<T extends keyof SlotMapTypes>(name: T): SlotMapTypes[T] {
-        let map = this.names.get(name)
+        let map = this.getMap(name)
         if (!map) {
             map = new Map()
             this.names.set(name, map)
         }
         return map as SlotMapTypes[T]
+    }
+    getMap<T extends keyof SlotMapTypes>(name: T) {
+        const map = this.names.get(name)
+        return map as SlotMapTypes[T] | undefined
     }
     inComponent = false
     cachedVueComponent: any = null
@@ -82,27 +86,16 @@ export function makeObject(names: string[], obj: any) {
     }, {})
 }
 
-// export function toBaseReverse(obj: any) {
-//     const arr: any[] = []
-//     let curr = obj
-//     while (curr.constructor !== Base) {
-//         arr.unshift(curr)
-//         curr = Object.getPrototypeOf(curr)
-//     }
-//     return arr
-// }
-
 export function toComponentReverse(obj: any) {
     const arr: any[] = []
     let curr = obj
-
     do {
-
         arr.unshift(curr)
         curr = Object.getPrototypeOf(curr)
     } while (curr.constructor !== Base && !getSlot(curr))
     return arr
 }
+
 export function getSuperSlot(obj: any) {
     let curr = Object.getPrototypeOf(obj)
 
@@ -116,46 +109,15 @@ export function getSuperSlot(obj: any) {
     return null
 }
 
-// export function extendSlotPath(obj: any): {
-//     constructor: any
-// }[] {
-//     const arr: any[] = []
-//     let curr = obj
-
-//     while (curr.constructor !== Base) {
-//         if (getSlot(curr)) {
-//             arr.push(curr)
-//         }
-//         curr = Object.getPrototypeOf(curr)
-//     }
-//     return arr
-// }
-// export function 
-// export function collect<>(slot: Slot,mapName:keyof SlotMapTypes,) {
-//     let currSlot: Slot | null = slot
-//     while (currSlot != null) {
-//         for (const mapName of currSlot.names.keys()) {
-//             if (['watch', 'hooks', 'setup'].includes(mapName)) {
-//                 continue
-//             }
-//             const map = currSlot.names.get(mapName)!
-//             if (map.has(name)) {
-//                 return false
-//             }
-//         }
-//         currSlot = getSuperSlot(currSlot.master)
-//     }
-
-//     return true
-// }
-
-export function excludeNames(names: string[], slot: Slot) {
+/**
+ * Exclude decorated names by a filter
+ */
+export function excludeNames(names: string[], slot: Slot, filter?: (mapName: string) => boolean) {
     return names.filter(name => {
         let currSlot: Slot | null = slot
         while (currSlot != null) {
             for (const mapName of currSlot.names.keys()) {
-
-                if (['watch', 'hooks', 'setup', 'emits'].includes(mapName)) {
+                if (filter && !filter(mapName)) {
                     continue
                 }
                 if (mapName === 'customDecorator') {
@@ -163,7 +125,7 @@ export function excludeNames(names: string[], slot: Slot) {
                     if (map.has(name)) {
                         if (!map.get(name)!.preserve) {
                             return false
-                        }else{
+                        } else {
                             continue
                         }
                     }
@@ -180,6 +142,9 @@ export function excludeNames(names: string[], slot: Slot) {
     })
 }
 
+/**
+ * Get own properties by a filter
+ */
 export function getValidNames(obj: any, filter: (des: PropertyDescriptor, name: string) => boolean) {
     const descriptors = Object.getOwnPropertyDescriptors(obj)
     return Object.keys(descriptors).filter(name => filter(descriptors[name], name))

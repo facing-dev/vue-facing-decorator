@@ -30,16 +30,10 @@ function ComponentOption(cons: Cons, extend?: any) {
     optionInject(cons, optionBuilder)
     optionEmit(cons, optionBuilder)
     optionRef(cons, optionBuilder)//after Computed
-    optionMethodsAndHooks(cons, optionBuilder)//after Ref Computed
     optionAccessor(cons, optionBuilder)
-
-
-    const setupFunction: OptionSetupFunction | undefined = optionBuilder.setup ? function (props, ctx) {
-        return optionBuilder.setup!(props, ctx)
-    } : undefined
-
+    optionMethodsAndHooks(cons, optionBuilder)//the last one
     const raw = {
-        setup: setupFunction,
+        setup: optionBuilder.setup,
         data() {
             delete optionBuilder.data
             optionData(cons, optionBuilder, this)
@@ -71,7 +65,9 @@ type ComponentOption = {
     mixins?: any[]
     setup?: ComponentSetupFunction
 }
+
 type ComponentConsOption = Cons | ComponentOption
+
 function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     const option = ComponentOption(cons, extend)
     const slot = obtainSlot(cons.prototype)
@@ -82,21 +78,21 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
         option[name] = arg[name as keyof ComponentOption]
         return option
     }, option)
+
+    //apply event emits
     let emits = Array.from(slot.obtainMap('emits').keys())
     if (Array.isArray(arg.emits)) {
         emits = Array.from(new Set([...emits, ...arg.emits]))
     }
     option.emits = emits
 
-    arg.setup ??= function () { return {} }
-
+    //merge setup function
     if (!option.setup) {
-
         option.setup = arg.setup
     } else {
 
         const oldSetup: OptionSetupFunction = option.setup
-        const newSetup: ComponentSetupFunction = arg.setup
+        const newSetup: ComponentSetupFunction = arg.setup ?? function () { return {} }
 
         const setup: ComponentSetupFunction = function (props, ctx) {
             const newRet = newSetup(props, ctx)
@@ -116,16 +112,24 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
         option.setup = setup
     }
 
-    slot.obtainMap('customDecorator').forEach((v) => {
-        v.creator.apply({}, [option, v.key])
-    })
+    //custom decorator
+    const map = slot.getMap('customDecorator')
+    if (map && map.size > 0) {
+        map.forEach((v) => {
+            v.creator.apply({}, [option, v.key])
+        })
+    }
 
+    //shallow merge options
     if (arg.options) {
         Object.assign(option, arg.options)
     }
+
+    //apply modifier
     if (arg.modifier) {
         arg.modifier(option)
     }
+
     return defineComponent(option)
 }
 function build(cons: Cons, option: ComponentOption) {

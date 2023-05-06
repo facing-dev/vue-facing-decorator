@@ -1,4 +1,4 @@
-import { compatibleMemberDecorator} from '../deco3/utils'
+import { compatibleMemberDecorator } from '../deco3/utils'
 import type { OptionSetupFunction } from '../component'
 import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
@@ -19,16 +19,15 @@ export function decorator(setupFunction: OptionSetupFunction) {
 }
 
 const isPromise = (v: any): v is Promise<any> => v instanceof Promise
-//(v: any) => typeof v === 'object' && typeof v.then === 'function'
 
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
-    const map = slot.obtainMap('setup')
-    if (map.size === 0) {
+    const map = slot.getMap('setup')
+    if (!map || map.size === 0) {
         return
     }
     const setup: OptionSetupFunction = function (props, ctx) {
-        
+
         const setupData: Record<string, any> = {};
         let promises: Promise<any>[] | null = null;
         for (const name of map.keys()) {

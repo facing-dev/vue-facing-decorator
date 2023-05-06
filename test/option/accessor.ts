@@ -22,7 +22,7 @@ class Comp extends Base {
 const CompContext = toNative(Comp) as any
 
 
-describe('decorator computed',
+describe('decorator accessor',
     () => {
         const wrapper = mount(CompContext)
         const vm = wrapper.vm

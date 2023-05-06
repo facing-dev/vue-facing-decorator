@@ -19,12 +19,14 @@ export const decorator = optoinNullableMemberDecorator(function (proto: any, nam
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.inject ??= {}
     const slot = obtainSlot(cons.prototype)
-    const names = slot.obtainMap('inject')
-    if (names) {
-        names.forEach((value, name) => {
-            optionBuilder.inject![name] = value
-        })
+    const names = slot.getMap('inject')
+    if (!names || names.size === 0) {
+        return
     }
+
+    names.forEach((value, name) => {
+        optionBuilder.inject![name] = value
+    })
 
 }
 
