@@ -39,6 +39,7 @@ function ComponentOption(cons: Cons, extend?: any) {
         return optionBuilder.setup!(props, ctx)
     } : undefined
     const raw = {
+        name: cons.name,
         setup: setupFunction,
         data() {
             delete optionBuilder.data
