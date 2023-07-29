@@ -58,6 +58,12 @@ Se você utiliza SFC ( Single File components ). O método render será aplicado
 
 [](./code-option-render.ts ':include :type=code typescript')
 
+### setup
+
+Assim fica a propriedade `setup` do vue options API, mas não pode retornar uma função render. 
+
+[](./code-option-setup.ts ':include :type=code typescript')
+
 ### template
 
 Assim fica a propriedade `template` do vue options API.
