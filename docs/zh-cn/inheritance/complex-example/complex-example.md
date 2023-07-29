@@ -2,7 +2,7 @@
 
 思考下面的代码：
 
-[](./code-example.ts ':include :type=code typescript')
+[](../../../en/inheritance/complex-example/code-example.ts ':include :type=code typescript')
 
 这里有三个组件`Comp`(包含 `CompSper`), `SuperComp`(包含 `SuperCompSuper`) 和 `VueNativeComponent`。
 

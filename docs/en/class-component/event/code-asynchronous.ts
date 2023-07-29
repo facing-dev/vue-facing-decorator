@@ -1,5 +1,5 @@
 
-import { Emit, Component, Vue } from 'vue-facing-decorator'
+import { Emit, Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 Vue options API
@@ -18,7 +18,7 @@ Vue options API
 */
 
 @Component
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
     @Emit
     triggerAsyncEvent() {
         return new Promise((resolver) => {
@@ -28,3 +28,5 @@ export default class MyComponent extends Vue {
         })
     }
 }
+
+export default toNative(MyComponent)

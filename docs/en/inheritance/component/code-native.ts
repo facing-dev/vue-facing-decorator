@@ -1,5 +1,5 @@
 
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue, toNative } from 'vue-facing-decorator'
 import { defineComponent } from 'vue'
 
 const VueNativeComponent = defineComponent({
@@ -26,7 +26,7 @@ interface VueNativeComponentContext {
     name: "MyComponent",
     mixins: [VueNativeComponent]
 })
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
     get VueNativeComponentContext(): VueNativeComponentContext {
         return this as any
     }
@@ -35,3 +35,5 @@ export default class MyComponent extends Vue {
         this.VueNativeComponentContext.nativeMethod()
     }
 }
+
+export default toNative(MyComponent)

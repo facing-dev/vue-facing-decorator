@@ -74,7 +74,7 @@ This is the `template` in vue options API.
 
 ### mixins
 
-This is the `mixins` in vue options API.
+This is the `mixins` in vue options API. It only accepts native vue component(if you want to pass a class component, use `toNative` to transform it).
 
 [](./code-option-mixins.ts ':include :type=code typescript')
 

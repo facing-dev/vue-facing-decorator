@@ -1,5 +1,5 @@
 
-import { Component, Vue, Hook } from 'vue-facing-decorator'
+import { Component, Vue, Hook, toNative } from 'vue-facing-decorator'
 
 /*
 Vue options API
@@ -9,7 +9,9 @@ Vue options API
 */
 
 @Component
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
     @Hook
     myHook() { }
 }
+
+export default toNative(MyComponent)

@@ -1,5 +1,5 @@
 
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 Vue options API
@@ -18,9 +18,11 @@ Vue options API
 */
 
 @Component
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
     foo = ''
     set setter(bar: string) {
         this.foo = bar
     }
 }
+
+export default toNative(MyComponent)

@@ -5,7 +5,7 @@ import { useRouter, Router } from 'vue-router'
 @Component
 class MyComponent extends Vue {
 
-    @Setup((props,ctx)=>useRouter())
+    @Setup((props, ctx) => useRouter())
     router!: Router
 
     mounted() {

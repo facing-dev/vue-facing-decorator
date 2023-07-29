@@ -1,4 +1,4 @@
-import { Component, ComponentBase, Vue, mixins } from 'vue-facing-decorator'
+import { Component, Vue, mixins, toNative } from 'vue-facing-decorator'
 
 /*
 Vue options API
@@ -13,14 +13,14 @@ Vue options API
     }
 }
 */
-@ComponentBase({
+@Component({
     name: "ComponentA"
 })
 class ComponentA extends Vue {
 
 }
 
-@ComponentBase({
+@Component({
     name: "ComponentB"
 })
 class ComponentB extends Vue {
@@ -30,6 +30,8 @@ class ComponentB extends Vue {
 @Component({
     name: "MyComponent"
 })
-export default class MyComponent extends mixins(ComponentA,ComponentB) {
+class MyComponent extends mixins(ComponentA, ComponentB) {
 
 }
+
+export default toNative(MyComponent)

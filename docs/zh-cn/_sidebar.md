@@ -22,5 +22,3 @@
     - [属性类型](/zh-cn/tsx/attribute-types/attribute-types.md)
 - 自定义装饰器
     - [自定义装饰器](/zh-cn/custom/custom.md)
-- 兼容性
-    - [reflect-metadata](/zh-cn/compatibility/reflect-metadata/reflect-metadata.md)

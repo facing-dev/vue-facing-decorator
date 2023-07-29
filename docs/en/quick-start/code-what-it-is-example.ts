@@ -1,6 +1,6 @@
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue, toNative } from 'vue-facing-decorator'
 @Component
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
 
     //This is a vue reactive property.
     text = 'Example code'
@@ -15,3 +15,6 @@ export default class MyComponent extends Vue {
         this.method()
     }
 }
+
+//Transform class component to vue native component
+export default toNative(MyComponent)

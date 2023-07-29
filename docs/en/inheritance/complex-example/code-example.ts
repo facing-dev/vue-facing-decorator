@@ -1,4 +1,4 @@
-import { Component, ComponentBase, Vue } from 'vue-facing-decorator'
+import { Component, Vue, toNative } from 'vue-facing-decorator'
 import { defineComponent } from 'vue'
 
 const VueNativeComponent = defineComponent({
@@ -9,7 +9,7 @@ class SuperCompSuper extends Vue {
 
 }
 
-@ComponentBase
+@Component
 class SuperComp extends SuperCompSuper {
 
 }
@@ -21,9 +21,11 @@ class CompSuper extends SuperComp {
 @Component({
     mixins: [VueNativeComponent]
 })
-export default class Comp extends CompSuper {
+class Comp extends CompSuper {
 
 }
+
+export default toNative(Comp)
 
 /*
 Vue options API

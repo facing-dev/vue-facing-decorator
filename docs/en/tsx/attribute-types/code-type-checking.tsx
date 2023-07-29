@@ -1,4 +1,4 @@
-import { TSX, Prop, Component, Vue } from 'vue-facing-decorator'
+import { TSX, Prop, Component, Vue, toNative } from 'vue-facing-decorator'
 
 interface Props {
     propString: string
@@ -12,6 +12,8 @@ export default class MyComponent extends TSX<Props>()(Vue) implements Props {
     propString!: string
 }
 
+const Comp = toNative(MyComponent)
+
 function render() {
-    return <MyComponent propString='foobar'></MyComponent>
+    return <Comp propString='foobar'></Comp>
 }

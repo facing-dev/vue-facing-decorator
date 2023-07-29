@@ -1,4 +1,4 @@
-import { Model, Component, Vue } from 'vue-facing-decorator'
+import { Model, Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 Vue options API
@@ -25,7 +25,9 @@ In other components:
 */
 
 @Component
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
     @Model
     valueAgent!: string
 }
+
+export default toNative(MyComponent)

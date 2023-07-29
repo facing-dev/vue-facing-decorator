@@ -1,21 +1,28 @@
 
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue, toNative } from 'vue-facing-decorator'
 import { defineComponent } from 'vue'
 
 const VueComponent = defineComponent({
 
 })
 
+@Component
+class ClassComponent extends Vue {
+
+}
+
 /*
 Vue options component
 {
-    mixins:[VueComponent]
+    mixins:[VueComponent, nativeClassComponent]
 }
 */
 
 @Component({
-    mixins: [VueComponent]
+    mixins: [VueComponent, toNative(ClassComponent)]
 })
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
 
 }
+
+export default toNative(MyComponent)

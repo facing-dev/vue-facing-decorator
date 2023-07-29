@@ -4,7 +4,7 @@
 
 简单例子:
 
-[](./code-what-it-is-example.ts ':include :type=code typescript')
+[](../../en/quick-start/code-what-it-is-example.ts ':include :type=code typescript')
 
 ## 安装
 
@@ -30,14 +30,14 @@ npm install --save vue-facing-decorator
 
 类组件必须继承这个项目的`Vue`基类并且应用这个项目的`Component`装饰器。
 
-[](./code-how-to-use-simplest-class-component.ts ':include :type=code typescript')
+[](../../en/quick-start/code-how-to-use-simplest-class-component.ts ':include :type=code typescript')
 
 
 ### 在vue SFC中使用
 
 在SFC中(`.vue` 文件)，使用类组件作为默认导出的内容。
 
-[](./code-how-to-use-sfc.vue ':include :type=code text')
+[](../../en/quick-start/code-how-to-use-sfc.vue ':include :type=code text')
 
 > ！！！不要使用 composition api `<script setup lang="ts">`。
 
@@ -47,8 +47,14 @@ npm install --save vue-facing-decorator
 
 > 像往常一样在通过webpack来管理CSS样式。
 
-[](./code-separated-files-tsx/Comp.render.tsx ':include :type=code tsx')
+[](../../en/quick-start/code-separated-files-tsx/Comp.render.tsx ':include :type=code tsx')
 
-[](./code-separated-files-tsx/Comp.ts ':include :type=code typescript')
+[](../../en/quick-start/code-separated-files-tsx/Comp.ts ':include :type=code typescript')
 
-[](./code-separated-files-tsx/style.css ':include :type=code css')
+[](../../en/quick-start/code-separated-files-tsx/style.css ':include :type=code css')
+
+### 使用 `toNative`
+
+类组件不能被VUE直接使用，所以我们需要使用`toNative`来将他们转换为VUE原生组件。你必须在VUE的原始API中使用转换后的组件（也就是`toNative`的返回值）。
+
+[](../../en/quick-start/code-use-toNative.ts ':include :type=code tsx')

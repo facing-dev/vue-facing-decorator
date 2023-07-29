@@ -52,3 +52,9 @@ If you don't want to use Single-File components, this is another choice. It use 
 [](./code-separated-files-tsx/Comp.ts ':include :type=code typescript')
 
 [](./code-separated-files-tsx/style.css ':include :type=code css')
+
+### Use `toNative`
+
+Class components couldn't be used by vue immediately, so we need to use `ToNative` to transform them into native vue options API components. You MUST pass the transformed components(returned by `toNative`) into vanilla vue APIs.
+
+[](./code-use-toNative.ts ':include :type=code typescript')

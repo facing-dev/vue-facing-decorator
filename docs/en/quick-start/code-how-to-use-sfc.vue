@@ -11,9 +11,10 @@ export default defineComponent({});
 */
 
 //class component
-import { Component, Vue } from "vue-facing-decorator";
+import { Component, Vue, toNative } from "vue-facing-decorator";
 @Component
-export default class MyComponent extends Vue {}
+class MyComponent extends Vue {}
+export default toNative(MyComponent)
 </script>
 <style>
 </style>

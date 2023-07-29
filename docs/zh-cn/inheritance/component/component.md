@@ -6,7 +6,7 @@
 
 思考代码：
 
-[](./code-example.ts ':include :type=code typescript')
+[](../../../en/inheritance/component/code-example.ts ':include :type=code typescript')
 
 这里有两个组件：`MyComponent`和`SuperComponent`。继承是通过vue `extends`实现的。
 
@@ -14,7 +14,7 @@
 
 使用 `mixins` 函数来继承多个通过 `ComponentBase` 装饰的组件。
 
-[](./code-mixins-function.ts ':include :type=code typescript')
+[](../../../en/inheritance/component/code-mixins-function.ts ':include :type=code typescript')
 
 ## 关于vue原生组件
 
@@ -22,7 +22,7 @@
 
 思考代码：
 
-[](./code-native.ts ':include :type=code typescript')
+[](../../../en/inheritance/component/code-native.ts ':include :type=code typescript')
 
 `VueNativeComponent`是vue option api原生组件，它被混入了`MyComponent`。`VueNativeComponent`的类型信息丢失了，所以我们构建了一个类型上下文`VueNativeComponentContext`。
 

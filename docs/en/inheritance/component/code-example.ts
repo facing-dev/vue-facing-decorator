@@ -1,5 +1,5 @@
 
-import { Component, ComponentBase, Vue } from 'vue-facing-decorator'
+import { Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 Vue options API
@@ -10,7 +10,7 @@ Vue options API
     }
 }
 */
-@ComponentBase({
+@Component({
     name: "SuperComponent"
 })
 class SuperComponent extends Vue {
@@ -20,6 +20,8 @@ class SuperComponent extends Vue {
 @Component({
     name: "MyComponent"
 })
-export default class MyComponent extends SuperComponent {
+class MyComponent extends SuperComponent {
 
 }
+
+export default toNative(MyComponent)

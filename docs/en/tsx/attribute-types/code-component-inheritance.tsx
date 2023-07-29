@@ -1,4 +1,4 @@
-import { TSX, Prop, Emit, Component, ComponentBase, Vue } from 'vue-facing-decorator'
+import { TSX, Prop, Emit, Component, Vue, toNative } from 'vue-facing-decorator'
 
 interface BaseProps {
     propNumber: number
@@ -8,7 +8,7 @@ interface BaseEvents {
     baseEvent: Function
 }
 
-@ComponentBase
+@Component
 class MyBaseComponent extends TSX<BaseProps, BaseEvents>()(Vue) implements BaseProps {
     @Prop({
         required: true
@@ -29,7 +29,7 @@ interface Events {
 }
 
 @Component
-export default class MyComponent extends TSX<Props, Events>()(MyBaseComponent) implements Props {
+class MyComponent extends TSX<Props, Events>()(MyBaseComponent) implements Props {
     @Prop({
         required: true
     })
@@ -40,6 +40,8 @@ export default class MyComponent extends TSX<Props, Events>()(MyBaseComponent) i
     }
 }
 
+const Comp = toNative(MyComponent)
+
 function render() {
-    return <MyComponent propString='foobar' propNumber={1} onBaseEvent={() => { }} onEvent={() => { }}></MyComponent>
+    return <Comp propString='foobar' propNumber={1} onBaseEvent={() => { }} onEvent={() => { }}></Comp>
 }

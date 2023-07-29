@@ -4,4 +4,4 @@
 
 > 当然，这些属性是可响应的。
 
-[](./code-usage.ts ':include :type=code typescript')
+[](../../../en/class-component/property/code-usage.ts ':include :type=code typescript')

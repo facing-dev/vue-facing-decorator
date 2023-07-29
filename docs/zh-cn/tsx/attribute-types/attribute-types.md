@@ -16,19 +16,19 @@
 
 > `TSX<Props,Events>`后有两个`()`。
 
-[](./code-usage.tsx ':include :type=code tsx')
+[](../../../en//tsx/attribute-types/code-usage.tsx ':include :type=code tsx')
 
 ## 组件内属性类型检查
 
 你可以通过`implements`来检查组件是否实现了属性。
 
-[](./code-type-checking.tsx ':include :type=code tsx')
+[](../../../en//tsx/attribute-types/code-type-checking.tsx ':include :type=code tsx')
 
 ## 组件继承
 
 TSX属性支持组件继承。
 
-[](./code-component-inheritance.tsx ':include :type=code tsx')
+[](../../../en//tsx/attribute-types/code-component-inheritance.tsx ':include :type=code tsx')
 
 
 

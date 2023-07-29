@@ -22,7 +22,7 @@
     - [Attribute types](/en/tsx/attribute-types/attribute-types.md)
 - Custom Decorator
     - [Custom Decorator](/en/custom/custom.md)
-- Compatibility
-    - [reflect-metadata](/en/compatibility/reflect-metadata/reflect-metadata.md)
-- Next version
-    - [Next version](/en/next-version/next-version.md)
+- Migrate from v2
+    - [Migrate from v2](/en/migrate-from-v2/migrate-from-v2.md)
+- Stage3 decorators
+    - [Stage3 decorators](/en/stage3-decorators/stage3-decorators.md)

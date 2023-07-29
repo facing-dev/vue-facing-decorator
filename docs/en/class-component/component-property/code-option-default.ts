@@ -1,5 +1,5 @@
 
-import { Prop, Component, Vue } from 'vue-facing-decorator'
+import { Prop, Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 
@@ -14,9 +14,11 @@ Vue options API
 */
 
 @Component
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
     @Prop({
         default: 'foo'
     })
     p!: string
 }
+
+export default toNative(MyComponent)

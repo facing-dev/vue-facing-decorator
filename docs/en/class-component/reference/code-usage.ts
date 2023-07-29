@@ -1,5 +1,5 @@
 
-import { Ref, Component, Vue } from 'vue-facing-decorator'
+import { Ref, Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 
@@ -10,7 +10,9 @@ import { Ref, Component, Vue } from 'vue-facing-decorator'
 */
 
 @Component
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
     @Ref
     readonly refEl!: HTMLDivElement
 }
+
+export default toNative(MyComponent)

@@ -1,5 +1,5 @@
 
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 Vue options API
@@ -11,8 +11,10 @@ Vue options API
 */
 
 @Component
-export default class MyComponent extends Vue {
-    mounted(){
+class MyComponent extends Vue {
+    mounted() {
 
     }
 }
+
+export default toNative(MyComponent)

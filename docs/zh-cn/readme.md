@@ -19,5 +19,3 @@
 欢迎讨论和贡献代码。
 
 [开始 > ](/zh-cn/quick-start/quick-start.md)
-
-# 捐献

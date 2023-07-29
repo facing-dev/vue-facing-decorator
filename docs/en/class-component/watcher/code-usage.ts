@@ -1,5 +1,5 @@
 
-import { Watch, Component, Vue } from 'vue-facing-decorator'
+import { Watch, Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 
@@ -31,7 +31,7 @@ Vue options API
 */
 
 @Component
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
     property = "value"
 
     @Watch("property")
@@ -48,3 +48,5 @@ export default class MyComponent extends Vue {
 
     }
 }
+
+export default toNative(MyComponent)

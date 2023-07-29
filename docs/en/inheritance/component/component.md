@@ -1,7 +1,5 @@
 ## Usage
 
-Use decorator `ComponentBase` to define a super component. It's parameter is same to decorator `Component`'s.
-
 Components which `vue-facing-decorator` generated can inherit another directly.
 
 Consider code:
@@ -12,7 +10,7 @@ There are two components: `MyComponent` and `SuperComponent`. The inheritance is
 
 ## Extends multiple components
 
-Use `mixins` function to extends multiple components decorated by `ComponentBase`.
+Use `mixins` function to extends multiple components.
 
 [](./code-mixins-function.ts ':include :type=code typescript')
 

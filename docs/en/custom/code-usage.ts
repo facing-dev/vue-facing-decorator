@@ -1,4 +1,4 @@
-import { createDecorator, Component, Vue } from 'vue-facing-decorator'
+import { createDecorator, Component, Vue, toNative } from 'vue-facing-decorator'
 
 function Log(prefix: string) {
     return createDecorator(function (options, key) {
@@ -13,9 +13,11 @@ function Log(prefix: string) {
 }
 
 @Component
-export default class Comp extends Vue {
+class Comp extends Vue {
     @Log('prefix')
     method() {
 
     }
 }
+
+export default toNative(Comp)

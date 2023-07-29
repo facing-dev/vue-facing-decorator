@@ -1,5 +1,5 @@
 
-import { Inject, Component, Vue } from 'vue-facing-decorator'
+import { Inject, Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 Vue options API
@@ -13,9 +13,11 @@ Vue options API
 */
 
 @Component
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
     @Inject({
-        from:'name'
+        from: 'name'
     })
     readonly nameAlias!: string
 }
+
+export default toNative(MyComponent)

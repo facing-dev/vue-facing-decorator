@@ -4,7 +4,7 @@
 
 > 这些钩子必须定义为类的方法，而不能是属性。
 
-[](./code-usage.ts ':include :type=code typescript')
+[](../../../en/class-component/hooks/code-usage.ts ':include :type=code typescript')
 
 ## 内部钩子名称列表
 
@@ -36,5 +36,5 @@
 
 > 例如`vue-router`中的钩子。
 
-[](./code-for-other-names.ts ':include :type=code typescript')
+[](../../../en/class-component/hooks/code-for-other-names.ts ':include :type=code typescript')
 

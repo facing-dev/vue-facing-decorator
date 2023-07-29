@@ -8,4 +8,4 @@
 1. 生成的Vue options组件，你可以修改这个参数来实现你想实现的功能。
 2. 装饰器所装饰的类属性（或方法）名。
 
-[](../../en//custom/code-usage.ts ':include :type=code typescript')
+[](../../en/custom/code-usage.ts ':include :type=code typescript')

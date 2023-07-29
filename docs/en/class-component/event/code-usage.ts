@@ -1,5 +1,5 @@
 
-import { Emit, Component, Vue } from 'vue-facing-decorator'
+import { Emit, Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 Vue options API
@@ -16,14 +16,16 @@ Vue options API
 */
 
 @Component
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
     @Emit
-    triggerMethodNameEvent(){
+    triggerMethodNameEvent() {
         return 'triggerMethodNameEvent value'
     }
 
     @Emit('SpecifiedName')
-    triggerSpecifiedNameEvent(){
+    triggerSpecifiedNameEvent() {
         return 'triggerSpecifiedNameEvent value'
     }
 }
+
+export default toNative(MyComponent)

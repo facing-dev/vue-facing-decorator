@@ -2,7 +2,7 @@
 
 使用装饰器`Prop`来定义vue`props`中的一个属性。
 
-[](./code-usage.ts ':include :type=code typescript')
+[](../../../en/class-component/component-property/code-usage.ts ':include :type=code typescript')
 
 ## 选项
 
@@ -10,22 +10,22 @@
 
 vue `props`中的`default`。
 
-[](./code-option-default.ts ':include :type=code typescript')
+[](../../../en/class-component/component-property/code-option-default.ts ':include :type=code typescript')
 
 ### required
 
 vue `props`中的`required`。
 
-[](./code-option-required.ts ':include :type=code typescript')
+[](../../../en/class-component/component-property/code-option-required.ts ':include :type=code typescript')
 
 ### type
 
 vue `props`中的`type`。
 
-[](./code-option-type.ts ':include :type=code typescript')
+[](../../../en/class-component/component-property/code-option-type.ts ':include :type=code typescript')
 
 ### validator
 
 vue `props`中的`validator`。
 
-[](./code-option-validator.ts ':include :type=code typescript')
+[](../../../en/class-component/component-property/code-option-validator.ts ':include :type=code typescript')

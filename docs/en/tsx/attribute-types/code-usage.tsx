@@ -1,4 +1,4 @@
-import { TSX, Prop, Emit, Component, Vue } from 'vue-facing-decorator'
+import { TSX, Prop, Emit, Component, Vue, toNative } from 'vue-facing-decorator'
 
 interface Props {
     propString: string
@@ -10,7 +10,7 @@ interface Events {
 }
 
 @Component
-export default class MyComponent extends TSX<Props, Events>()(Vue) {
+class MyComponent extends TSX<Props, Events>()(Vue) {
     @Prop({
         required: true
     })
@@ -25,7 +25,9 @@ export default class MyComponent extends TSX<Props, Events>()(Vue) {
     }
 }
 
+const Comp = toNative(MyComponent)
+
 //TypeScript will check component attributes in TSX.
 function render() {
-    return <MyComponent propString='foobar' onMyEvent={(v: string) => { }} onMyEvent2={(v:string)=>{}}></MyComponent>
+    return <Comp propString='foobar' onMyEvent={(v: string) => { }} onMyEvent2={(v: string) => { }}></Comp>
 }

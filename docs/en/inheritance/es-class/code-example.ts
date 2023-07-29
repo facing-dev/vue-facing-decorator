@@ -1,5 +1,5 @@
 
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 Vue options API
@@ -41,7 +41,7 @@ class Super extends Vue {
 }
 
 @Component
-export default class MyComponent extends Super {
+class MyComponent extends Super {
     propertyB = 'from MyComponent'
 
     property = 'from MyComponent'
@@ -55,3 +55,5 @@ export default class MyComponent extends Super {
         console.log('from MyComponent')
     }
 }
+
+export default toNative(MyComponent)

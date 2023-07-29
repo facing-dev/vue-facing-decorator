@@ -1,5 +1,5 @@
 
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue, toNative } from 'vue-facing-decorator'
 
 /*
 Vue options component
@@ -18,6 +18,8 @@ Vue options component
         option.methods.customMethod = function () { }
     }
 })
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
 
 }
+
+export default toNative(MyComponent)

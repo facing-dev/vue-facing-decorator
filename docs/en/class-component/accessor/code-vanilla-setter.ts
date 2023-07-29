@@ -1,11 +1,13 @@
 
-import { Component, Vue, Vanilla } from 'vue-facing-decorator'
+import { Component, Vue, Vanilla, toNative } from 'vue-facing-decorator'
 
 @Component
-export default class MyComponent extends Vue {
+class MyComponent extends Vue {
     foo = ''
     @Vanilla
     set setter(bar: string) {
         this.foo = bar
     }
 }
+
+export default toNative(MyComponent)

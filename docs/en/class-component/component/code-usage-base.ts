@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue, toNative } from 'vue-facing-decorator'
 @Component
 class MyComponent extends Vue {
 
@@ -9,6 +9,8 @@ class MyComponent extends Vue {
 @Component({
     //Set your options here.
 })
-export default class MyComponentWithOptions extends Vue {
+class MyComponentWithOptions extends Vue {
 
 }
+
+export default toNative(MyComponentWithOptions)
