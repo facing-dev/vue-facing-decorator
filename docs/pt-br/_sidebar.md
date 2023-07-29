@@ -12,7 +12,7 @@
     - [Observadores](/pt-br/class-component/watcher/watcher.md)
     - [Inject](/pt-br/class-component/injection/injection.md)
     - [Model](/pt-br/class-component/model/model.md)
-    - [Use](/pt-br/class-component/use/use.md)
+    - [Setup](/pt-br/class-component/setup/setup.md)
 - Herança
     - [Classes ECMAScript](/pt-br/inheritance/es-class/es-class.md)
     - [Componentes](/pt-br/inheritance/component/component.md)
@@ -20,5 +20,7 @@
 - TSX
     - [TSX render](/pt-br/tsx/tsx-render/tsx-render.md)
     - [Tipando Atributos](/pt-br/tsx/attribute-types/attribute-types.md)
+- Custom Decorator
+    - [Custom Decorator](/pt-br/custom/custom.md)
 - Compatibilidade
     - [reflect-metadata](/pt-br/compatibility/reflect-metadata/reflect-metadata.md)

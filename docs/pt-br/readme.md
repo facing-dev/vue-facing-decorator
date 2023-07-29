@@ -22,7 +22,6 @@ Sugestões e contribuições são bem-vindas.
 
 # Doações
 
-Doação
 
 # Discussões
 
