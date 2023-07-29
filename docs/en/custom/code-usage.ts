@@ -9,6 +9,8 @@ function Log(prefix: string) {
         options.methods[key] = function (...args: any[]) {
             old.apply(this, args)
         }
+    }, {
+        preserve: true
     })
 }
 

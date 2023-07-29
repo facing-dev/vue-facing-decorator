@@ -12,7 +12,7 @@
 * 支持 ES 类 继承、vue `extends` 和 vue `mixins`。
 * [官方推荐](https://class-component.vuejs.org)
 
-[](./quick-start/code-what-it-is-example.ts ':include :type=code typescript')
+[](../en/quick-start/code-what-it-is-example.ts ':include :type=code typescript')
 
 如果你喜欢已经废弃的 [vue-class-component](https://github.com/vuejs/vue-class-component) 或 deprecaed [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator), 那么请试试这个项目吧！
 
