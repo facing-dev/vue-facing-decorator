@@ -24,18 +24,24 @@ export const decorator = optoinNullableMemberDecorator(function (proto: any, nam
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.computed ??= {}
     const slot = obtainSlot(cons.prototype)
-    const names = slot.obtainMap('v-model')!
-    if (names && names.size > 0) {
-        names.forEach((value, name) => {
-            const vmodelName = (value && value.name) ?? 'modelValue'
-            optionBuilder.computed![name] = {
-                get: function (this: any) {
-                    return this[vmodelName]
-                },
-                set: function (val: any) {
-                    this.$emit(`update:${vmodelName}`, val)
-                }
-            }
-        })
+    const names = slot.getMap('v-model')
+    if (!names || names.size === 0) {
+        return
     }
+    const emits = slot.obtainMap('emits')
+
+    names.forEach((value, name) => {
+        const vmodelName = (value && value.name) ?? 'modelValue'
+        const eventName = `update:${vmodelName}`
+        optionBuilder.computed![name] = {
+            get: function (this: any) {
+                return this[vmodelName]
+            },
+            set: function (val: any) {
+                this.$emit(eventName, val)
+            }
+        }
+        emits.set(eventName, true)
+    })
+
 }

@@ -17,7 +17,7 @@
         "esModuleInterop": true,
         "isolatedModules": true,
         "emitDeclarationOnly": false,
-        "experimentalDecorators": false,
+        "experimentalDecorators": true,
         "composite": false,
         "declaration": true,
         "declarationMap": true,

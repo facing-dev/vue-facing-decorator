@@ -10,7 +10,6 @@ const SETUP_AXIOM = 'setup is working to allow composition API usage'
 const DATA_AXIOM = 'data is injected into the template'
 const injectionKey = Symbol('injection test key')
 function useInjectedValue() {
-    console.log('in use')
     return inject(injectionKey) as string
 }
 
@@ -24,7 +23,6 @@ class SyncComp extends Base {
 }
 
 const SyncCompContext = toNative(SyncComp) as any
-console.log('ppp',SyncCompContext.setup())
 @Component({
     render() { return [] },
     setup() {

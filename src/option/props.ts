@@ -19,13 +19,15 @@ export const decorator = optoinNullableMemberDecorator(function (proto: any, nam
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.props ??= {}
     const slot = obtainSlot(cons.prototype)
-    const names = slot.obtainMap('props')
-
-    if (names) {
-        names.forEach((value, name) => {
-            optionBuilder.props![name] = value
-        })
+    const names = slot.getMap('props')
+    if (!names || names.size === 0) {
+        return
     }
+
+    names.forEach((value, name) => {
+        optionBuilder.props![name] = value
+    })
+
 
 }
 

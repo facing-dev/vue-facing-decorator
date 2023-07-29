@@ -40,7 +40,7 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const HookFunctions: Record<string, Function> = {}
     const MethodFunctions: Record<string, Function> = {}
     protoArr.forEach(proto => {
-        excludeNames(getValidNames(proto, (des, name) => {
+        let names = getValidNames(proto, (des, name) => {
 
             if (name === 'constructor') {
                 return false
@@ -50,7 +50,15 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
                 return true
             }
             return false
-        }), slot).forEach(name => {
+        })
+        names = excludeNames(names, slot, (mapName) => {
+            //include these names:
+            //watch, user may call watch method directly
+            //hooks, user may call hook method directly
+            //emits, user may have a method name which is same as one of event names
+            return !['watch', 'hooks', 'emits'].includes(mapName)
+        });
+        names.forEach(name => {
             if (HookNames.includes(name as any) || map.has(name)) {
 
                 HookFunctions[name] = proto[name]
@@ -64,13 +72,13 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
     })
 
     Object.assign(optionBuilder.methods, MethodFunctions)
-    const bccbs = optionBuilder.beforeCreateCallbacks
-    if (bccbs && bccbs.length > 0) {
-        const oldBc = HookFunctions['beforeCreate']
+    const beforeCreateCallbacks = [...optionBuilder.beforeCreateCallbacks??[]]
+    if (beforeCreateCallbacks && beforeCreateCallbacks.length > 0) {
+        const oldBeforeCreateCallback = HookFunctions['beforeCreate']
         HookFunctions['beforeCreate'] = function () {
-            bccbs.forEach(bccb => bccb.apply(this, arguments))
-            if (oldBc) {
-                oldBc.apply(this, arguments)
+            beforeCreateCallbacks.forEach(callback => callback.apply(this, arguments))
+            if (oldBeforeCreateCallback) {
+                oldBeforeCreateCallback.apply(this, arguments)
             }
         }
     }

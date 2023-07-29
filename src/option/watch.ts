@@ -13,7 +13,6 @@ export interface WatchConfig {
 type Option = Omit<WatchConfig, 'handler' | 'key'>
 export function decorator(key: string, option?: Option) {
     return compatibleMemberDecorator(function (proto: any, name: string) {
-        console.log('watch deco',proto,name,option)
         const slot = obtainSlot(proto)
         const map = slot.obtainMap('watch');
         const opt = Object.assign({}, option ?? {}, {
@@ -37,23 +36,26 @@ export function decorator(key: string, option?: Option) {
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     optionBuilder.watch ??= {}
     const slot = obtainSlot(cons.prototype)
-    const names = slot.obtainMap('watch')
-    if (names) {
-        names.forEach((value, _name) => {
-            const values = Array.isArray(value) ? value : [value]
-            values.forEach(v => {
-                if (!optionBuilder.watch![v.key]) {
-                    optionBuilder.watch![v.key] = v
-                } else {
-                    const t = optionBuilder.watch![v.key]
-                    if (Array.isArray(t)) {
-                        t.push(v)
-                    } else {
-                        optionBuilder.watch![v.key] = [t, v]
-                    }
-                }
-            })
-        })
+    const names = slot.getMap('watch')
+    if (!names || names.size === 0) {
+        return
     }
+
+    names.forEach((value, _name) => {
+        const values = Array.isArray(value) ? value : [value]
+        values.forEach(v => {
+            if (!optionBuilder.watch![v.key]) {
+                optionBuilder.watch![v.key] = v
+            } else {
+                const t = optionBuilder.watch![v.key]
+                if (Array.isArray(t)) {
+                    t.push(v)
+                } else {
+                    optionBuilder.watch![v.key] = [t, v]
+                }
+            }
+        })
+    })
+
 
 }

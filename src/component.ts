@@ -11,7 +11,6 @@ import { build as optionInject } from './option/inject'
 import { build as optionEmit } from './option/emit'
 import { build as optionVModel } from './option/vmodel'
 import { build as optionAccessor } from './option/accessor'
-import { CustomRecords } from './custom/custom'
 import type { SetupContext } from 'vue';
 import type { OptionBuilder } from './optionBuilder'
 import type { VueCons } from './index'
@@ -31,16 +30,10 @@ function ComponentOption(cons: Cons, extend?: any) {
     optionInject(cons, optionBuilder)
     optionEmit(cons, optionBuilder)
     optionRef(cons, optionBuilder)//after Computed
-    optionMethodsAndHooks(cons, optionBuilder)//after Ref Computed
     optionAccessor(cons, optionBuilder)
-
-
-    const setupFunction: OptionSetupFunction | undefined = optionBuilder.setup ? function (props, ctx) {
-        return optionBuilder.setup!(props, ctx)
-    } : undefined
-
+    optionMethodsAndHooks(cons, optionBuilder)//the last one
     const raw = {
-        setup: setupFunction,
+        setup: optionBuilder.setup,
         data() {
             delete optionBuilder.data
             optionData(cons, optionBuilder, this)
@@ -72,7 +65,9 @@ type ComponentOption = {
     mixins?: any[]
     setup?: ComponentSetupFunction
 }
+
 type ComponentConsOption = Cons | ComponentOption
+
 function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     const option = ComponentOption(cons, extend)
     const slot = obtainSlot(cons.prototype)
@@ -83,25 +78,21 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
         option[name] = arg[name as keyof ComponentOption]
         return option
     }, option)
+
+    //apply event emits
     let emits = Array.from(slot.obtainMap('emits').keys())
     if (Array.isArray(arg.emits)) {
         emits = Array.from(new Set([...emits, ...arg.emits]))
     }
     option.emits = emits
 
-
-    CustomRecords.forEach(rec => {
-        rec.creator.apply({}, [option, rec.key])
-    })
-
-
-    arg.setup ??= function () { return {} }
+    //merge setup function
     if (!option.setup) {
         option.setup = arg.setup
     } else {
 
         const oldSetup: OptionSetupFunction = option.setup
-        const newSetup: ComponentSetupFunction = arg.setup
+        const newSetup: ComponentSetupFunction = arg.setup ?? function () { return {} }
 
         const setup: ComponentSetupFunction = function (props, ctx) {
             const newRet = newSetup(props, ctx)
@@ -121,12 +112,24 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
         option.setup = setup
     }
 
+    //custom decorator
+    const map = slot.getMap('customDecorator')
+    if (map && map.size > 0) {
+        map.forEach((v) => {
+            v.creator.apply({}, [option, v.key])
+        })
+    }
+
+    //shallow merge options
     if (arg.options) {
         Object.assign(option, arg.options)
     }
+
+    //apply modifier
     if (arg.modifier) {
         arg.modifier(option)
     }
+
     return defineComponent(option)
 }
 function build(cons: Cons, option: ComponentOption) {
@@ -143,8 +146,8 @@ function build(cons: Cons, option: ComponentOption) {
     }
     const component = buildComponent(cons, option, superSlot === null ? undefined : superSlot.cachedVueComponent)
     component.__vfdConstructor = cons
-    slot.cachedVueComponent = component
-
+    slot.cachedVueComponent = component;
+    (cons as any).__vccOpts = component
 }
 function _Component(cb: (cons: Cons, option: ComponentOption) => any, arg: ComponentConsOption, ctx?: ClassDecoratorContext) {
     if (typeof arg === 'function') {
