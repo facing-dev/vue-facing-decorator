@@ -33,6 +33,7 @@ function ComponentOption(cons: Cons, extend?: any) {
     optionAccessor(cons, optionBuilder)
     optionMethodsAndHooks(cons, optionBuilder)//the last one
     const raw = {
+        name: cons.name,
         setup: optionBuilder.setup,
         data() {
             delete optionBuilder.data

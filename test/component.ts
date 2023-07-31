@@ -69,6 +69,8 @@ describe('Component',
           expect(true).to.equal(isEmptyObject(EmptyContext[key]()))
         } else if (key === '__vfdConstructor') {
           expect('function').to.equal(typeof EmptyContext[key])
+        } else if (key === 'name') {
+            expect(EmptyContext[key]).to.equal('Empty')
         } else {
 
           expect(true).to.equal(isEmptyObject(EmptyContext[key]))
