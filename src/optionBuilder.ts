@@ -11,6 +11,7 @@ export interface OptionBuilder {
     computed?: Record<string, any>
     watch?: Record<string, WatchConfig | WatchConfig[]>
     props?: Record<string, PropsConfig>
+    provide?: Record<string, any>
     inject?: Record<string, InjectConfig>
     setup?: OptionSetupFunction
     beforeCreateCallbacks?: Function[]

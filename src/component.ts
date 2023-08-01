@@ -1,5 +1,5 @@
 import { defineComponent, type ComponentCustomOptions } from 'vue';
-import { obtainSlot, getSuperSlot } from './utils'
+import { obtainSlot, getSuperSlot, getProviderFunction } from './utils'
 import { build as optionSetup } from './option/setup'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
@@ -8,6 +8,7 @@ import { build as optionRef } from './option/ref'
 import { build as optionWatch } from './option/watch'
 import { build as optionProps } from './option/props'
 import { build as optionInject } from './option/inject'
+import { build as optionProvide } from './option/provide'
 import { build as optionEmit } from './option/emit'
 import { build as optionVModel } from './option/vmodel'
 import { build as optionAccessor } from './option/accessor'
@@ -45,6 +46,10 @@ function ComponentOption(cons: Cons, extend?: any) {
         watch: optionBuilder.watch,
         props: optionBuilder.props,
         inject: optionBuilder.inject,
+        provide() {
+            optionProvide(cons, optionBuilder, this)
+            return optionBuilder.provide ?? {}
+        },
         ...optionBuilder.hooks,
         extends: extend
     }
@@ -73,7 +78,7 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     const option = ComponentOption(cons, extend)
     const slot = obtainSlot(cons.prototype)
     Object.keys(arg).reduce<Record<string, any>>((option, name: string) => {
-        if (['options', 'modifier', 'emits', 'setup'].includes(name)) {
+        if (['options', 'modifier', 'emits', 'setup', 'provide'].includes(name)) {
             return option
         }
         option[name] = arg[name as keyof ComponentOption]
@@ -111,6 +116,13 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
 
         }
         option.setup = setup
+    }
+
+    //merge provide function
+    const oldProvider = getProviderFunction(option.provide)
+    const newProvider = getProviderFunction(arg.provide)
+    option.provide = function() {
+        return Object.assign({}, oldProvider.call(this), newProvider.call(this))
     }
 
     //custom decorator
