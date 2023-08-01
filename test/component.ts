@@ -15,7 +15,7 @@ const FullOptionOpt = {
   name: 'FullOption',
   emits: ['emits1', 'emits2'],
   provide: function () {
-    return 'provided'
+    return {provided: 'provided'}
   },
   components: {
     empty: Empty
@@ -99,6 +99,9 @@ describe('Component',
             expect(true).to.equal(pro instanceof Promise)
             const r = await pro
             expect('setupVA').to.equal(r.setupA)
+            break
+        case 'provide':
+            expect(opt()).to.eql({provided: 'provided'})
             break
           default:
             expect(opt).to.equal(FullOptionContext[key])
