@@ -39,7 +39,12 @@ export const Base = class {
                 (this as any)[key] = vueInstance[key];
             })
         }
-
+        const methods = optionBuilder.methods
+        if (methods) {
+            Object.keys(methods).forEach(key => {
+                (this as any)[key] = methods[key].bind(vueInstance)
+            })
+        }
     }
 
 } as VueCons

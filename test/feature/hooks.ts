@@ -15,7 +15,6 @@ class Comp extends Base {
 
 }
 const CompContext = toNative(Comp) as any
-
 describe('feature hooks',
     () => {
         it('default', () => {

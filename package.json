@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "test-build": "npm run build && npm run test",
-    "test":"npm run test-stage2 && npm run test-stage3",
+    "test": "npm run test-stage2 && npm run test-stage3",
     "test-stage2": "env TS_NODE_COMPILER_OPTIONS='{\"experimentalDecorators\": true }' mocha -r ts-node/register test/test.ts",
     "test-stage3": "env TS_NODE_COMPILER_OPTIONS='{\"experimentalDecorators\": false }' mocha -r ts-node/register test/test.ts",
     "build": "npm run build:cjs && npm run build:esm",
@@ -45,8 +45,8 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^10.0.0",
     "ts-node": "^10.8.1",
-    "vue": "^3.2.37",
-    "typescript": "latest"
+    "typescript": "^5.1.6",
+    "vue": "^3.2.37"
   },
   "homepage": "https://github.com/facing-dev/vue-facing-decorator",
   "repository": {
