@@ -4,7 +4,7 @@ import 'mocha';
 import { Component, Base, Prop, toNative } from '../../dist'
 import { mount } from '@vue/test-utils'
 
-@Component
+@Component({template: '<div/>'})
 class Comp extends Base {
 
     data = 'data value'
