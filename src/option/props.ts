@@ -1,6 +1,6 @@
 import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
-import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
+import { obtainSlot, optionNullableMemberDecorator } from '../utils'
 
 export interface PropsConfig {
     type?: any
@@ -9,7 +9,7 @@ export interface PropsConfig {
     validator?(value: any): boolean;
 }
 
-export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, option?: PropsConfig) {
+export const decorator = optionNullableMemberDecorator(function (proto: any, name: string, option?: PropsConfig) {
     const slot = obtainSlot(proto)
     const map = slot.obtainMap('props')
     const opt = Object.assign({}, option ?? {})
