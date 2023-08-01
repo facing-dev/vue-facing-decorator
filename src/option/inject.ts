@@ -2,7 +2,7 @@ import type { InjectionKey } from 'vue'
 import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
-import { compatibleMemberDecorator } from '../deco3/utils'
+
 export interface InjectConfig {
     from?: string | symbol | Symbol | InjectionKey<any>
     default?: any
