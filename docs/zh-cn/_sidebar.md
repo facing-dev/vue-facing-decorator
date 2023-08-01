@@ -11,6 +11,7 @@
     - [引用](/zh-cn/class-component/reference/reference.md)
     - [监视器](/zh-cn/class-component/watcher/watcher.md)
     - [注入](/zh-cn/class-component/injection/injection.md)
+    - [提供](/zh-cn/class-component/provide/provide.md)
     - [Model](/zh-cn/class-component/model/model.md)
     - [Composition 组件](/zh-cn/class-component/setup/setup.md)
 - 继承

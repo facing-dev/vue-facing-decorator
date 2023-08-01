@@ -9,6 +9,10 @@ export function build(cons: Cons, optionBuilder: OptionBuilder, vueInstance: any
         return !!des.enumerable
     })
     const slot = obtainSlot(cons.prototype)
-    names = excludeNames(names, slot)
+    names = excludeNames(names, slot,(mapName) => {
+        //include these names:
+        //provide, user may access field directly
+        return !['provide'].includes(mapName)
+    })
     Object.assign(optionBuilder.data, makeObject(names, sample))
 }

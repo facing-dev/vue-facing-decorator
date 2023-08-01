@@ -10,6 +10,7 @@
     - [Event](/en/class-component/event/event.md)
     - [Reference](/en/class-component/reference/reference.md)
     - [Watcher](/en/class-component/watcher/watcher.md)
+    - [Provide](/en/class-component/provide/provide.md)
     - [Injection](/en/class-component/injection/injection.md)
     - [Model](/en/class-component/model/model.md)
     - [Setup](/en/class-component/setup/setup.md)

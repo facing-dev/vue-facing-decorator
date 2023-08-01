@@ -1,8 +1,8 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Provide, Base, Inject } from '../../dist'
-import {VueWrapper, mount} from '@vue/test-utils';
+import { Component, Provide, Base, Inject, toNative } from '../../dist'
+import { VueWrapper, mount } from '@vue/test-utils';
 
 describe('decorator Provide',
     () => {
@@ -23,7 +23,7 @@ describe('decorator Provide',
             readonly _internalName = 123
         }
 
-        @Component({template: '<span />'})
+        @Component({ template: '<span />' })
         class Child extends Base {
             @Inject
             readonly fromClassDecorator!: string
@@ -84,7 +84,7 @@ describe('decorator Provide',
                 readonly ambiguous = 'property'
             }
 
-            @Component({template: '<span />'})
+            @Component({ template: '<span />' })
             class Child extends Base {
                 @Inject
                 readonly ambiguous!: string
@@ -104,6 +104,35 @@ describe('decorator Provide',
             const child = component.findComponent(Child)
 
             expect(child.vm.ambiguous).to.equal('class')
+        })
+
+        it('preserve feild', () => {
+            @Component({
+                template: '<div><slot/></div>',
+            })
+            class Comp extends Base {
+                @Provide
+                readonly vp = 'foo'
+                v!: string
+
+                @Provide
+                fp() { }
+                f!: Function
+                mounted() {
+
+                    this.v = this.vp
+                    this.f = this.fp
+
+                }
+
+
+            }
+
+
+            const component = mount(toNative(Comp) as any)
+
+            expect(component.vm.v).to.equal('foo')
+            expect(typeof component.vm.f).to.equal('function')
         })
     }
 )
