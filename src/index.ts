@@ -3,6 +3,7 @@ export { decorator as Setup } from './option/setup'
 export { decorator as Ref } from './option/ref'
 export { decorator as Watch } from './option/watch'
 export { decorator as Prop } from './option/props'
+export { decorator as Provide } from './option/provide'
 export { decorator as Inject } from './option/inject'
 export { decorator as Emit } from './option/emit'
 export { decorator as VModel, decorator as Model } from './option/vmodel'
@@ -44,7 +45,6 @@ export const Base = class {
                 (this as any)[key] = methods[key].bind(vueInstance)
             })
         }
-        console.log('pp',this)
     }
 
 } as VueCons

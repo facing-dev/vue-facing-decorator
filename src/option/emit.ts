@@ -1,9 +1,9 @@
 import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
-import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
+import { obtainSlot, optionNullableMemberDecorator } from '../utils'
 export type EmitConfig = null | string
 
-export const decorator = optoinNullableMemberDecorator(function (proto: any, name: string, key?: string) {
+export const decorator = optionNullableMemberDecorator(function (proto: any, name: string, key?: string) {
     const slot = obtainSlot(proto)
     const map = slot.obtainMap('emit');
     map.set(name, typeof key === 'undefined' ? null : key)

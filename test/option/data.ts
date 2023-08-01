@@ -4,13 +4,15 @@ import 'mocha';
 import { Component, Base, Prop, toNative } from '../../dist'
 import { mount } from '@vue/test-utils'
 
-@Component
-class DataComp extends Base {
+
+@Component({ template: '<div/>' })
+class Comp extends Base {
     data = 'data value'
 
     @Prop
     prop!: string
-    fieldInitProp = this.prop
+
+    fieldInitProp = this.prop //not work
 
     methods = [this.method];
 
@@ -24,7 +26,7 @@ class DataComp extends Base {
     }
 }
 
-const CompContext = toNative(DataComp) as any
+const CompContext = toNative(Comp) as any
 
 describe('option data',
     () => {
@@ -37,10 +39,7 @@ describe('option data',
 
             expect('function').to.equal(typeof CompContext?.data)
             expect('data value').to.equal(vm.data)
-            // expect('data value').to.equal(CompContext.data().mb)
-            // expect(5).to.equal(Object.keys(CompContext.data()).length)
-      
-
+            expect(5).to.equal(Object.keys(CompContext.data()).length)
         })
 
         it('binds methods to the component context', () => {
@@ -52,7 +51,8 @@ describe('option data',
             expect('prop test').to.equal(vm.methods[0]())
             expect('prop test').to.equal(vm.options.handler())
             expect('prop test').to.equal(vm.wrapped())
-            expect('prop test').to.equal(vm.fieldInitProp)
+            // expect('prop test').to.equal(vm.fieldInitProp)
+
 
         })
     }

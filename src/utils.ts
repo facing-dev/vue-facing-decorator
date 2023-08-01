@@ -9,6 +9,7 @@ import type { WatchConfig } from "./option/watch";
 import type { SetupConfig } from './option/setup'
 import type { Record as CustomDecoratorRecord } from './custom/custom'
 import type { RefConfig } from './option/ref';
+import type { ProvideConfig } from './option/provide';
 import { compatibleMemberDecorator } from './deco3/utils';
 
 const SlotSymbol = Symbol('vue-facing-decorator-slot')
@@ -16,6 +17,7 @@ const SlotSymbol = Symbol('vue-facing-decorator-slot')
 export type SlotMapTypes = {
     vanilla: Map<string, boolean>
     computed: Map<string, boolean>
+    provide: Map<string, ProvideConfig>
     inject: Map<string, InjectConfig>
     emit: Map<string, EmitConfig>
     emits: Map<string, boolean>
@@ -152,7 +154,7 @@ export function getValidNames(obj: any, filter: (des: PropertyDescriptor, name: 
     return Object.keys(descriptors).filter(name => filter(descriptors[name], name))
 }
 
-export function optoinNullableMemberDecorator<T>(handler: { (proto: any, name: string, option?: T): any }) {
+export function optionNullableMemberDecorator<T>(handler: { (proto: any, name: string, option?: T): any }) {
     function decorator(option?: T): any
     function decorator(proto: BaseTypeIdentify, name: any): any
     function decorator(value: any, ctx: ClassMemberDecoratorContext): any //deco stage 3
@@ -170,4 +172,9 @@ export function optoinNullableMemberDecorator<T>(handler: { (proto: any, name: s
     }
 
     return decorator
+}
+
+export function getProviderFunction(provide: any): () => {} {
+    if (typeof provide === 'function') return provide
+    return function () { return provide || {} }
 }
