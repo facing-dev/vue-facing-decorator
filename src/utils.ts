@@ -152,7 +152,7 @@ export function getValidNames(obj: any, filter: (des: PropertyDescriptor, name: 
     return Object.keys(descriptors).filter(name => filter(descriptors[name], name))
 }
 
-export function optoinNullableMemberDecorator<T>(handler: { (proto: any, name: string, option?: T): any }) {
+export function optionNullableMemberDecorator<T>(handler: { (proto: any, name: string, option?: T): any }) {
     function decorator(option?: T): any
     function decorator(proto: BaseTypeIdentify, name: any): any
     function decorator(value: any, ctx: ClassMemberDecoratorContext): any //deco stage 3
