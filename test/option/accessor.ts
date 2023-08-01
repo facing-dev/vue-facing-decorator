@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import 'mocha';
 import { Component, Base, Vanilla, toNative } from '../../dist'
 
-@Component
+@Component({template: '<div/>'})
 class Comp extends Base {
 
     @Vanilla
