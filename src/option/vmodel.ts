@@ -2,7 +2,7 @@ import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optoinNullableMemberDecorator } from '../utils'
 import { decorator as PropsDecorator, type PropsConfig } from './props'
-import { compatibleMemberDecorator } from '../deco3/utils'
+
 export type VModelConfig = PropsConfig & {
     name?: string
 }
