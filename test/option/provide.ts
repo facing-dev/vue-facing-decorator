@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import 'mocha';
 import { Component, Provide, Base, Inject, toNative } from '../../dist'
 import { VueWrapper, mount } from '@vue/test-utils';
+import { Ref, computed, ref } from 'vue';
 
 describe('decorator Provide',
     () => {
@@ -14,13 +15,18 @@ describe('decorator Provide',
         })
         class Parent extends Base {
             @Provide
-            readonly foo = 'provided foo'
+            foo = 'provided foo'
 
             @Provide
             readonly foo2 = this.foo
 
             @Provide('overridden')
             readonly _internalName = 123
+
+            @Provide
+            get getter() {
+                return 'from getter'
+            }
         }
 
         @Component({ template: '<span />' })
@@ -36,8 +42,12 @@ describe('decorator Provide',
 
             @Inject
             readonly overridden!: number
+
+            @Inject
+            readonly getter!: string
         }
 
+        let parent: VueWrapper<Parent>;
         let child: VueWrapper<Child>;
 
         beforeEach(() => {
@@ -51,7 +61,14 @@ describe('decorator Provide',
                     Parent,
                     Child,
                 }
+            }, {
+                global: {
+                    config: {
+                        unwrapInjectedRef: true,
+                    },
+                },
             })
+            parent = component.findComponent(Parent)
             child = component.findComponent(Child)
         })
 
@@ -70,6 +87,18 @@ describe('decorator Provide',
         it('custom key', () => {
             expect(child.vm).to.not.have.property('_internalName')
             expect(child.vm.overridden).to.equal(123)
+        })
+
+        it('getter', () => {
+            expect(child.vm.getter).to.equal('from getter')
+        })
+
+        it('honours reactivity', async () => {
+            expect(parent.vm.foo).to.equal('provided foo')
+            expect(child.vm.foo).to.equal('provided foo')
+
+            parent.vm.foo = 'bar'
+            expect(child.vm.foo).to.equal('bar')
         })
 
         it('prioritises the class decorator', () => {
