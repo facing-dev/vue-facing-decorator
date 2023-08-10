@@ -28,7 +28,9 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
                 const proRet = await ret
                 this.$emit(eventName, proRet)
             }
-            else {
+            else if (ret === undefined) {
+                this.$emit(eventName)
+            } else {
                 this.$emit(eventName, ret)
             }
         }
