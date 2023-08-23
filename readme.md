@@ -17,6 +17,8 @@ Welcome to suggest and contribute.
 
 # Donate
 
+[opencollective](https://opencollective.com/vue-facing-decorator)
+
 # Document
 
 [To document](https://facing-dev.github.io/vue-facing-decorator/#/)
