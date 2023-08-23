@@ -129,7 +129,8 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     const map = slot.getMap('customDecorator')
     if (map && map.size > 0) {
         map.forEach((v) => {
-            v.creator.apply({}, [option, v.key])
+            v.forEach(ite=>ite.creator.apply({}, [option, ite.key]))
+            
         })
     }
 

@@ -27,7 +27,7 @@ export type SlotMapTypes = {
     watch: Map<string, WatchConfig | WatchConfig[]>
     ref: Map<string, RefConfig>
     setup: Map<string, SetupConfig>
-    customDecorator: Map<string, CustomDecoratorRecord>
+    customDecorator: Map<string, CustomDecoratorRecord[]>
 }
 
 class Slot {
@@ -127,7 +127,7 @@ export function excludeNames(names: string[], slot: Slot, filter?: (mapName: str
                 if (mapName === 'customDecorator') {
                     const map = currSlot.obtainMap('customDecorator')
                     if (map.has(name)) {
-                        if (!map.get(name)!.preserve) {
+                        if (map.get(name)!.every(ite=>!ite.preserve)) {
                             return false
                         } else {
                             continue

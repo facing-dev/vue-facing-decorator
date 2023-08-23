@@ -13,11 +13,16 @@ export function createDecorator(creator: Creator, opt?: {
     return compatibleMemberDecorator(function (proto: any, key: string) {
         const slot = obtainSlot(proto)
         const map = slot.obtainMap('customDecorator')
-        map.set(key, {
+        if(!map.has(key)){
+            map.set(key,[])
+        }
+        const arr = map.get(key)!
+        arr.push({
             key,
             creator,
             preserve: !!opt?.preserve
         })
+
     })
 }
 
