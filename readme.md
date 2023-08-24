@@ -30,3 +30,10 @@ Document languages: English, 简体中文, Portuguese
 To discord [https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)
 
 QQ群号 766350254
+
+# Awesome List
+
+* [vuex-facing-decorator](https://github.com/wangzhiguoengineer/vuex-facing-decorator)
+
+    Binding helpers for Vuex and vue-facing-decorator.
+    
