@@ -32,7 +32,7 @@ export const decorator = optionNullableMemberDecorator(function (proto: any, nam
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
     const protoArr = toComponentReverse(cons.prototype)
-    const hookMap = slot.obtainMap('hooks')
+    const map = slot.obtainMap('hooks')
 
     optionBuilder.hooks ??= {}
     optionBuilder.methods ??= {}
@@ -50,7 +50,7 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
             return !['watch', 'hooks', 'emits', 'provide'].includes(mapName)
         });
         names.forEach(name => {
-            if (HookNames.includes(name) || hookMap.has(name)) {
+            if (HookNames.includes(name) || map.has(name)) {
                 HookFunctions[name] = proto[name]
             } else {
                 MethodFunctions[name] = proto[name]
