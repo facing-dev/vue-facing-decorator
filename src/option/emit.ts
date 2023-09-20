@@ -18,12 +18,10 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
         return
     }
     const emits = slot.obtainMap('emits')
-    const methods = slot.obtainMap('methods')
     names.forEach((value, key) => {
         const eventName = value === null ? key : value
         emits.set(eventName, true)
-
-        const emitFunction = async function (this: any) {
+        optionBuilder.methods![key] = async function (this: any) {
 
             const ret = proto[key].apply(this, arguments)
             if (ret instanceof Promise) {
@@ -34,7 +32,6 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
                 this.$emit(eventName, ret)
             }
         }
-        optionBuilder.methods![key] = emitFunction
-        methods.set(key, emitFunction)
     })
+
 }

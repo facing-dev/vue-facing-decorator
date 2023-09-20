@@ -79,7 +79,7 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     const option = ComponentOption(cons, extend)
     const slot = obtainSlot(cons.prototype)
     Object.keys(arg).reduce<Record<string, any>>((option, name: string) => {
-        if (['options', 'modifier', 'emits', 'setup', 'provide'].includes(name)) {
+        if (['options', 'modifier', 'methods', 'emits', 'setup', 'provide'].includes(name)) {
             return option
         }
         option[name] = arg[name as keyof ComponentOption]
@@ -93,12 +93,11 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     }
     option.emits = emits
 
-    //apply methods
-    let methods = Object.fromEntries(slot.obtainMap('methods'))
+    //merge methods
     if ('object' === typeof arg.methods && !Array.isArray(arg.methods) && arg.methods !== null) {
-        methods = Object.assign(methods, arg.methods);
+        option.methods??={}
+        Object.assign(option.methods, arg.methods);
     }
-    option.methods = methods
 
     //merge setup function
     if (!option.setup) {

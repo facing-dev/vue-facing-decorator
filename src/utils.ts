@@ -28,7 +28,6 @@ export type SlotMapTypes = {
     ref: Map<string, RefConfig>
     setup: Map<string, SetupConfig>
     customDecorator: Map<string, CustomDecoratorRecord[]>
-    methods: Map<string, Function>
 }
 
 class Slot {

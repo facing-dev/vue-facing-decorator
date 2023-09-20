@@ -33,7 +33,6 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
     const protoArr = toComponentReverse(cons.prototype)
     const hookMap = slot.obtainMap('hooks')
-    const methodsMap = slot.obtainMap('methods')
 
     optionBuilder.hooks ??= {}
     optionBuilder.methods ??= {}
@@ -48,14 +47,13 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
             //watch, user may call watch method directly
             //hooks, user may call hook method directly
             //emits, user may have a method name which is same as one of event names
-            return !['methods', 'watch', 'hooks', 'emits', 'provide'].includes(mapName)
+            return !['watch', 'hooks', 'emits', 'provide'].includes(mapName)
         });
         names.forEach(name => {
             if (HookNames.includes(name) || hookMap.has(name)) {
                 HookFunctions[name] = proto[name]
             } else {
                 MethodFunctions[name] = proto[name]
-                methodsMap.set(name, proto[name])
             }
         })
     })
