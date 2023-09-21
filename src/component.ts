@@ -1,4 +1,4 @@
-import { defineComponent, type ComponentCustomOptions } from 'vue';
+import { defineComponent, type ComponentCustomOptions, type MethodOptions } from 'vue';
 import { obtainSlot, getSuperSlot, getProviderFunction } from './utils'
 import { build as optionSetup } from './option/setup'
 import { build as optionComputed } from './option/computed'
@@ -70,6 +70,7 @@ type ComponentOption = {
     template?: string
     mixins?: any[]
     setup?: ComponentSetupFunction
+    methods?: MethodOptions
 }
 
 type ComponentConsOption = Cons | ComponentOption
@@ -78,7 +79,7 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     const option = ComponentOption(cons, extend)
     const slot = obtainSlot(cons.prototype)
     Object.keys(arg).reduce<Record<string, any>>((option, name: string) => {
-        if (['options', 'modifier', 'emits', 'setup', 'provide'].includes(name)) {
+        if (['options', 'modifier', 'methods', 'emits', 'setup', 'provide'].includes(name)) {
             return option
         }
         option[name] = arg[name as keyof ComponentOption]
@@ -92,11 +93,16 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     }
     option.emits = emits
 
+    //merge methods
+    if ('object' === typeof arg.methods && !Array.isArray(arg.methods) && arg.methods !== null) {
+        option.methods??={}
+        Object.assign(option.methods, arg.methods);
+    }
+
     //merge setup function
     if (!option.setup) {
         option.setup = arg.setup
     } else {
-
         const oldSetup: OptionSetupFunction = option.setup
         const newSetup: ComponentSetupFunction = arg.setup ?? function () { return {} }
 
@@ -105,16 +111,13 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
             const oldRet = oldSetup(props, ctx)
             if (oldRet instanceof Promise || newRet instanceof Promise) {
                 return Promise.all([newRet, oldRet]).then((arr) => {
-                    const ret = Object.assign({}, arr[0], arr[1])
-                    return ret
+                    return Object.assign({}, arr[0], arr[1])
                 })
             } else {
-
-                const ret = Object.assign({}, newRet, oldRet)
-                return ret
+                return Object.assign({}, newRet, oldRet)
             }
-
         }
+
         option.setup = setup
     }
 
@@ -130,7 +133,6 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     if (map && map.size > 0) {
         map.forEach((v) => {
             v.forEach(ite=>ite.creator.apply({}, [option, ite.key]))
-            
         })
     }
 

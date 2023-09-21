@@ -2,7 +2,7 @@ import type { Cons } from '../component'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, toComponentReverse, excludeNames, getValidNames, optionNullableMemberDecorator } from '../utils'
 
-export const HookNames = [
+export const HookNames: ReadonlyArray<string> = [
     "beforeCreate",
     "created",
     "beforeMount",
@@ -29,7 +29,6 @@ export const decorator = optionNullableMemberDecorator(function (proto: any, nam
     map.set(name, null)
 })
 
-
 export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
     const protoArr = toComponentReverse(cons.prototype)
@@ -41,15 +40,7 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
     const MethodFunctions: Record<string, Function> = {}
     protoArr.forEach(proto => {
         let names = getValidNames(proto, (des, name) => {
-
-            if (name === 'constructor') {
-                return false
-            }
-            if (typeof des.value === 'function') {
-
-                return true
-            }
-            return false
+            return typeof des.value === 'function' && name !== 'constructor'
         })
         names = excludeNames(names, slot, (mapName) => {
             //include these names:
@@ -59,16 +50,12 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
             return !['watch', 'hooks', 'emits', 'provide'].includes(mapName)
         });
         names.forEach(name => {
-            if (HookNames.includes(name as any) || map.has(name)) {
-
+            if (HookNames.includes(name) || map.has(name)) {
                 HookFunctions[name] = proto[name]
-            }
-            else {
+            } else {
                 MethodFunctions[name] = proto[name]
             }
         })
-
-
     })
 
     Object.assign(optionBuilder.methods, MethodFunctions)
@@ -83,5 +70,4 @@ export function build(cons: Cons, optionBuilder: OptionBuilder) {
         }
     }
     Object.assign(optionBuilder.hooks, HookFunctions)
-
 }
