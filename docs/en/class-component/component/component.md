@@ -78,6 +78,13 @@ This is the `mixins` in vue options API. It only accepts native vue component(if
 
 [](./code-option-mixins.ts ':include :type=code typescript')
 
+
+### methods
+
+Methods in this field will be exposed to the component.
+
+[](./code-option-methods.ts ':include :type=code typescript')
+
 ### options
 
 It will be assigned to vue options API before `modifier`.

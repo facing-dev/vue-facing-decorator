@@ -78,6 +78,12 @@
 
 [](../../../en/class-component/component/code-option-mixins.ts ':include :type=code typescript')
 
+### methods
+
+会被合并进vue option api中的`methods`。
+
+[](../../../en/class-component/component/code-option-methods.ts ':include :type=code typescript')
+
 ### options
 
 其中的数据会在`modifier`执行前被赋值到vue option组件上。
