@@ -2,6 +2,7 @@
 import { expect } from 'chai';
 import 'mocha';
 import { Component, Emit, Base, toNative } from '../../dist'
+import {mount} from '@vue/test-utils';
 
 @Component
 class Comp extends Base {
@@ -24,6 +25,9 @@ class Comp extends Base {
 
         })
     }
+
+    @Emit
+    noReturn() {}
 
 }
 const CompContext = toNative(Comp) as any
@@ -72,6 +76,11 @@ describe('decorator Emit',
             })
             expect(emitName).to.equal('promiseEmit')
             expect(emitValue).to.equal('promiseEmit value')
+        })
+        it('has an empty array when emitting void', () => {
+            const component = mount(CompContext)
+            component.vm.noReturn()
+            expect(component.emitted('noReturn')).to.eql([[]])
         })
     }
 )
