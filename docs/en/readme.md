@@ -7,6 +7,8 @@
 Works on TypeScript and decorator.
 
 * Community desired vue class component with typescript decorators.
+* Compatible with both stage3 and stage2 decorators.
+* Compatible with both TypeScript and JavaScript projects.
 * Safety. Transform es class to vue options api according to specifications.
 * Performance. Once transform on project loading, ready for everywhere.
 * Support ES class inherit, vue `extends` and vue `mixins`.

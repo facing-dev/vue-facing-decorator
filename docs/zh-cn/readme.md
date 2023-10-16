@@ -7,6 +7,8 @@
 基于TypeScript和装饰器。
 
 * 通过类的方式来写vue组件。
+* 兼容 stage3 和 stage2 装饰器。
+* 兼容 TypeScript 和 JavaScript 项目。
 * 稳定、安全，根据vue规范将es 类转换成vue option api。
 * 高性能，项目加载时转换一次，随处可用。
 * 支持 ES 类 继承、vue `extends` 和 vue `mixins`。

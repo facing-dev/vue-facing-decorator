@@ -8,6 +8,8 @@
 
 ## 安装
 
+### TypeScript 项目
+
 使用你喜欢的包管理器来安装`vue-facing-decorator`。
 
 ```
@@ -23,6 +25,100 @@ npm install --save vue-facing-decorator
     }
 }
 ```
+
+
+### JavaScript 项目
+
+#### Vite
+
+1.  安装依赖:
+
+    ```shell
+    npm install @haixing_hu/vue3-class-component
+    npm install @babel/core @babel/runtime @babel/preset-env
+    npm install @babel/plugin-proposal-decorators @babel/plugin-transform-class-properties @babel/plugin-transform-runtime
+    ```
+
+2.  配置`babel.config.json`文件：
+
+    ```json
+    {
+      "presets": [
+        ["@babel/preset-env", { "modules": false }]
+      ],
+      "plugins": [
+        "@babel/plugin-transform-runtime",
+        ["@babel/plugin-proposal-decorators", { "version": "2023-05" }],
+        "@babel/plugin-transform-class-properties"
+      ]
+    }
+    ```
+
+    **Note:** `@babel/preset-env` 的 `modules` 选项必须为 `false`。
+
+3.  配置 `vite.config.js` ：
+
+    ```js
+    import { fileURLToPath, URL } from 'node:url';
+    import { defineConfig } from 'vite';
+    import vue from '@vitejs/plugin-vue';
+    import * as babel from '@babel/core';
+
+    // A very simple Vite plugin support babel transpilation
+    const babelPlugin = {
+      name: 'plugin-babel',
+      transform: (src, id) => {
+        if (/\.(jsx?|vue)$/.test(id)) {              // the pattern of the file to handle
+          return babel.transform(src, {
+            filename: id,
+            babelrc: true,
+          });
+        }
+      },
+    };
+
+    // https://vitejs.dev/config/
+    export default defineConfig({
+      plugins: [
+        vue({
+          script: {
+            babelParserPlugins: ['decorators'],     // 必须开启 decorators 支持
+          },
+        }),
+        babelPlugin,                                // 在 vue plugin 之后
+      ],
+      resolve: {
+        alias: {
+          '@': fileURLToPath(new URL('./src', import.meta.url)),
+        },
+      },
+    });
+    ```
+
+#### Webpack
+
+1.  安装依赖：
+
+    ```shell
+    npm install @haixing_hu/vue3-class-component
+    npm install @babel/core @babel/runtime @babel/preset-env
+    npm install @babel/plugin-proposal-decorators @babel/plugin-transform-class-properties @babel/plugin-transform-runtime
+    ```
+
+2.  配置`babel.config.json`文件：
+
+    ```json
+    {
+      "presets": [
+        "@babel/preset-env"
+      ],
+      "plugins": [
+        "@babel/plugin-transform-runtime",
+        ["@babel/plugin-proposal-decorators", { "version": "2023-05" }],
+        "@babel/plugin-transform-class-properties"
+      ]
+    }
+    ```
 
 ## 如何使用?
 
