@@ -1,3 +1,4 @@
+import { computed } from 'vue';
 import type { Cons } from '../component';
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, optionNullableMemberDecorator } from '../utils'
@@ -12,12 +13,11 @@ export const decorator = optionNullableMemberDecorator(function (proto: any, nam
 
 export function build(cons: Cons, optionBuilder: OptionBuilder, vueInstance: any) {
     optionBuilder.provide ??= {}
-    const sample = new cons(optionBuilder, vueInstance) as any
     const slot = obtainSlot(cons.prototype)
     const names = slot.obtainMap('provide')
     if (!names) return null
     names.forEach((value, name) => {
         const key = value === null ? name : value
-        optionBuilder.provide![key] = sample[name]
+        optionBuilder.provide![key] = computed(() => vueInstance[name])
     })
 }
