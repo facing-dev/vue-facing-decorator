@@ -32,6 +32,9 @@
   "peerDependencies": {
     "vue": "^3.0.0"
   },
+  "dependencies": {
+    "facing-metadata": "^1.0.1"
+  },
   "devDependencies": {
     "@types/chai": "^4.3.1",
     "@types/mocha": "^9.1.1",
