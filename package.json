@@ -33,7 +33,7 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
-    "facing-metadata": "^1.0.1"
+    "facing-metadata": "^2.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.3.1",
