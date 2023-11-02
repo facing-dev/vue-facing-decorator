@@ -62,11 +62,7 @@ export function makeSlot(obj: any, defaultSlot?: Slot): Slot {
         defaultSlot.master = obj
     }
     const slot = defaultSlot ?? new Slot(obj)
-
-    Object.defineProperty(obj, SlotSymbol, {
-        enumerable: false,
-        value: slot
-    })
+    metadata.create(obj,slot)
     return slot
 }
 
