@@ -1,3 +1,4 @@
+import { Metadata } from 'facing-metadata'
 import { Base } from './index'
 import type { BaseTypeIdentify } from './index'
 import type { InjectConfig } from "./option/inject";
@@ -29,7 +30,6 @@ export type SlotMapTypes = {
     setup: Map<string, SetupConfig>
     customDecorator: Map<string, CustomDecoratorRecord[]>
 }
-
 class Slot {
     master: any
     constructor(master: any) {
@@ -52,6 +52,8 @@ class Slot {
     cachedVueComponent: any = null
 }
 
+const metadata = new Metadata<Slot>(SlotSymbol)
+
 export function makeSlot(obj: any, defaultSlot?: Slot): Slot {
     if (getSlot(obj)) {
         throw ''
@@ -60,17 +62,12 @@ export function makeSlot(obj: any, defaultSlot?: Slot): Slot {
         defaultSlot.master = obj
     }
     const slot = defaultSlot ?? new Slot(obj)
-
-    Object.defineProperty(obj, SlotSymbol, {
-        enumerable: false,
-        value: slot
-    })
+    metadata.create(obj,slot)
     return slot
 }
 
 export function getSlot(obj: any): Slot | undefined {
-
-    return Object.getOwnPropertyDescriptor(obj, SlotSymbol)?.value
+    return metadata.getOwn(obj)
 }
 
 export function obtainSlot(obj: any, defaultSlot?: Slot): Slot {
@@ -127,7 +124,7 @@ export function excludeNames(names: string[], slot: Slot, filter?: (mapName: str
                 if (mapName === 'customDecorator') {
                     const map = currSlot.obtainMap('customDecorator')
                     if (map.has(name)) {
-                        if (map.get(name)!.every(ite=>!ite.preserve)) {
+                        if (map.get(name)!.every(ite => !ite.preserve)) {
                             return false
                         } else {
                             continue
