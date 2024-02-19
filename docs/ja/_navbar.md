@@ -1,0 +1,4 @@
+-   [英語](/)
+-   [简体中文](/zh-cn/readme.md)
+-   [ポルトガル語](/pt-br/readme.md)
+-   [日本語](/ja/readme.md)

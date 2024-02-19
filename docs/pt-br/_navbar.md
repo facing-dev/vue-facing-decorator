@@ -1,3 +1,4 @@
 - [Inglês](/en/readme.md)
 - [Chinês](/zh-cn/readme.md)
 - [Português](/pt-br/readme.md)
+- [Japonês](/ja/readme.md)
