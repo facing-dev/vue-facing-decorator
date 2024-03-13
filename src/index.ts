@@ -11,6 +11,7 @@ export { decorator as Vanilla } from './option/vanilla'
 export { decorator as Hook } from './option/methodsAndHooks'
 export { createDecorator } from './custom/custom'
 export { mixins } from './mixins'
+export * from './hooks'
 import type { ComponentPublicInstance } from 'vue'
 import type { OptionBuilder } from './optionBuilder'
 

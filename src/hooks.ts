@@ -1,0 +1,17 @@
+export interface BeforeCreate { beforeCreate(): void; }
+export interface Created { created(): void; }
+export interface BeforeMount { beforeMount(): void; }
+export interface Mounted { mounted(): void; }
+export interface BeforeUpdate { beforeUpdate(): void; }
+export interface Updated { updated(): void; }
+export interface Activated { activated(): void; }
+export interface Deactivated { deactivated(): void; }
+export interface BeforeDestroy { beforeDestroy(): void; }
+export interface BeforeUnmount { beforeUnmount(): void; }
+export interface Destroyed { destroyed(): void; }
+export interface Unmounted { unmounted(): void; }
+export interface RenderTracked { renderTracked(): void; }
+export interface RenderTriggered { renderTriggered(): void; }
+export interface ErrorCaptured { errorCaptured(): void; }
+export interface ServerPrefetch { serverPrefetch(): void; }
+export interface Render { render(): void; }
