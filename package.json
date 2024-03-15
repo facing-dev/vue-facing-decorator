@@ -2,8 +2,20 @@
   "name": "vue-facing-decorator",
   "version": "3.0.4",
   "description": "Vue typescript class and decorator based component.",
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/cjs/index.js"
+    },
+    "./dist/index-return-cons.js": {
+      "require": "./dist/cjs/index-return-cons.js",
+      "import": "./dist/esm/index-return-cons.js",
+      "default": "./dist/cjs/index-return-cons.js"
+    }
+  },
   "keywords": [
     "vue",
     "class",
@@ -16,12 +28,13 @@
     "vue component decorator"
   ],
   "scripts": {
-    "test-build": "npm run build && npm run test",
+    "test-build": "npm run build-test",
+    "build-test":"npm run build && npm run test",
     "test": "npm run test-stage2 && npm run test-stage3",
     "test-stage2": "env TS_NODE_COMPILER_OPTIONS='{\"experimentalDecorators\": true }' mocha -r ts-node/register test/test.ts",
     "test-stage3": "env TS_NODE_COMPILER_OPTIONS='{\"experimentalDecorators\": false }' mocha -r ts-node/register test/test.ts",
     "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "./node_modules/.bin/tsc",
+    "build:cjs": "./node_modules/.bin/tsc -outDir dist/cjs",
     "build:esm": "./node_modules/.bin/tsc -outDir dist/esm -module ES6",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
