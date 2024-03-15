@@ -13,19 +13,19 @@ export { createDecorator } from './custom/custom'
 export { mixins } from './mixins'
 import type { ComponentPublicInstance } from 'vue'
 import type { OptionBuilder } from './optionBuilder'
-
+export { TSX } from './tsx/type'
 const IdentifySymbol = Symbol('vue-facing-decorator-identify')
 export interface BaseTypeIdentify {
     [IdentifySymbol]: undefined
 }
-export function TSX<Properties extends {} = {}, Events extends {} = {}>() {
-    type Bundle = Properties & { [index in keyof Events as `on${Capitalize<index & string>}`]: Events[index] extends Function ? Events[index] : { (param: Events[index]): any } }
-    return function <C extends VueCons>(cons: C) {
-        return cons as unknown as {
-            new(): Omit<ComponentPublicInstance<(InstanceType<C>['$props']) & Bundle>, keyof Bundle> & InstanceType<C>//& ComponentPublicInstance & BaseTypeIdentify
-        }
-    }
-}
+// export function TSX<Properties extends {} = {}, Events extends {} = {}>() {
+//     type TEvents = { [index in keyof Events as `on${Capitalize<index & string>}`]: Events[index] extends Function ? Events[index] : { (param: Events[index]): any } }
+//     return function <C extends VueCons>(cons: C) {
+//         return cons as unknown as {
+//             new(): ComponentPublicInstance<Properties & TEvents> & InstanceType<C>//& ComponentPublicInstance & BaseTypeIdentify
+//         }
+//     }
+// }
 
 export type VueCons<T = {}> = {
     new(optionBuilder: OptionBuilder, vueInstance: any): ComponentPublicInstance & BaseTypeIdentify & T

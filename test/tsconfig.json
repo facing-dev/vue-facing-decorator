@@ -19,7 +19,8 @@
         "composite": false,
         "declaration": true,
         "declarationMap": true,
-        "noUnusedLocals": false
+        "noUnusedLocals": false,
+        "jsx": "preserve"
     },
     "include": [
         "./**/*.ts",
