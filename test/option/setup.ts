@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils'
 import { expect } from 'chai'
 import { mountSuspense } from '../utils'
 import 'mocha'
-import { Component, Base, Setup, toNative } from '../../dist'
+import { Component, Base, Setup, toNative } from '../../dist/esm'
 
 const SETUP_AXIOM = 'setup is working to allow composition API usage'
 const DATA_AXIOM = 'data is injected into the template'

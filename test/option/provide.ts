@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Provide, Base, Inject, toNative } from '../../dist'
+import { Component, Provide, Base, Inject, toNative } from '../../dist/esm'
 import { VueWrapper, mount } from '@vue/test-utils';
 import { Ref, computed, ref } from 'vue';
 

@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, ComponentBase, Vue, mixins, toNative } from '../../dist'
+import { Component, ComponentBase, Vue, mixins, toNative } from '../../dist/esm'
 
 @ComponentBase
 class A extends Vue {

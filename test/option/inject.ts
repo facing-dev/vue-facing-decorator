@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Inject, Base, toNative } from '../../dist'
+import { Component, Inject, Base, toNative } from '../../dist/esm'
 import { isEmptyObject } from '../utils'
 @Component
 class Comp extends Base {

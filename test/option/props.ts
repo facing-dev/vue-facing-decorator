@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Prop, Base, toNative } from '../../dist'
+import { Component, Prop, Base, toNative } from '../../dist/esm'
 import { isEmptyObject } from '../utils'
 function Full_validator() {
     return true

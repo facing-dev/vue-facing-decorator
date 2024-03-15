@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Model, Base, toNative } from '../../dist'
+import { Component, Model, Base, toNative } from '../../dist/esm'
 
 @Component
 class Comp extends Base {

@@ -2,7 +2,7 @@
 import { mount } from '@vue/test-utils'
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Base, Vanilla, toNative } from '../../dist'
+import { Component, Base, Vanilla, toNative } from '../../dist/esm'
 
 @Component({template: '<div/>'})
 class Comp extends Base {

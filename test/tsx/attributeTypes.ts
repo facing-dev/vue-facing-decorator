@@ -1,4 +1,4 @@
-import { Component, TSX, Prop, Base } from '../../dist'
+import { Component, TSX, Prop, Base } from '../../dist/esm'
 interface Props {
     p: string
 }

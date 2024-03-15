@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Base, createDecorator,toNative } from '../../dist'
+import { Component, Base, createDecorator,toNative } from '../../dist/esm'
 
 function CustomDeco(param?: String) {
     return createDecorator(function (options: any, key: string) {
