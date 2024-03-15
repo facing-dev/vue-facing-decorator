@@ -1,28 +1,3 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "rootDir": ".",
-        "moduleResolution": "Bundler",
-        "module": "ES6",
-        "target": "ES6",
-        "strict": true,
-        "sourceMap": true,
-        "lib": [
-            "esnext",
-        ],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "isolatedModules": true,
-        "emitDeclarationOnly": false,
-        "experimentalDecorators": true,
-        "composite": false,
-        "declaration": true,
-        "declarationMap": true,
-        "noUnusedLocals": false,
-        "jsx": "preserve"
-    },
-    "include": [
-        "./**/*.ts",
-    ],
+    "extends":"./tsconfig/tsconfig.json"
 }

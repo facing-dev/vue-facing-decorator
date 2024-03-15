@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "moduleResolution": "Bundler",
+        "strict": true,
+        "sourceMap": true,
+        "lib": [
+            "esnext",
+            "DOM"
+        ],
+        "allowJs": true,
+        "noUnusedLocals": false,
+        "useDefineForClassFields": true,
+        "jsx": "preserve"
+   
+    },
+    "files": [
+        "../test.ts"
+    ]
+}
+

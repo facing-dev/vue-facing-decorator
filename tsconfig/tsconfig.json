@@ -3,11 +3,6 @@
         "target": "ES6",
         "moduleResolution": "Node",
         "rootDir": "../src",
-        "paths": {
-            "@/*": [
-                "../src/*"
-            ]
-        },
         "strict": true,
         "sourceMap": true,
         "lib": [
@@ -19,11 +14,11 @@
         "esModuleInterop": true,
         "isolatedModules": true,
         "emitDeclarationOnly": false,
-        "experimentalDecorators": true,
         "composite": false,
         "declaration": true,
         "declarationMap": true,
-        "noUnusedLocals": false
+        "noUnusedLocals": true,
+        "useDefineForClassFields": true
     },
     "files": [
         "../src/index.ts"

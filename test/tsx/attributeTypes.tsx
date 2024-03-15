@@ -16,4 +16,4 @@ class TsxAttributeTypes extends TSX<Props, Events>()(Base) implements Props {
 
 export default {}
 
-const template = <TsxAttributeTypes p="" onE={() => { }} onE2={() => { }}></TsxAttributeTypes>
+// const template = <TsxAttributeTypes p="" onE={() => { }} onE2={() => { }}></TsxAttributeTypes>
