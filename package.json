@@ -4,6 +4,7 @@
   "description": "Vue typescript class and decorator based component.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "type": "commonjs",
   "exports": {
     ".": {
       "require": "./dist/cjs/index.js",
@@ -29,7 +30,7 @@
   ],
   "scripts": {
     "test-build": "npm run build-test",
-    "build-test":"npm run build && npm run test",
+    "build-test": "npm run build && npm run test",
     "test": "npm run test-stage2 && npm run test-stage3",
     "test-stage2": "env TS_NODE_COMPILER_OPTIONS='{\"experimentalDecorators\": true }' mocha -r ts-node/register test/test.ts",
     "test-stage3": "env TS_NODE_COMPILER_OPTIONS='{\"experimentalDecorators\": false }' mocha -r ts-node/register test/test.ts",
