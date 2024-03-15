@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "moduleResolution": "Node",
+        "rootDir": "../src",
+        "paths": {
+            "@/*": [
+                "../src/*"
+            ]
+        },
+        "strict": true,
+        "sourceMap": true,
+        "lib": [
+            "esnext",
+            "DOM"
+        ],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "emitDeclarationOnly": false,
+        "experimentalDecorators": true,
+        "composite": false,
+        "declaration": true,
+        "declarationMap": true,
+        "noUnusedLocals": false
+    },
+    "files": [
+        "../src/index.ts"
+    ]
+}

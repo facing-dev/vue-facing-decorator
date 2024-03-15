@@ -1,29 +1,3 @@
 {
-    "compilerOptions": {
-        "outDir": "./dist",
-        "baseUrl": ".",
-        "rootDir": "./src",
-        "moduleResolution": "node",
-        "module": "CommonJS",
-        "target": "ES6",
-        "strict": true,
-        "sourceMap": true,
-        "lib": [
-            "esnext",
-            "DOM"
-        ],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "isolatedModules": true,
-        "emitDeclarationOnly": false,
-        "experimentalDecorators": true,
-        "composite": false,
-        "declaration": true,
-        "declarationMap": true,
-        "noUnusedLocals": false
-    },
-    "include": [
-        "./src/**/*.ts",
-    ],
+    "extends":"./tsconfig/tsconfig.json"
 }
