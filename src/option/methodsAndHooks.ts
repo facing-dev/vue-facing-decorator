@@ -1,6 +1,6 @@
 import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
-import { obtainSlot, toComponentReverse, excludeNames, getValidNames, optionNullableMemberDecorator } from '../utils'
+import { obtainSlot, toComponentReverse, filterNames, getValidOwnPropertyNames, optionNullableMemberDecorator } from '../utils'
 
 export const HookNames: ReadonlyArray<string> = [
     "beforeCreate",
@@ -39,16 +39,16 @@ export function build(cons: VueCons, optionBuilder: OptionBuilder) {
     const HookFunctions: Record<string, Function> = {}
     const MethodFunctions: Record<string, Function> = {}
     protoArr.forEach(proto => {
-        let names = getValidNames(proto, (des, name) => {
+        let names = getValidOwnPropertyNames(proto, (des, name) => {
             return typeof des.value === 'function' && name !== 'constructor'
         })
-        names = excludeNames(names, slot, (mapName) => {
-            //include these names:
-            //watch, user may call watch method directly
-            //hooks, user may call hook method directly
-            //emits, user may have a method name which is same as one of event names
-            return !['watch', 'hooks', 'emits', 'provide'].includes(mapName)
-        });
+        //include these names:
+        //watch, user may call watch method directly
+        //hooks, user may call hook method directly
+        //emits, user may have a method name which is same as one of event names
+        //provide, user may access field directly
+        //customDecorator
+        names = filterNames(names, slot, ['watch', 'hooks', 'emits', 'provide', 'customDecorator']);
         names.forEach(name => {
             if (HookNames.includes(name) || map.has(name)) {
                 HookFunctions[name] = proto[name]

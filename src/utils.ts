@@ -31,12 +31,13 @@ export type SlotMapTypes = {
     setup: Map<string, SetupConfig>
     customDecorator: Map<string, CustomDecoratorRecord[]>
 }
+type SlotMapNames = keyof SlotMapTypes
 class Slot {
     master: any
     constructor(master: any) {
         this.master = master
     }
-    names: Map<string, SlotMapTypes[keyof SlotMapTypes]> = new Map()
+    names: Map<keyof SlotMapTypes, SlotMapTypes[keyof SlotMapTypes]> = new Map()
     obtainMap<T extends keyof SlotMapTypes>(name: T): SlotMapTypes[T] {
         let map = this.getMap(name)
         if (!map) {
@@ -112,26 +113,25 @@ export function getSuperSlot(obj: any) {
 }
 
 /**
- * Exclude decorated names by a filter
+ * Filter decorated names
  */
-export function excludeNames(names: string[], slot: Slot, filter?: (mapName: string) => boolean) {
+export function filterNames(names: string[], slot: Slot, mapNames?: SlotMapNames[]) {
     return names.filter(name => {
         let currSlot: Slot | null = slot
         while (currSlot != null) {
             for (const mapName of currSlot.names.keys()) {
-                if (filter && !filter(mapName)) {
-                    continue
-                }
                 if (mapName === 'customDecorator') {
                     const map = currSlot.obtainMap('customDecorator')
                     if (map.has(name)) {
                         if (map.get(name)!.every(ite => !ite.preserve)) {
                             return false
-                        } else {
-                            continue
                         }
                     }
                 }
+                if (mapNames && mapNames.includes(mapName)) {
+                    continue
+                }
+                
                 const map = currSlot.names.get(mapName)!
                 if (map.has(name)) {
                     return false
@@ -145,11 +145,20 @@ export function excludeNames(names: string[], slot: Slot, filter?: (mapName: str
 }
 
 /**
- * Get own properties by a filter
+ * Get own propertie name by a filter
  */
-export function getValidNames(obj: any, filter: (des: PropertyDescriptor, name: string) => boolean) {
+export function getValidOwnPropertyNames(obj: any, filter: (des: PropertyDescriptor, name: string) => boolean) {
     const descriptors = Object.getOwnPropertyDescriptors(obj)
     return Object.keys(descriptors).filter(name => filter(descriptors[name], name))
+}
+
+
+/**
+ * Transform provide into function.
+ */
+export function getProviderFunction(provide: any): () => {} {
+    if (typeof provide === 'function') return provide
+    return function () { return provide || {} }
 }
 
 export function optionNullableMemberDecorator<T>(handler: { (proto: any, name: string, option?: T): any }) {
@@ -197,7 +206,3 @@ export function optionNullableClassDecorator<T>(handler: { (cons: VueCons, optio
     return decorator
 }
 
-export function getProviderFunction(provide: any): () => {} {
-    if (typeof provide === 'function') return provide
-    return function () { return provide || {} }
-}

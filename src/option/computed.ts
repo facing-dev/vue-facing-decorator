@@ -1,5 +1,5 @@
 import type { VueCons } from '../class'
-import { obtainSlot, toComponentReverse, getValidNames } from '../utils'
+import { obtainSlot, toComponentReverse, getValidOwnPropertyNames } from '../utils'
 import type { OptionBuilder } from '../optionBuilder'
 
 export function build(cons: VueCons, optionBuilder: OptionBuilder) {
@@ -9,7 +9,7 @@ export function build(cons: VueCons, optionBuilder: OptionBuilder) {
     const vanillaMap = slot.obtainMap('vanilla')
     const protoArr = toComponentReverse(cons.prototype)
     protoArr.forEach(proto => {
-        getValidNames(proto, (des, name) => {
+        getValidOwnPropertyNames(proto, (des, name) => {
             return (typeof des.get === 'function' || typeof des.set === 'function') && !vanillaMap.has(name)
         }).forEach(name => {
 
