@@ -1,6 +1,6 @@
 import { ComponentBase } from './component'
 import { obtainSlot } from './utils'
-import type { VueCons } from './index'
+import type { VueCons } from './class'
 import { Vue } from './index'
 import type { MergeIdentityType, IdentitySymbol } from './identity'
 type MixedClass<Mixins extends VueCons[], Base extends VueCons = VueCons> =
@@ -13,8 +13,8 @@ type MixedClass<Mixins extends VueCons[], Base extends VueCons = VueCons> =
     Base
 export function mixins<T extends VueCons[]>(...conses: T) {
     class MixinsClass extends Vue {
-
     }
+    
     ComponentBase({
         mixins: conses.map((cons => obtainSlot(cons.prototype).cachedVueComponent))
     })(MixinsClass)

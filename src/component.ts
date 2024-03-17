@@ -14,7 +14,7 @@ import { build as optionVModel } from './option/vmodel'
 import { build as optionAccessor } from './option/accessor'
 import type { SetupContext } from 'vue';
 import type { OptionBuilder } from './optionBuilder'
-import type { VueCons } from './index'
+import type { VueCons } from './class'
 import * as DecoratorCompatible from './deco3/utils'
 export type Cons = VueCons
 

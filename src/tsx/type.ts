@@ -1,5 +1,5 @@
 import type { IdentityType, MergeIdentityType, IdentitySymbol } from '../identity'
-import type { VueCons } from '../index'
+import type { VueCons } from '../class'
 
 export function TSX<Properties extends IdentityType['props'] = {}, Events extends IdentityType['events'] = {}, IT extends IdentityType = {
     props: Properties
