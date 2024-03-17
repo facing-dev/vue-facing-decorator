@@ -16,12 +16,10 @@ import type { SetupContext } from 'vue';
 import type { OptionBuilder } from './optionBuilder'
 import type { VueCons } from './class'
 import * as DecoratorCompatible from './deco3/utils'
-export type Cons = VueCons
-
 type SetupFunction<T> = (this: void, props: Readonly<any>, ctx: SetupContext<any>) => T | Promise<T>
 export type OptionSetupFunction = SetupFunction<any>
 export type ComponentSetupFunction = SetupFunction<Record<string, any>>
-function ComponentOption(cons: Cons, extend?: any) {
+function ComponentOption(cons: VueCons, extend?: any) {
     const optionBuilder: OptionBuilder = {}
     optionSetup(cons, optionBuilder)
     optionVModel(cons, optionBuilder)
@@ -73,9 +71,9 @@ type ComponentOption = {
     methods?: MethodOptions
 }
 
-type ComponentConsOption = Cons | ComponentOption
+type ComponentConsOption = VueCons | ComponentOption
 
-function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
+function buildComponent(cons: VueCons, arg: ComponentOption, extend?: any): any {
     const option = ComponentOption(cons, extend)
     const slot = obtainSlot(cons.prototype)
     Object.keys(arg).reduce<Record<string, any>>((option, name: string) => {
@@ -95,7 +93,7 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
 
     //merge methods
     if ('object' === typeof arg.methods && !Array.isArray(arg.methods) && arg.methods !== null) {
-        option.methods??={}
+        option.methods ??= {}
         Object.assign(option.methods, arg.methods);
     }
 
@@ -124,7 +122,7 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     //merge provide function
     const oldProvider = getProviderFunction(option.provide)
     const newProvider = getProviderFunction(arg.provide)
-    option.provide = function() {
+    option.provide = function () {
         return Object.assign({}, oldProvider.call(this), newProvider.call(this))
     }
 
@@ -132,7 +130,7 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
     const map = slot.getMap('customDecorator')
     if (map && map.size > 0) {
         map.forEach((v) => {
-            v.forEach(ite=>ite.creator.apply({}, [option, ite.key]))
+            v.forEach(ite => ite.creator.apply({}, [option, ite.key]))
         })
     }
 
@@ -148,7 +146,7 @@ function buildComponent(cons: Cons, arg: ComponentOption, extend?: any): any {
 
     return defineComponent(option)
 }
-function build(cons: Cons, option: ComponentOption) {
+function build(cons: VueCons, option: ComponentOption) {
     const slot = obtainSlot(cons.prototype)
     slot.inComponent = true
     const superSlot = getSuperSlot(cons.prototype)
@@ -165,26 +163,25 @@ function build(cons: Cons, option: ComponentOption) {
     slot.cachedVueComponent = component;
     (cons as any).__vccOpts = component
 }
-function _Component(cb: (cons: Cons, option: ComponentOption) => any, arg: ComponentConsOption, ctx?: ClassDecoratorContext) {
-    if (typeof arg === 'function') {
-        return DecoratorCompatible.compatibleClassDecorator(function (cons: Cons) {
-            return cb(cons, {})
-        })(arg, ctx)
-    }
-    return DecoratorCompatible.compatibleClassDecorator(function (cons: Cons) {
-        return cb(cons, arg)
-    })
-}
+
 export function ComponentBase(arg: ComponentConsOption, ctx?: ClassDecoratorContext): any {
-    return _Component(function (cons: Cons, option: ComponentOption) {
+    function process(cons: VueCons, option: ComponentOption) {
         build(cons, option)
         return cons
-    }, arg, ctx)
+    }
+    if (typeof arg === 'function') {
+        return DecoratorCompatible.compatibleClassDecorator(function (cons: VueCons) {
+            return process(cons, {})
+        })(arg, ctx)
+    }
+    return DecoratorCompatible.compatibleClassDecorator(function (cons: VueCons) {
+        return process(cons, arg)
+    })
 }
 
 
 
-export function toNative<T extends Cons>(cons: T): T {
+export function toNative<T extends VueCons>(cons: T): T {
     const slot = obtainSlot(cons.prototype)
     if (!slot.inComponent) {
         throw 'to native 1'
