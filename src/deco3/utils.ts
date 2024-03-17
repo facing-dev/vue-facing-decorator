@@ -1,3 +1,4 @@
+import { VueCons } from '../class'
 import { obtainSlot } from '../utils'
 export const Compatible: {
     fakePrototype?: any,
@@ -6,10 +7,8 @@ export const Compatible: {
 
 }
 export function compatibleClassDecorator(deco: Function) {
-    return function (arg: any, ctx?: DecoratorContext) {
-
-        if (ctx) {//stage 3
-
+    return function (cons: VueCons, ctx?: ClassDecoratorContext) {
+        if (ctx) {//stage 3 arg is constructor, ctx is ClassDecoratorContext
             if (ctx.kind !== 'class') {
                 throw 'deco stage 3 class'
             }
@@ -17,26 +16,29 @@ export function compatibleClassDecorator(deco: Function) {
             const slot = obtainSlot(proto)
             delete Compatible.fakePrototype
 
-            obtainSlot(arg.prototype, slot)
-            const ret = deco(arg)
+            obtainSlot(cons.prototype, slot)
+            const ret = deco(cons)
 
             return ret
         }
-        else {
-
-            return deco(arg)
+        else {//stage 2 arg is constructor
+            return deco(cons)
         }
     }
 }
 
 export function compatibleMemberDecorator(deco: Function) {
-    return function (arg: any, ctx: DecoratorContext | string) {
-        if (typeof ctx === 'object') {//stage 3
+    return function (protoOrValue: any, nameOrCtx: ClassMemberDecoratorContext | string) {
+        if (typeof nameOrCtx === 'object') {//stage 3 arg is value, ctx is ClassMemberDecoratorContext
+            const ctx = nameOrCtx
+            const value = protoOrValue
             const proto = Compatible.fakePrototype ??= {};
-            proto[ctx.name!] = arg
+            proto[ctx.name!] = value
             return deco(proto, ctx.name)
-        } else {
-            return deco(arg, ctx)
+        } else { //stage 2 arg is prototype, ctx is name stirng
+            const name = nameOrCtx
+            const proto = protoOrValue
+            return deco(proto, name)
         }
     }
 }

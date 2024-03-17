@@ -1,5 +1,5 @@
 import { defineComponent, type ComponentCustomOptions, type MethodOptions } from 'vue';
-import { obtainSlot, getSuperSlot, getProviderFunction } from './utils'
+import { obtainSlot, getSuperSlot, getProviderFunction, optionNullableClassDecorator } from './utils'
 import { build as optionSetup } from './option/setup'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
@@ -15,7 +15,6 @@ import { build as optionAccessor } from './option/accessor'
 import type { SetupContext } from 'vue';
 import type { OptionBuilder } from './optionBuilder'
 import type { VueCons } from './class'
-import * as DecoratorCompatible from './deco3/utils'
 type SetupFunction<T> = (this: void, props: Readonly<any>, ctx: SetupContext<any>) => T | Promise<T>
 export type OptionSetupFunction = SetupFunction<any>
 export type ComponentSetupFunction = SetupFunction<Record<string, any>>
@@ -70,8 +69,6 @@ type ComponentOption = {
     setup?: ComponentSetupFunction
     methods?: MethodOptions
 }
-
-type ComponentConsOption = VueCons | ComponentOption
 
 function buildComponent(cons: VueCons, arg: ComponentOption, extend?: any): any {
     const option = ComponentOption(cons, extend)
@@ -164,22 +161,9 @@ function build(cons: VueCons, option: ComponentOption) {
     (cons as any).__vccOpts = component
 }
 
-export function ComponentBase(arg: ComponentConsOption, ctx?: ClassDecoratorContext): any {
-    function process(cons: VueCons, option: ComponentOption) {
-        build(cons, option)
-        return cons
-    }
-    if (typeof arg === 'function') {
-        return DecoratorCompatible.compatibleClassDecorator(function (cons: VueCons) {
-            return process(cons, {})
-        })(arg, ctx)
-    }
-    return DecoratorCompatible.compatibleClassDecorator(function (cons: VueCons) {
-        return process(cons, arg)
-    })
-}
-
-
+export const ComponentBase = optionNullableClassDecorator((cons: VueCons, option?: ComponentOption) => {
+    build(cons, option ?? {})
+})
 
 export function toNative<T extends VueCons>(cons: T): T {
     const slot = obtainSlot(cons.prototype)

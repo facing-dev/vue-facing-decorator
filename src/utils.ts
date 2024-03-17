@@ -1,5 +1,4 @@
 import { Metadata } from 'facing-metadata'
-import { Base } from './index'
 import type { Identity } from './identity'
 import type { InjectConfig } from "./option/inject";
 import type { EmitConfig } from "./option/emit";
@@ -11,7 +10,9 @@ import type { SetupConfig } from './option/setup'
 import type { Record as CustomDecoratorRecord } from './custom/custom'
 import type { RefConfig } from './option/ref';
 import type { ProvideConfig } from './option/provide';
-import { compatibleMemberDecorator } from './deco3/utils';
+import { compatibleMemberDecorator, compatibleClassDecorator } from './deco3/utils';
+import { type VueCons, Base } from './class';
+
 
 const SlotSymbol = Symbol('vue-facing-decorator-slot')
 
@@ -62,7 +63,7 @@ export function makeSlot(obj: any, defaultSlot?: Slot): Slot {
         defaultSlot.master = obj
     }
     const slot = defaultSlot ?? new Slot(obj)
-    metadata.create(obj,slot)
+    metadata.create(obj, slot)
     return slot
 }
 
@@ -152,22 +153,47 @@ export function getValidNames(obj: any, filter: (des: PropertyDescriptor, name: 
 }
 
 export function optionNullableMemberDecorator<T>(handler: { (proto: any, name: string, option?: T): any }) {
-    function decorator(option?: T): any
-    function decorator(proto: Identity, name: any): any
+    function decorator(): any
+    function decorator(option: T): any//option
+    function decorator(proto: Identity, name: any): any//deco stage 2
     function decorator(value: any, ctx: ClassMemberDecoratorContext): any //deco stage 3
-    function decorator(optionOrProto?: T | Identity | any, name?: string | ClassMemberDecoratorContext): any {
-        if (name) {
+    function decorator(optionOrProtoOrValue?: T | Identity | any, nameOrCtx?: string | ClassMemberDecoratorContext): any {
+        if (nameOrCtx) {//no option
+            const protoOrValue = optionOrProtoOrValue as Identity | any
             compatibleMemberDecorator(function (proto: any, name: any) {
                 handler(proto, name)
-            })(optionOrProto, name)
+            })(protoOrValue, nameOrCtx)
         }
-        else {
+        else {//with option
+            const option = optionOrProtoOrValue as T
             return compatibleMemberDecorator(function (proto: any, name: any) {
-                handler(proto, name, optionOrProto as T | undefined)
+                handler(proto, name, option as T | undefined)
             })
         }
     }
 
+    return decorator
+}
+
+export function optionNullableClassDecorator<T>(handler: { (cons: VueCons, option?: T): any }) {
+    function decorator(): any
+    function decorator(option: T): any//option
+    function decorator(cons: VueCons): any//deco stage 2
+    function decorator(cons: VueCons, ctx: ClassDecoratorContext): any//deco stage 3
+    function decorator(optionOrCons?: T | VueCons, ctx?: ClassDecoratorContext) {
+        if (typeof optionOrCons === 'function') {
+            const cons = optionOrCons as VueCons
+            compatibleClassDecorator(function (cons: VueCons) {
+                handler(cons)
+            })(cons, ctx)
+
+        } else {
+            const option = optionOrCons as T
+            return compatibleClassDecorator(function (cons: VueCons) {
+                handler(cons, option)
+            })
+        }
+    }
     return decorator
 }
 
