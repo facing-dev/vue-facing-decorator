@@ -1,6 +1,6 @@
 import { compatibleMemberDecorator } from '../deco3/utils'
 import type { OptionSetupFunction } from '../component'
-import type { Cons } from '../component'
+import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot } from '../utils'
 
@@ -20,7 +20,7 @@ export function decorator(setupFunction: OptionSetupFunction) {
 
 const isPromise = (v: any): v is Promise<any> => v instanceof Promise
 
-export function build(cons: Cons, optionBuilder: OptionBuilder) {
+export function build(cons: VueCons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
     const map = slot.getMap('setup')
     if (!map || map.size === 0) {

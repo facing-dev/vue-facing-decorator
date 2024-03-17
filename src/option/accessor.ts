@@ -1,8 +1,8 @@
-import type { Cons } from '../component'
+import type { VueCons } from '../class'
 import { type OptionBuilder, applyAccessors } from '../optionBuilder'
 import { toComponentReverse, obtainSlot } from '../utils'
 
-export function build(cons: Cons, optionBuilder: OptionBuilder) {
+export function build(cons: VueCons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
     const vanillaMap = slot.getMap('vanilla')
     if (!vanillaMap || vanillaMap.size === 0) {

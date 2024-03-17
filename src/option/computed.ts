@@ -1,8 +1,8 @@
-import type { Cons } from '../component'
+import type { VueCons } from '../class'
 import { obtainSlot, toComponentReverse, getValidNames } from '../utils'
 import type { OptionBuilder } from '../optionBuilder'
 
-export function build(cons: Cons, optionBuilder: OptionBuilder) {
+export function build(cons: VueCons, optionBuilder: OptionBuilder) {
     optionBuilder.computed ??= {}
     const slot = obtainSlot(cons.prototype)
     const map = slot.obtainMap('computed')

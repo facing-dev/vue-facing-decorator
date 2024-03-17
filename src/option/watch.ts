@@ -1,4 +1,4 @@
-import type { Cons } from '../component'
+import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, } from '../utils'
 import type { WatchCallback } from 'vue'
@@ -33,7 +33,7 @@ export function decorator(key: string, option?: Option) {
     })
 }
 
-export function build(cons: Cons, optionBuilder: OptionBuilder) {
+export function build(cons: VueCons, optionBuilder: OptionBuilder) {
     optionBuilder.watch ??= {}
     const slot = obtainSlot(cons.prototype)
     const names = slot.getMap('watch')

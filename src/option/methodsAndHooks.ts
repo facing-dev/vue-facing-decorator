@@ -1,4 +1,4 @@
-import type { Cons } from '../component'
+import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
 import { obtainSlot, toComponentReverse, excludeNames, getValidNames, optionNullableMemberDecorator } from '../utils'
 
@@ -29,7 +29,7 @@ export const decorator = optionNullableMemberDecorator(function (proto: any, nam
     map.set(name, null)
 })
 
-export function build(cons: Cons, optionBuilder: OptionBuilder) {
+export function build(cons: VueCons, optionBuilder: OptionBuilder) {
     const slot = obtainSlot(cons.prototype)
     const protoArr = toComponentReverse(cons.prototype)
     const map = slot.obtainMap('hooks')
