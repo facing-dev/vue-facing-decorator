@@ -182,7 +182,7 @@ export function ComponentBase(arg: ComponentConsOption, ctx?: ClassDecoratorCont
     }, arg, ctx)
 }
 
-export const Component = ComponentBase
+
 
 export function toNative<T extends Cons>(cons: T): T {
     const slot = obtainSlot(cons.prototype)

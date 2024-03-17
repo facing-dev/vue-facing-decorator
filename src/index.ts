@@ -1,4 +1,4 @@
-export { Component, ComponentBase } from './component'
+export { ComponentBase, ComponentBase as Component } from './component'
 export { decorator as Setup } from './option/setup'
 export { decorator as Ref } from './option/ref'
 export { decorator as Watch } from './option/watch'
@@ -12,7 +12,5 @@ export { decorator as Hook } from './option/methodsAndHooks'
 export { createDecorator } from './custom/custom'
 export { mixins } from './mixins'
 export { TSX } from './tsx/type'
-import { Base } from './class'
-export { Base }
-export const Vue = Base
+export { Base, Base as Vue } from './class'
 export { toNative } from './component'
