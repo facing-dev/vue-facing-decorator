@@ -2,8 +2,15 @@ import { ComponentBase } from './component'
 import { obtainSlot } from './utils'
 import type { VueCons } from './index'
 import { Vue } from './index'
-type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never;
-type MixedClass<Mixins extends VueCons[]> = UnionToIntersection<{ [index in keyof Mixins]: InstanceType<Mixins[index]> }[number]>
+import type { MergeIdentityType, IdentitySymbol } from './identity'
+type MixedClass<Mixins extends VueCons[], Base extends VueCons = VueCons> =
+    Mixins extends [infer T extends VueCons, ...infer E extends VueCons[]] ?
+    MixedClass<E,
+        VueCons<InstanceType<Base> & InstanceType<T>,
+            MergeIdentityType<InstanceType<T>[typeof IdentitySymbol], InstanceType<Base>[typeof IdentitySymbol]>
+        >
+    > :
+    Base
 export function mixins<T extends VueCons[]>(...conses: T) {
     class MixinsClass extends Vue {
 
@@ -11,11 +18,9 @@ export function mixins<T extends VueCons[]>(...conses: T) {
     ComponentBase({
         mixins: conses.map((cons => obtainSlot(cons.prototype).cachedVueComponent))
     })(MixinsClass)
-    return MixinsClass as any as VueCons<MixedClass<T>>
+
+    return MixinsClass as any as MixedClass<T>
 }
-
-
-
 
 
 

@@ -1,19 +1,52 @@
-import { Component, TSX, Prop, Base } from '../../dist/esm'
-interface Props {
-    p: string
-}
-interface Events {
-    e: Function
-    e2: string
-}
+import { Component, TSX, Base, mixins } from '../../dist/esm'
+
 @Component
-class TsxAttributeTypes extends TSX<Props, Events>()(Base) implements Props {
-    @Prop({
-        required: true
-    })
-    p!: string
+class A extends TSX<{
+    pA: number
+}, {
+    eA: () => void
+}>()(Base) {
+
+}
+
+@Component
+class B extends TSX<{
+    pB: number
+}, {
+    eB: () => void
+}>()(A) {
+
+}
+
+@Component
+class C extends TSX<{
+    pC: number
+}, {
+    eC: () => void
+}>()(Base) {
+
+}
+
+@Component
+class D extends TSX<{
+    pD:number
+}, {
+    eD: () => void
+}>()(mixins(B, C)) {
+    checkType() {
+        this.pA
+        this.onEA
+        this.pB
+        this.onEB
+        this.pC
+        this.onEC
+        this.pD
+        this.onED
+
+    }
 }
 
 export default {}
 
-// const template = <TsxAttributeTypes p="" onE={() => { }} onE2={() => { }}></TsxAttributeTypes>
+
+// const template = <D q-a={1} kk={1}></D>

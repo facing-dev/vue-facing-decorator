@@ -1,10 +1,11 @@
-import type { ComponentPublicInstance } from 'vue'
+import type { IdentityType, MergeIdentityType, IdentitySymbol } from '../identity'
 import type { VueCons } from '../index'
-export function TSX<Properties extends {} = {}, Events extends {} = {}>() {
-    type TEvents = { [index in keyof Events as `on${Capitalize<index & string>}`]: Events[index] extends Function ? Events[index] : { (param: Events[index]): any } }
-    return function <C extends VueCons>(cons: C) {
-        return cons as unknown as {
-            new(): ComponentPublicInstance<Properties & TEvents> & InstanceType<C>
-        }
+
+export function TSX<Properties extends IdentityType['props'] = {}, Events extends IdentityType['events'] = {}, IT extends IdentityType = {
+    props: Properties
+    events: Events
+}>() {
+    return function <C extends VueCons>(cons: C): VueCons<InstanceType<C>, MergeIdentityType<IT, InstanceType<C>[typeof IdentitySymbol]>> {
+        return cons as any
     }
 }

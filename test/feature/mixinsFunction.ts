@@ -20,12 +20,13 @@ class B extends Vue {
 
 @Component
 class Comp extends mixins(A, B) {
-
+    checkType() {
+        this.methodA()
+        this.methodB()
+    }
 }
 
 const CompContext = toNative(Comp) as any
-
-
 
 describe('mixins function',
     () => {

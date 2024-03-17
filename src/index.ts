@@ -14,21 +14,10 @@ export { mixins } from './mixins'
 import type { ComponentPublicInstance } from 'vue'
 import type { OptionBuilder } from './optionBuilder'
 export { TSX } from './tsx/type'
-const IdentifySymbol = Symbol('vue-facing-decorator-identify')
-export interface BaseTypeIdentify {
-    [IdentifySymbol]: undefined
-}
-// export function TSX<Properties extends {} = {}, Events extends {} = {}>() {
-//     type TEvents = { [index in keyof Events as `on${Capitalize<index & string>}`]: Events[index] extends Function ? Events[index] : { (param: Events[index]): any } }
-//     return function <C extends VueCons>(cons: C) {
-//         return cons as unknown as {
-//             new(): ComponentPublicInstance<Properties & TEvents> & InstanceType<C>//& ComponentPublicInstance & BaseTypeIdentify
-//         }
-//     }
-// }
+import type { IdentityType, Identity, IdentitySymbol } from './identity'
 
-export type VueCons<T = {}> = {
-    new(optionBuilder: OptionBuilder, vueInstance: any): ComponentPublicInstance & BaseTypeIdentify & T
+export type VueCons<RawInstance extends Identity = Identity, IT extends IdentityType = { props:{} , events: {} }, Bundle = IT['props'] & { [index in keyof IT['events']as `on${Capitalize<index & string>}`]?: IT['events'][index] extends Function ? IT['events'][index] : { (param: IT['events'][index]): any } }> = {
+    new(optionBuilder: OptionBuilder, vueInstance: any): ComponentPublicInstance<Bundle> & Identity<IT> & Omit<RawInstance, typeof IdentitySymbol>
 }
 
 export const Base = class {

@@ -1,6 +1,6 @@
 import { Metadata } from 'facing-metadata'
 import { Base } from './index'
-import type { BaseTypeIdentify } from './index'
+import type { Identity } from './identity'
 import type { InjectConfig } from "./option/inject";
 import type { EmitConfig } from "./option/emit";
 import type { PropsConfig } from "./option/props";
@@ -153,9 +153,9 @@ export function getValidNames(obj: any, filter: (des: PropertyDescriptor, name: 
 
 export function optionNullableMemberDecorator<T>(handler: { (proto: any, name: string, option?: T): any }) {
     function decorator(option?: T): any
-    function decorator(proto: BaseTypeIdentify, name: any): any
+    function decorator(proto: Identity, name: any): any
     function decorator(value: any, ctx: ClassMemberDecoratorContext): any //deco stage 3
-    function decorator(optionOrProto?: T | BaseTypeIdentify | any, name?: string | ClassMemberDecoratorContext): any {
+    function decorator(optionOrProto?: T | Identity | any, name?: string | ClassMemberDecoratorContext): any {
         if (name) {
             compatibleMemberDecorator(function (proto: any, name: any) {
                 handler(proto, name)
