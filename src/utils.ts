@@ -3,32 +3,33 @@ import { compatibleMemberDecorator, compatibleClassDecorator } from './deco3/uti
 import { type VueCons, Base } from './class';
 import { getSlot, type Slot, type SlotMapNames } from './slot'
 
-export function makeObject(names: string[], obj: any) {
-    return names.reduce<Record<string, any>>((pv, cv) => {
-        pv[cv] = obj[cv]
-        return pv
-    }, {})
+export function getPrototypeOf(proto: Identity): Identity | null {
+    const p = Object.getPrototypeOf(proto)
+    if (!(p instanceof Base)) {
+        return null
+    }
+    return p
 }
 
-export function toComponentReverse(obj: any) {
-    const arr: any[] = []
-    let curr = obj
+export function toComponentReverse(proto: Identity) {
+    const arr: Identity[] = []
+    let curr: Identity | null = proto
     do {
         arr.unshift(curr)
-        curr = Object.getPrototypeOf(curr)
-    } while (curr.constructor !== Base && !getSlot(curr))
+        curr = getPrototypeOf(curr)
+    } while (curr !== null && !getSlot(curr))
     return arr
 }
 
-export function getSuperSlot(obj: any) {
-    let curr = Object.getPrototypeOf(obj)
+export function getSuperSlot(proto: Identity) {
+    let curr = getPrototypeOf(proto)
 
-    while (curr.constructor !== Base) {
+    while (curr !== null) {
         const slot = getSlot(curr)
         if (slot) {
             return slot
         }
-        curr = Object.getPrototypeOf(curr)
+        curr = getPrototypeOf(proto)
     }
     return null
 }

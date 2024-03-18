@@ -8,6 +8,7 @@ export type IdentityType = {
 type AssertIs<O, T extends O> = T
 
 export interface Identity<T extends IdentityType = IdentityType> {
+    [index: string | number | symbol]: any
     [IdentitySymbol]: T
 }
 
