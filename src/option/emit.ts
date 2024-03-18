@@ -1,8 +1,8 @@
 import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
-import { obtainSlot, optionNullableMemberDecorator } from '../utils'
+import { optionNullableMemberDecorator } from '../utils'
 export type EmitConfig = null | string
-
+import { obtainSlot } from '../slot'
 export const decorator = optionNullableMemberDecorator(function (proto: any, name: string, key?: string) {
     const slot = obtainSlot(proto)
     const map = slot.obtainMap('emit');

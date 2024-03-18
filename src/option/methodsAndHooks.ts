@@ -1,7 +1,7 @@
 import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
-import { obtainSlot, toComponentReverse, filterNames, getValidOwnPropertyNames, optionNullableMemberDecorator } from '../utils'
-
+import { toComponentReverse, filterNames, getValidOwnPropertyNames, optionNullableMemberDecorator } from '../utils'
+import { obtainSlot } from '../slot'
 export const HookNames: ReadonlyArray<string> = [
     "beforeCreate",
     "created",

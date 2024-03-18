@@ -1,5 +1,6 @@
 import { defineComponent, type ComponentCustomOptions, type MethodOptions } from 'vue';
-import { obtainSlot, getSuperSlot, getProviderFunction, optionNullableClassDecorator } from './utils'
+import { obtainSlot } from './slot'
+import { getSuperSlot, getProviderFunction, optionNullableClassDecorator } from './utils'
 import { build as optionSetup } from './option/setup'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'

@@ -1,7 +1,7 @@
 import type { VueCons } from '../class'
-import { obtainSlot, toComponentReverse, getValidOwnPropertyNames } from '../utils'
+import { toComponentReverse, getValidOwnPropertyNames } from '../utils'
 import type { OptionBuilder } from '../optionBuilder'
-
+import { obtainSlot } from '../slot'
 export function build(cons: VueCons, optionBuilder: OptionBuilder) {
     optionBuilder.computed ??= {}
     const slot = obtainSlot(cons.prototype)

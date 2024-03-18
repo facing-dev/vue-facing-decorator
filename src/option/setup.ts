@@ -2,7 +2,7 @@ import { compatibleMemberDecorator } from '../deco3/utils'
 import type { OptionSetupFunction } from '../component'
 import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
-import { obtainSlot } from '../utils'
+import { obtainSlot } from '../slot'
 
 export type SetupConfig = {
     setupFunction: OptionSetupFunction

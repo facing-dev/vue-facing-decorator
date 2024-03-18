@@ -1,5 +1,5 @@
 import { ComponentBase } from './component'
-import { obtainSlot } from './utils'
+import { obtainSlot } from './slot'
 import type { VueCons } from './class'
 import { Vue } from './index'
 

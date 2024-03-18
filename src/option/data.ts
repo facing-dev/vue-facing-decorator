@@ -1,7 +1,7 @@
 import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
-import { makeObject, obtainSlot, filterNames, getValidOwnPropertyNames } from '../utils'
-
+import { makeObject, filterNames, getValidOwnPropertyNames } from '../utils'
+import { obtainSlot } from '../slot'
 export function build(cons: VueCons, optionBuilder: OptionBuilder, vueInstance: any) {
     optionBuilder.data ??= {}
     const sample = new cons(optionBuilder, vueInstance) as any

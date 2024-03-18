@@ -1,8 +1,8 @@
 import { computed } from 'vue';
 import type { VueCons } from '../class';
 import type { OptionBuilder } from '../optionBuilder'
-import { obtainSlot, optionNullableMemberDecorator } from '../utils'
-
+import { optionNullableMemberDecorator } from '../utils'
+import { obtainSlot } from '../slot'
 export type ProvideConfig = null | string
 
 export const decorator = optionNullableMemberDecorator(function (proto: any, name: string, key?: ProvideConfig) {

@@ -1,4 +1,4 @@
-import { obtainSlot } from '../utils'
+import { obtainSlot } from '../slot'
 import { compatibleMemberDecorator } from '../deco3/utils'
 type Creator = { (options: any, key: string): void }
 export interface Record {

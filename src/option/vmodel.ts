@@ -1,8 +1,8 @@
 import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
-import { obtainSlot, optionNullableMemberDecorator } from '../utils'
+import {  optionNullableMemberDecorator } from '../utils'
 import { decorator as PropsDecorator, type PropsConfig } from './props'
-
+import { obtainSlot } from '../slot'
 export type VModelConfig = PropsConfig & {
     name?: string
 }

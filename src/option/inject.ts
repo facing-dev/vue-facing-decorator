@@ -1,8 +1,8 @@
 import type { InjectionKey } from 'vue'
 import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
-import { obtainSlot, optionNullableMemberDecorator } from '../utils'
-
+import { optionNullableMemberDecorator } from '../utils'
+import { obtainSlot } from '../slot'
 export interface InjectConfig {
     from?: string | symbol | Symbol | InjectionKey<any>
     default?: any

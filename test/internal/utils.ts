@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import 'mocha';
 import { Base } from '../../dist/esm'
 import * as Utils from '../../dist/esm/utils'
-
+import { obtainSlot } from '../../dist/esm/slot'
 
 class Comp1Sup extends Base {
     method1Sup() {
@@ -46,11 +46,11 @@ class Comp3 extends Comp3Sup {
 describe('internal utils',
     () => {
         it('slot', () => {
-            expect(true).to.equal(Utils.obtainSlot(Comp3.prototype).names instanceof Map)
+            expect(true).to.equal(obtainSlot(Comp3.prototype).names instanceof Map)
         })
         it('toComponentReverse', () => {
-            Utils.obtainSlot(Comp2.prototype)
-            Utils.obtainSlot(Comp1.prototype)
+            obtainSlot(Comp2.prototype)
+            obtainSlot(Comp1.prototype)
 
             const path3 = Utils.toComponentReverse(Comp3.prototype)
 

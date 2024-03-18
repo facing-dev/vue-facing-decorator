@@ -1,6 +1,6 @@
 import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
-import { obtainSlot, } from '../utils'
+import { obtainSlot } from '../slot'
 import type { WatchCallback } from 'vue'
 import { compatibleMemberDecorator } from '../deco3/utils'
 export interface WatchConfig {
