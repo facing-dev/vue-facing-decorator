@@ -29,7 +29,7 @@ export function getSuperSlot(proto: Identity) {
         if (slot) {
             return slot
         }
-        curr = getPrototypeOf(proto)
+        curr = getPrototypeOf(curr)
     }
     return null
 }
