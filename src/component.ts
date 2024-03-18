@@ -19,7 +19,7 @@ import type { VueCons } from './class'
 type SetupFunction<T> = (this: void, props: Readonly<any>, ctx: SetupContext<any>) => T | Promise<T>
 export type OptionSetupFunction = SetupFunction<any>
 export type ComponentSetupFunction = SetupFunction<Record<string, any>>
-function ComponentOption(cons: VueCons, extend?: any) {
+function componentOptionFactory(cons: VueCons, extend?: any) {
     const optionBuilder: OptionBuilder = {}
     optionSetup(cons, optionBuilder)
     optionVModel(cons, optionBuilder)
@@ -72,7 +72,7 @@ type ComponentOption = {
 }
 
 function buildComponent(cons: VueCons, arg: ComponentOption, extend?: any): any {
-    const option = ComponentOption(cons, extend)
+    const option = componentOptionFactory(cons, extend)
     const slot = obtainSlot(cons.prototype)
     Object.keys(arg).reduce<Record<string, any>>((option, name: string) => {
         if (['options', 'modifier', 'methods', 'emits', 'setup', 'provide'].includes(name)) {
