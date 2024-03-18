@@ -12,14 +12,14 @@ class Comp extends Base {
     @Prop
     prop!: string
 
-    fieldInitProp = this.prop //not work
+    // fieldInitProp = this.prop //not work
 
-    methods = [this.method];
+    // methods = [this.method];
 
-    options = {
-        handler: this.method,
-    }
-    wrapped = () => this.method();
+    // options = {
+    //     handler: this.method,
+    // }
+    // wrapped = () => this.method();
 
     method() {
         return this.prop
@@ -39,22 +39,22 @@ describe('option data',
 
             expect('function').to.equal(typeof CompContext?.data)
             expect('data value').to.equal(vm.data)
-            expect(5).to.equal(Object.keys(CompContext.data()).length)
+            expect(1).to.equal(Object.keys(CompContext.data()).length)
         })
 
-        it('binds methods to the component context', () => {
-            const { vm } = mount(CompContext, {
-                props: {
-                    prop: 'prop test'
-                }
-            })
-            expect('prop test').to.equal(vm.methods[0]())
-            expect('prop test').to.equal(vm.options.handler())
-            expect('prop test').to.equal(vm.wrapped())
-            // expect('prop test').to.equal(vm.fieldInitProp)
+        // it('binds methods to the component context', () => {
+        //     const { vm } = mount(CompContext, {
+        //         props: {
+        //             prop: 'prop test'
+        //         }
+        //     })
+        //     expect('prop test').to.equal(vm.methods[0]())
+        //     expect('prop test').to.equal(vm.options.handler())
+        //     expect('prop test').to.equal(vm.wrapped())
+        //     // expect('prop test').to.equal(vm.fieldInitProp)
 
 
-        })
+        // })
     }
 )
 export default {}

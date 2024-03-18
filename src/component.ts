@@ -36,7 +36,7 @@ function componentOptionFactory(cons: VueCons, extend?: any) {
         setup: optionBuilder.setup,
         data() {
             delete optionBuilder.data
-            optionData(cons, optionBuilder, this)
+            optionData(cons, optionBuilder)
             return optionBuilder.data ?? {}
         },
         methods: optionBuilder.methods,

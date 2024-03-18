@@ -2,9 +2,9 @@ import type { VueCons } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
 import { filterNames, getValidOwnPropertyNames } from '../utils'
 import { obtainSlot } from '../slot'
-export function build(cons: VueCons, optionBuilder: OptionBuilder, vueInstance: any) {
+export function build(cons: VueCons, optionBuilder: OptionBuilder) {
     optionBuilder.data ??= {}
-    const sample = new cons(optionBuilder, vueInstance)
+    const sample = new cons()
     let names = getValidOwnPropertyNames(sample, (des, name) => {
         return !!des.enumerable
             && !optionBuilder.methods?.[name]
