@@ -28,6 +28,10 @@ Welcome to suggest and contribute.
 
 Document languages: English, 简体中文, Portuguese
 
+# Wellknown issues
+
+https://facing-dev.github.io/vue-facing-decorator/#/en/wellknown-issues/wellknown-issues
+
 # Discussion
 
 To discord [https://discord.gg/4exxtFgkcz](https://discord.gg/4exxtFgkcz)

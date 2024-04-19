@@ -27,3 +27,5 @@
     - [v2迁移到v3](/zh-cn/migration/from-v2-to-v3.md)
 - Stage3装饰器
     - [Stage3装饰器](/zh-cn/stage3-decorators/stage3-decorators.md)
+- 常见问题
+    - [常见问题](/zh-cn/wellknown-issues/wellknown-issues.md)

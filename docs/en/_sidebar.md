@@ -27,3 +27,5 @@
     - [Migrate from v2 to v3](/en/migration/from-v2-to-v3.md)
 - Stage3 decorators
     - [Stage3 decorators](/en/stage3-decorators/stage3-decorators.md)
+- Wellknown issues
+    - [Wellknown issues](/en/wellknown-issues/wellknown-issues.md)
