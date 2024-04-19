@@ -1,0 +1,23 @@
+## Breaking changes
+### Output into new dist structure
+
+* Output ESM into dist/esm
+* Output CommonJS into dist/cjs
+
+If you use deprecated `vue-facing-decorator/dist/index-return-cons` and your ts config uses `moduleResolution` with `Node16`, it will be resolved correctly. Otherwise you need to change the path to `vue-facing-decorator/dist/esm/index-return-cons` or `vue-facing-decorator/dist/cjs/index-return-cons`.
+
+### Totally remove support for initialization class fields with this.xxx in class declaration
+
+```ts
+@Component
+class C extends Vue{
+    @Prop
+    prop!:string
+
+    method(){return ''}
+
+    field1 = this.prop //NOT SUPPORT
+
+    field2 = this.method()  //NOT SUPPORT
+}
+```
