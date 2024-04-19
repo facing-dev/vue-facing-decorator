@@ -23,7 +23,7 @@
     - [Attribute types](/en/tsx/attribute-types/attribute-types.md)
 - Custom Decorator
     - [Custom Decorator](/en/custom/custom.md)
-- Migrate from v2
-    - [Migrate from v2](/en/migrate-from-v2/migrate-from-v2.md)
+- Migration
+    - [Migrate from v2 to v3](/en/migration/from-v2-to-v3.md)
 - Stage3 decorators
     - [Stage3 decorators](/en/stage3-decorators/stage3-decorators.md)

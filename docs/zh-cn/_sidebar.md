@@ -23,3 +23,7 @@
     - [属性类型](/zh-cn/tsx/attribute-types/attribute-types.md)
 - 自定义装饰器
     - [自定义装饰器](/zh-cn/custom/custom.md)
+- 从旧版迁移
+    - [v2迁移到v3](/zh-cn/migration/from-v2-to-v3.md)
+- Stage3装饰器
+    - [Stage3装饰器](/zh-cn/stage3-decorators/stage3-decorators.md)
