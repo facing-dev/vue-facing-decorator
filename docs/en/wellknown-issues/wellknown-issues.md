@@ -2,13 +2,14 @@
 
 When `useDefineForClassFields` is `true` in ts config, we can't access fields on `this` context while declaring class fields.
 
-[](./do-not-use-this.ts ':include :type=code typescript')
+[](./code-do-not-use-this.ts ':include :type=code typescript')
 
 ## Use Vitest
 
 If you have some error when use v-f-d with  test framework, use Vitest instead of it.
 
 https://github.com/facing-dev/vue-facing-decorator/issues/54#issuecomment-1500019388
+
 https://github.com/facing-dev/vue-facing-decorator/issues/33#issuecomment-1410648544
 
 ## Lake of IDE type supports
