@@ -1,10 +1,10 @@
 
 import { expect } from 'chai';
 import 'mocha';
-import { Component, Base, Hook, toNative } from '../../dist/esm'
+import { Component, Base, Hook, toNative, HookMounted } from '../../dist/esm'
 
 @Component
-class Comp extends Base {
+class Comp extends Base implements HookMounted {
     mounted() {
         return 'mounted test value'
     }
@@ -29,3 +29,4 @@ describe('feature hooks',
     }
 )
 export default {}
+
