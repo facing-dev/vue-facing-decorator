@@ -1,5 +1,5 @@
 
-import { Component, Vue, toNative } from 'vue-facing-decorator'
+import { Component, Vue, toNative, HookMounted } from 'vue-facing-decorator'
 
 /*
 Vue options API
@@ -11,7 +11,7 @@ Vue options API
 */
 
 @Component
-class MyComponent extends Vue {
+class MyComponent extends Vue implements HookMounted {
     mounted() {
 
     }

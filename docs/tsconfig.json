@@ -23,8 +23,8 @@
         "declarationMap": true,
         "noUnusedLocals": false,
         "paths": {
-            "vue-facing-decorator": ["../dist"],
-            "vue-facing-decorator/dist/index-return-cons": ["../dist/index-return-cons"]
+            "vue-facing-decorator": ["../dist/esm"],
+            "vue-facing-decorator/dist/index-return-cons": ["../dist/esm/index-return-cons"]
         },
         "jsx": "preserve"
     },
