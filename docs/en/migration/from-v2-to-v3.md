@@ -12,7 +12,7 @@ It is recommended to use `toNative` to transform a class component into a vue op
 
 [](./from-v2-to-v3-breaking-changes-toNative.ts ':include :type=code typescript')
 
-### Depreactate init class property despends on another in constructor
+### Deprecate init class property depends on another in constructor
 
 This is not allowed now.
 
