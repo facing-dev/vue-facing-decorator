@@ -1,6 +1,6 @@
 ## Usage
 
-Class component supports almost all lifecycle hooks in vanilla vue. Write them as class methods directly. Hooks won't be tranformed into `methods`.
+Class component supports almost all lifecycle hooks in vanilla vue. Write them as class methods directly. Hooks won't be transformed into `methods`.
 
 > All these hooks must be methods of a class, not properties.
 

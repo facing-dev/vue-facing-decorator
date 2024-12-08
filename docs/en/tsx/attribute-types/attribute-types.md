@@ -4,9 +4,9 @@ To make enable TSX attribute types:
 
 1. Import `TSX` function from this repo.
 
-2. Define an interface(e.g. `Props`) to decribe properties in component.
+2. Define an interface(e.g. `Props`) to describe properties in component.
 
-3. Define an interface(e.g. `Events`) to decribe events in component.
+3. Define an interface(e.g. `Events`) to describe events in component.
 
 4. Make component extend from `TSX<Props,Events>()(BaseComponent)`.
 

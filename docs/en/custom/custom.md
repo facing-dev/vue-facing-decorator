@@ -2,7 +2,7 @@
 
 Use `createDecorator` to build your own decorators. 
 
-If you are a package author, install vue-facing-decorator as `devDependecies` and mark it in `peerDependencies`.
+If you are a package author, install vue-facing-decorator as `devDependencies` and mark it in `peerDependencies`.
 
 `createDecorator` receives a creator function, which accepts two parameters: 
 1. Generated vue options component, you can modify it to implement anything you want.
