@@ -4,7 +4,7 @@ Consider code:
 
 [](./code-example.ts ':include :type=code typescript')
 
-There are three components: `Comp`(includes `CompSper`), `SuperComp`(includes `SuperCompSuper`) and `VueNativeComponent`.
+There are three components: `Comp`(includes `CompSuper`), `SuperComp`(includes `SuperCompSuper`) and `VueNativeComponent`.
 
 The inheritance relationship is:
 
@@ -14,4 +14,4 @@ The inheritance relationship is:
         vue extends (SuperComp ECMAScript extends SuperCompSuper)
 ```
 
-Due to vue implemention, `VueNativeComponent`(useing vue `mixins`) will overwrite `SuperComp`(useing vue `extends`).
+Due to vue implementation, `VueNativeComponent`(using vue `mixins`) will overwrite `SuperComp`(using vue `extends`).

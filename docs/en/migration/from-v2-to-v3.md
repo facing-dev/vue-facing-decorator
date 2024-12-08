@@ -2,7 +2,7 @@
 
 To migrate from v2, you need to change your project with some break changes.
 
-In 3.x, decorator `Component` is same to `ComponentBase`, and you should cast class component to vue options API manually, see Breaking changes secion.
+In 3.x, decorator `Component` is same to `ComponentBase`, and you should cast class component to vue options API manually, see Breaking changes section.
 
 ## Breaking changes
 
