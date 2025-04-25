@@ -1,7 +1,7 @@
 import { ComponentBase } from './component'
 import { obtainSlot } from './slot'
 import type { VueCons } from './class'
-import { Vue } from './index'
+import { Base as Vue } from './class'
 
 import type { MergeIdentityType, IdentitySymbol } from './identity'
 type MixedClass<Mixins extends VueCons[], Base extends VueCons = VueCons> =
