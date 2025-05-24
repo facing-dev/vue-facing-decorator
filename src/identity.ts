@@ -8,8 +8,11 @@ export type IdentityType = {
 type AssertIs<O, T extends O> = T
 
 export interface Identity<T extends IdentityType = IdentityType> {
-    [index: PropertyKey]: any
     [IdentitySymbol]: T
+}
+
+export interface IdentityAny<T extends IdentityType = IdentityType> extends Identity<T> {
+    [index: PropertyKey]: any
 }
 
 type MergeRecord<N extends Record<string, any>, O extends Record<string, any>> = {

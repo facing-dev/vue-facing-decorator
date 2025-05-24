@@ -1,8 +1,8 @@
-import type { VueCons } from '../class'
+import type { VueConsAny } from '../class'
 import type { OptionBuilder } from '../optionBuilder'
 import { filterNames, getValidOwnPropertyNames } from '../utils'
 import { obtainSlot } from '../slot'
-export function build(cons: VueCons, optionBuilder: OptionBuilder) {
+export function build(cons: VueConsAny, optionBuilder: OptionBuilder) {
     optionBuilder.data ??= {}
     const sample = new cons()
     let names = getValidOwnPropertyNames(sample, (des, name) => {

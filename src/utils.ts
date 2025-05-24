@@ -1,9 +1,9 @@
-import type { Identity } from './identity'
+import type { IdentityAny } from './identity'
 import { compatibleMemberDecorator, compatibleClassDecorator } from './deco3/utils';
 import { type VueCons, Base } from './class';
 import { getSlot, type Slot, type SlotMapNames } from './slot'
 
-export function getPrototypeOf(proto: Identity): Identity | null {
+export function getPrototypeOf(proto: IdentityAny): IdentityAny | null {
     const p = Object.getPrototypeOf(proto)
     if (!(p instanceof Base)) {
         return null
@@ -11,9 +11,9 @@ export function getPrototypeOf(proto: Identity): Identity | null {
     return p
 }
 
-export function toComponentReverse(proto: Identity) {
-    const arr: Identity[] = []
-    let curr: Identity | null = proto
+export function toComponentReverse(proto: IdentityAny) {
+    const arr: IdentityAny[] = []
+    let curr: IdentityAny | null = proto
     do {
         arr.unshift(curr)
         curr = getPrototypeOf(curr)
@@ -21,7 +21,7 @@ export function toComponentReverse(proto: Identity) {
     return arr
 }
 
-export function getSuperSlot(proto: Identity) {
+export function getSuperSlot(proto: IdentityAny) {
     let curr = getPrototypeOf(proto)
 
     while (curr !== null) {
@@ -86,11 +86,11 @@ export function getProviderFunction(provide: any): () => {} {
 export function optionNullableMemberDecorator<T>(handler: { (proto: any, name: string, option?: T): any }) {
     function decorator(): any
     function decorator(option: T): any//option
-    function decorator(proto: Identity, name: any): any//deco stage 2
+    function decorator(proto: IdentityAny, name: any): any//deco stage 2
     function decorator(value: any, ctx: ClassMemberDecoratorContext): any //deco stage 3
-    function decorator(optionOrProtoOrValue?: T | Identity | any, nameOrCtx?: string | ClassMemberDecoratorContext): any {
+    function decorator(optionOrProtoOrValue?: T | IdentityAny | any, nameOrCtx?: string | ClassMemberDecoratorContext): any {
         if (nameOrCtx) {//no option
-            const protoOrValue = optionOrProtoOrValue as Identity | any
+            const protoOrValue = optionOrProtoOrValue as IdentityAny | any
             compatibleMemberDecorator(function (proto: any, name: any) {
                 handler(proto, name)
             })(protoOrValue, nameOrCtx)
