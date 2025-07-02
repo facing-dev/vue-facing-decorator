@@ -1,6 +1,6 @@
 import { defineComponent, type ComponentCustomOptions, type MethodOptions } from 'vue';
 import { obtainSlot } from './slot'
-import { getSuperSlot, getProviderFunction, optionNullableClassDecorator } from './utils'
+import { getSuperSlot, getProviderFunction, optionNullableClassDecorator, assignStaticClassProperties } from './utils'
 import { build as optionSetup } from './option/setup'
 import { build as optionComputed } from './option/computed'
 import { build as optionData } from './option/data'
@@ -31,7 +31,7 @@ function componentOptionFactory(cons: VueCons, extend?: any) {
     optionRef(cons, optionBuilder)//after Computed
     optionAccessor(cons, optionBuilder)
     optionMethodsAndHooks(cons, optionBuilder)//the last one
-    const raw = {
+    const raw: any = {
         name: cons.name,
         setup: optionBuilder.setup,
         data() {
@@ -51,7 +51,8 @@ function componentOptionFactory(cons: VueCons, extend?: any) {
         ...optionBuilder.hooks,
         extends: extend
     }
-    return raw as any
+    assignStaticClassProperties(cons, raw);
+    return raw
 }
 
 type ComponentOption = {
