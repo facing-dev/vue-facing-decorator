@@ -128,3 +128,32 @@ export function optionNullableClassDecorator<T>(handler: { (cons: VueCons, optio
     return decorator
 }
 
+export function assignStaticClassProperties<T extends VueCons = any>(source: T, target: any) {
+    // keep track of things we've assigned (e.g. overridden variables in child class)
+    const previouslyAssigned: Record<string, true> = {};
+
+    while (source !== Base) {
+        const classObject = source;
+        for (const property of Object.getOwnPropertyNames(classObject)) {
+            if (property === 'prototype' || property === 'name' || property === 'length') {
+                continue;
+            }
+            if ((property in target) && !(property in previouslyAssigned)) {
+                console.warn(`Property/method ${property} of ${classObject.name} is not supported for static access, as it conflicts with names on the underlying Vue object.`);
+                continue;
+            }
+            previouslyAssigned[property] = true;
+            if (typeof (classObject as any)[property] === 'function') {
+                target[property] = (...args: unknown[]): unknown => {
+                    return (classObject as any)[property].apply(classObject, args);
+                }
+            } else {
+                target[property] = new Proxy(classObject, {
+                    get(target: any, prop) { return target[prop] },
+                    set(target: any, prop, value) { target[prop] = value; return true; },
+                });
+            }
+        }
+        source = Object.getPrototypeOf(classObject);
+    }
+}
