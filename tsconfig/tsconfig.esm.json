@@ -3,5 +3,6 @@
     "compilerOptions": {
         "outDir": "../dist/esm",
         "module": "ES6",
+        "moduleResolution": "node"
     }
 }
