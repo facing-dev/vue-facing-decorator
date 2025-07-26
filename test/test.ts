@@ -22,3 +22,6 @@ import './feature/mixinsFunction'
 import './tsx/attributeTypes'
 import './custom/custom'
 
+// Import module compatibility tests to prevent regression of issue #158
+require('./module-imports.test.js')
+
