@@ -14,12 +14,18 @@ describe('Module Import Compatibility Tests', function() {
     const esmDistPath = path.join(projectRoot, 'dist', 'esm');
 
     before(function() {
+        console.log('Node.js version:', process.version);
+        console.log('Platform:', process.platform);
+        console.log('Project root:', projectRoot);
+        console.log('CJS dist path:', cjsDistPath);
+        console.log('ESM dist path:', esmDistPath);
+        
         // Ensure dist directories exist
         if (!fs.existsSync(cjsDistPath)) {
-            throw new Error('CommonJS dist directory not found. Run npm run build first.');
+            throw new Error(`CommonJS dist directory not found at ${cjsDistPath}. Run npm run build first.`);
         }
         if (!fs.existsSync(esmDistPath)) {
-            throw new Error('ESM dist directory not found. Run npm run build first.');
+            throw new Error(`ESM dist directory not found at ${esmDistPath}. Run npm run build first.`);
         }
     });
 
@@ -86,7 +92,12 @@ describe('Module Import Compatibility Tests', function() {
             const esmIndexPath = path.join(esmDistPath, 'index.js');
             
             // Use dynamic import to test ESM compatibility
-            const esmModule = await import('file://' + esmIndexPath.replace(/\\/g, '/'));
+            // Convert Windows paths to file URLs properly
+            const fileUrl = process.platform === 'win32' 
+                ? 'file:///' + esmIndexPath.replace(/\\/g, '/')
+                : 'file://' + esmIndexPath;
+            
+            const esmModule = await import(fileUrl);
             expect(typeof esmModule).to.equal('object');
             expect(esmModule).to.not.be.null;
         });
@@ -95,7 +106,12 @@ describe('Module Import Compatibility Tests', function() {
             const esmReturnConsPath = path.join(esmDistPath, 'index-return-cons.js');
             if (fs.existsSync(esmReturnConsPath)) {
                 // Use dynamic import to test ESM compatibility
-                const esmReturnConsModule = await import('file://' + esmReturnConsPath.replace(/\\/g, '/'));
+                // Convert Windows paths to file URLs properly
+                const fileUrl = process.platform === 'win32' 
+                    ? 'file:///' + esmReturnConsPath.replace(/\\/g, '/')
+                    : 'file://' + esmReturnConsPath;
+                
+                const esmReturnConsModule = await import(fileUrl);
                 expect(typeof esmReturnConsModule).to.equal('object');
                 expect(esmReturnConsModule).to.not.be.null;
             }
