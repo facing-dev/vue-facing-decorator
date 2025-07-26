@@ -17,7 +17,8 @@
         "transpileOnly": true,
         "files": true,
         "compilerOptions": {
-            "module": "CommonJS"
+            "module": "CommonJS",
+            "moduleResolution": "Node"
         }
     },
     "files": ["../test.ts"]
