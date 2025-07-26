@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
-        "target": "ES6",
-        "moduleResolution": "Bundler",
+        "target": "ES2020",
+        "module": "CommonJS",
+        "moduleResolution": "Node",
         "strict": true,
         "sourceMap": true,
         "lib": [
@@ -11,8 +12,15 @@
         "allowJs": true,
         "noUnusedLocals": false,
         "useDefineForClassFields": true,
-        "jsx": "preserve"
-   
+        "jsx": "preserve",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true
+    },
+    "ts-node": {
+        "transpileOnly": true,
+        "compilerOptions": {
+            "module": "CommonJS"
+        }
     },
     "files": [
         "../test.ts"
