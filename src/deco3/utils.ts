@@ -1,4 +1,4 @@
-import { VueCons } from '../class'
+import type { VueCons } from '../class'
 import { obtainSlot } from '../slot'
 export const Compatible: {
     fakePrototype?: any,
