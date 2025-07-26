@@ -20,10 +20,10 @@ The ESM import issue (#158) has been **successfully resolved**:
 
 ### Node.js 22 (Local Development) ⚠️
 
-- ESM import tests: **12 passing (146ms)** ✅
-- Original test suite: Module resolution issues with ts-node
+- ESM import tests: **12 passing (90ms)** ✅
+- Original test suite: Module resolution issues with ts-node due to stricter ESM handling
 
-The original test suite has compatibility issues with Node.js 22 due to stricter ESM module resolution. This affects local development but not CI/CD pipeline.
+The original test suite has compatibility issues with Node.js 22 due to stricter ESM module resolution when package.json includes exports field. This affects local development but not CI/CD pipeline.
 
 ## Resolution Status
 
