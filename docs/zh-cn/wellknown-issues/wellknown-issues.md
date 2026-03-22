@@ -12,6 +12,6 @@ https://github.com/facing-dev/vue-facing-decorator/issues/54#issuecomment-150001
 
 https://github.com/facing-dev/vue-facing-decorator/issues/33#issuecomment-1410648544
 
-## 缺少IDE类型是吃
+## 缺少IDE类型支持
 
 目前我们不能为IDE提供完整的类型支持。如果你需要目前尽可能多的类型支持，建议使用TSX作为渲染器。我们会持续加强类型支持。
