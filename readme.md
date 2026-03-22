@@ -1,3 +1,8 @@
+# IMPORTANT
+There are some issues about v-f-d is not still compatible with modern vue build tools. I suggest every one to use v-f-d with vue in an original way, setup up your decorator environment and use `.tsx templates + .ts class components` to build your project. Everything are changing with no standrad now. The build tools are unreasonable.
+
+https://facing-dev.github.io/vue-facing-decorator/#/en/quick-start/quick-start?id=in-separated-files-with-tsx
+
 # Read me
 
 ![GitHub](https://img.shields.io/github/license/facing-dev/vue-facing-decorator) ![npm](https://img.shields.io/npm/v/vue-facing-decorator) ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/vue-facing-decorator/peer/vue) ![lts](https://img.shields.io/badge/LTS-prepared-blue)
